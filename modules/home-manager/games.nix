@@ -1,0 +1,36 @@
+{config, lib, pkgs, inputs,...}: 
+with lib;
+let 
+  cfg = config.games;
+in
+{
+  imports = [
+    inputs.ssbm-nix.homeManagerModule
+  ];
+  
+  options.games = {
+    enable = mkEnableOption "Games Module";
+    titanfall2 = mkEnableOption "Titanfall 2";
+    melee = mkEnableOption "Super Smash Bros Melee";
+  };
+  
+  config = mkIf cfg.enable {
+    # Titanfall 2 configuration
+    home.file = mkIf cfg.titanfall2 {
+      ".local/share/applications/titanfall2.desktop".text = ''
+        [Desktop Entry]
+        Type=Application
+        Name=Titanfall 2
+        Exec=sh -c "~/Projects/Bash/niri-wine-window-fixer.sh & lutris lutris:rungame/titanfall-2"
+        Icon=/home/crimson/.local/share/icons/hicolor/128x128/apps/lutris_titanfall-2.png
+        Categories=Game;
+      '';
+    };
+    
+    # Melee configuration - this goes directly at config root level
+    ssbm.slippi-launcher = mkIf cfg.melee {
+      enable = true;
+      isoPath = "/mnt/storage/games/Slippi/isos/Super Smash Bros. Melee (USA) (En,Ja) (v1.02).iso";
+    };
+  };
+}
