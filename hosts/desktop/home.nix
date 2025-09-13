@@ -164,36 +164,18 @@
   };
     zsh = {
       enable=true;
-      prezto = {
-        tmux.autoStartLocal=true;
-      };
       
       shellAliases = {
-        rebuild = "sudo nixos-rebuild switch --flake ~/nixos#desktop";
+        rebuild = "sudo ~/nixos/scripts/bash/rebuild-commit.sh";
         cleanup = "sudo nix-collect-garbage -d";
         test = "sudo nixos-rebuild test --flake ~/nixos#desktop";
         # homerebuild = "home-manager switch --flake ~/nixos#desktop";
       };
       initExtra = " 
-        export DOTFILES=${config.home.homeDirectory}/nixos/dotfiles
-        export MY_NVIM_CONFIG=$DOTFILES/nvim 
-        export NIXOS_CONFIG=~/nixos/hosts/desktop
         export EDITOR=nvim
         export VISUAL=nvim
         export DISPLAY=:0
         " ;
-};
-  tmux = {
-    enable=true;
-    keyMode = "vi";
-    shortcut ="a";
-
-    extraConfig = "
-      set-window-option -g mode-keys vi
-      bind-key -T copy-mode-vi 'v' send -X begin-selection
-      bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
-    ";
-
 };
   zen-browser= {
    enable=true;
@@ -272,6 +254,14 @@
 
   services.podman = {
     enable=true;
+  };
+  services.udiskie = {
+    enable = true;
+    settings ={
+      program_options = {
+        file_manager = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.ranger}/bin/ranger";
+      };
+    };
   };
   services.mpd = {
     enable=true;

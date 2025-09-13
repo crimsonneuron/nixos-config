@@ -11,6 +11,7 @@ in
       Type=Application
       Name=Calculator
       Exec=/usr/bin/env bash -lc 'python /home/crimson/nixos/scripts/python/qalc.py'
+      Terminal=false
   '';
     #poweroff.sh 
     "${desktop_path}/poweroff.desktop".text = ''
@@ -18,12 +19,14 @@ in
       Type=Application
       Name=Poweroff 
       Exec=/usr/bin/env bash -lc '/home/crimson/nixos/scripts/bash/poweroff.sh'
+      Terminal=false
     '';
     "${desktop_path}/audioswitch.desktop".text = ''
       [Desktop Entry]
       Type=Application 
       Name=Audioswitch
       Exec=/usr/bin/env bash -lc 'python /home/crimson/nixos/scripts/python/audioswitch.py'
+      Terminal=false
     '';
   };
 
