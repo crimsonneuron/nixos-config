@@ -32,10 +32,7 @@
     })
     obsidian
     cutechess
-    kdePackages.okular
-    pomodoro-gtk
     beeper
-    element-desktop
     youtube-music
     ncmpcpp
     wayfarer
@@ -69,7 +66,6 @@
 
     #gnome-tweaks
     swaybg
-    flameshot
     pavucontrol
     networkmanagerapplet
     font-awesome
@@ -82,20 +78,6 @@
     jq
     pywal
     tofi
-
-    #Games (NB:Steam in configued in config):
-    prismlauncher
-    osu-lazer-bin
-
-    mangohud
-    protonup
-    bottles
-    gamescope
-
-    wineWowPackages.waylandFull
-    winetricks
-    razergenie
-    openrazer-daemon
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -110,9 +92,6 @@
     ncmpcpp = {
       enable=true;
       mpdMusicDir = /mnt/storage/music;
-    };
-    lutris = {
-      enable=true;
     };
     distrobox = {
      enable=true;
@@ -231,7 +210,6 @@
 
   games = {
     enable=true;
-    titanfall2=true;
     melee=true;
   };
 
@@ -361,7 +339,7 @@
   xdg.configFile = {
     "nvim/init.lua".source = ../../dotfiles/nvim/init.lua;
     "nvim/lua".source = ../../dotfiles/nvim/lua;
-    "niri/config.kdl".source = ../../dotfiles/niri/desktop-config.kdl;
+    "niri/config.kdl".source = ../../dotfiles/niri/laptop-config.kdl;
 
     "waybar/config.jsonc".source = ../../dotfiles/waybar/config.jsonc;
     "waybar/style.css".source = ../../dotfiles/waybar/style.css;
