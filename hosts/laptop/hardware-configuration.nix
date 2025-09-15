@@ -8,51 +8,17 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "vmd" "ahci" "nvme" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-<<<<<<< HEAD
-    { device = "tmpfs";
-      fsType = "tmpfs";
-    };
-
-  fileSystems."/iso" =
-    { device = "/dev/disk/by-uuid/080A-2318";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
-
-  fileSystems."/nix/.ro-store" =
-    { device = "/iso/nix-store.squashfs";
-      fsType = "squashfs";
-      options = [ "loop" ];
-    };
-
-  fileSystems."/nix/.rw-store" =
-    { device = "tmpfs";
-      fsType = "tmpfs";
-    };
-
-  fileSystems."/nix/store" =
-    { device = "overlay";
-      fsType = "overlay";
-    };
-
-  fileSystems."/mnt" =
-=======
->>>>>>> f9b6008b46fbf7073afa7e7685087423a7498231
     { device = "/dev/disk/by-uuid/55449366-ada3-46b1-9373-8baccfacf913";
       fsType = "ext4";
     };
 
-<<<<<<< HEAD
-  fileSystems."/mnt/boot" =
-=======
   fileSystems."/boot" =
->>>>>>> f9b6008b46fbf7073afa7e7685087423a7498231
     { device = "/dev/disk/by-uuid/0E56-8C18";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
