@@ -156,12 +156,7 @@
     #distrobox
     #podman
 
-<<<<<<< HEAD
     #rocm:
-
-    #Games
-=======
->>>>>>> f9b6008b46fbf7073afa7e7685087423a7498231
     #Niri:
     xwayland-satellite
 
@@ -180,15 +175,10 @@
     };
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-
-<<<<<<< HEAD
-    fileSystems."/mnt/storage" = {
-      device = "/dev/disk/by-uuid/6ea6f707-199d-4227-a89f-9d696d44cd89";
-      fsType = "ext4";
-      options = [ "defaults" "nofail" "exec" "noatime"  "discard"];
-    };
-=======
->>>>>>> f9b6008b46fbf7073afa7e7685087423a7498231
+    environment.etc."gitconfig".text = ''
+    [safe]
+      directory=/home/crimson/nixos
+  '';
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

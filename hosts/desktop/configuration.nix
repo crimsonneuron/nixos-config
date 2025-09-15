@@ -188,6 +188,10 @@
       };
     };
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    environment.etc."gitconfig".text = ''
+    [safe]
+      directory=/home/crimson/nixos
+  '';
 
 
     fileSystems."/mnt/storage" = {
