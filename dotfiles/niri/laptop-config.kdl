@@ -85,7 +85,6 @@ input {
     // for the resolution.
     // If the mode is omitted altogether or is invalid, niri will pick one automatically.
     // Run `niri msg outputs` while inside a niri instance to list all outputs and their modes.
-<<<<<<< HEAD
   //  mode "3840x2160@59.997"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
@@ -94,7 +93,6 @@ input {
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
     //transform "normal"
-=======
  //   mode "3840x2160@59.997"
 
     // You can use integer or fractional scale, for example use 1.5 for 150% scale.
@@ -103,7 +101,6 @@ input {
     // Transform allows to rotate the output counter-clockwise, valid values are:
     // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
    // transform "normal"
->>>>>>> f9b6008b46fbf7073afa7e7685087423a7498231
 
     // Position of the output in the global coordinate space.
     // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
@@ -114,30 +111,24 @@ input {
     // so to put another output directly adjacent to it on the right, set its x to 1920.
     // If the position is unset or results in an overlap, the output is instead placed
     // automatically.
-<<<<<<< HEAD
     //position x=0 y=0
-=======
    // position x=0 y=0
->>>>>>> f9b6008b46fbf7073afa7e7685087423a7498231
 
     //focus-at-startup
 //}
 
-<<<<<<< HEAD
 //output "HDMI-A-2" {
    // mode "1920x1080@119.982"
     //transform "normal"
     //scale 1
     //position x=1920 y=0
 //}
-=======
  //output "HDMI-A-2" {
      //mode "1920x1080@119.982"
      //transform "normal"
      //scale 1
      //position x=1920 y=0
  //}
->>>>>>> f9b6008b46fbf7073afa7e7685087423a7498231
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
