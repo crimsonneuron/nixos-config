@@ -361,7 +361,7 @@
   xdg.configFile = {
     "nvim/init.lua".source = ../../dotfiles/nvim/init.lua;
     "nvim/lua".source = ../../dotfiles/nvim/lua;
-    "niri/config.kdl".source = ../../dotfiles/niri/config.kdl;
+    "niri/config.kdl".source = ../../dotfiles/niri/desktop-config.kdl;
 
     "waybar/config.jsonc".source = ../../dotfiles/waybar/config.jsonc;
     "waybar/style.css".source = ../../dotfiles/waybar/style.css;

@@ -35,6 +35,10 @@
     beeper
     youtube-music
     ncmpcpp
+<<<<<<< HEAD
+=======
+    wayfarer
+>>>>>>> f9b6008b46fbf7073afa7e7685087423a7498231
 
     libqalculate
 
