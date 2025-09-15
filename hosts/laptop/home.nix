@@ -35,10 +35,7 @@
     beeper
     youtube-music
     ncmpcpp
-<<<<<<< HEAD
-=======
     wayfarer
->>>>>>> f9b6008b46fbf7073afa7e7685087423a7498231
 
     libqalculate
 
@@ -344,8 +341,8 @@
     "nvim/lua".source = ../../dotfiles/nvim/lua;
     "niri/config.kdl".source = ../../dotfiles/niri/laptop-config.kdl;
 
-    "waybar/config.jsonc".source = ../../dotfiles/waybar/config.jsonc;
-    "waybar/style.css".source = ../../dotfiles/waybar/style.css;
+    "waybar/config.jsonc".source = ../../dotfiles/waybar/laptop-config.jsonc;
+    "waybar/style.css".source = ../../dotfiles/waybar/laptop-style.css;
 
     "containers/registries.conf".text = ''
       [registries.search]
