@@ -62,7 +62,7 @@ fi
 
 # Determine flake target based on hostname
 HOSTNAME=$(hostname)
-if [[ "$HOSTNAME" == "nixos-laptop" ]]; then
+if [[ "$HOSTNAME" == "lsla" ]]; then
     FLAKE_TARGET=".#laptop"
 elif [[ "$HOSTNAME" == "nixos-desktop" ]]; then
     FLAKE_TARGET=".#desktop"
