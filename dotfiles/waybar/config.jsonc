@@ -35,6 +35,12 @@
             "tooltip-format-ethernet": "{ifname} 🖧 ",
             "on-click": "nm-connection-editor"
         },
+        "battery": {
+           "states": {
+                "warning": 30,
+                "critical": 15,
+            },
+        },
         "bluetooth": {
             "format-on": "󰂯",
             "format-off": "BT-off",

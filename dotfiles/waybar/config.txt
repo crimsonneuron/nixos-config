@@ -1,11 +1,10 @@
-// -*- mode: jsonc -*-
 {
         "layer": "top",
         "position": "top",
         "reload_style_on_change": true,
         "modules-left": ["custom/notification","clock","tray"],
         "modules-center": [""],
-        "modules-right": ["group/expand","bluetooth","network","battery"],
+        "modules-right": ["group/expand","bluetooth","network"],
         
         "custom/notification": {
             "tooltip": false,
@@ -26,15 +25,6 @@
                 "on-click-right": "shift_down",
                 "on-click": "shift_up"
             }
-        },
-        "battery": {
-           "states": {
-                "warning": 30,
-                "critical": 15,
-            },
-            "format": "{icon} {capacity}",
-            "format-icons": ["󰁻","󰁽","󰂂"]
-            "format-charging": "󰂄 {capacity}" 
         },
         "network": {
             "format-wifi": "",
@@ -90,3 +80,4 @@
             "spacing": 10
         },
 } 
+
