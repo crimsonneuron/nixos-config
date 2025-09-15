@@ -1,3 +1,4 @@
+// -*- mode: jsonc -*-
 {
         "layer": "top",
         "position": "top",
@@ -5,8 +6,7 @@
         "modules-left": ["custom/notification","clock","tray"],
         "modules-center": [""],
         "modules-right": ["group/expand","bluetooth","network"],
-
-        },
+        
         "custom/notification": {
             "tooltip": false,
             "format": "",
@@ -19,7 +19,7 @@
             "tooltip-format": "<tt>{calendar}</tt>",
             "calendar": {
                 "format": {
-                    "today": "<span color='#fAfBfC'><b>{}</b></span>"
+                    "today": "<span color='#b0624e'><b>{}</b></span>"
                 }
             },
             "actions": {
@@ -81,4 +81,3 @@
             "spacing": 10
         },
 } 
-
