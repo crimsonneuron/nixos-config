@@ -36,6 +36,7 @@
     pomodoro-gtk
     beeper
     element-desktop
+    playerctl
     youtube-music
     ncmpcpp
     wayfarer
