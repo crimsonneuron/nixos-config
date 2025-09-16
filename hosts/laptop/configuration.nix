@@ -88,7 +88,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  services.avahi.enable=true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -160,6 +159,7 @@
     #rocm:
     #Niri:
     xwayland-satellite
+    libfprint-2-tod1-broadcom
 
   ];
 
@@ -195,10 +195,10 @@
   # services.openssh.enable = true;
   security.polkit.enable=true;
   security.pam.services.hyprlock={};
-
   services.fprintd = {
     enable=true;
     tod.enable=true;
+    tod.driver = pkgs.libfprint-2-tod1-broadcom;
   };
 
   # Open ports in the firewall.
