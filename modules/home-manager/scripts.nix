@@ -28,6 +28,14 @@ in
       Exec=/usr/bin/env bash -lc 'python /home/crimson/nixos/scripts/python/audioswitch.py'
       Terminal=false
     '';
+
+    "${desktop_path}/character.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Poweroff 
+      Exec=/usr/bin/env bash -lc '/home/crimson/nixos/scripts/bash/character_picker.sh'
+      Terminal=false
+    '';
   };
 
 
