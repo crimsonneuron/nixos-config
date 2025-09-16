@@ -31,7 +31,7 @@ in
     "${desktop_path}/character.desktop".text = ''
       [Desktop Entry]
       Type=Application
-      Name=Poweroff 
+      Name=Character
       Exec=/usr/bin/env bash -lc '/home/crimson/nixos/scripts/bash/character_picker.sh'
       Terminal=false
     '';
