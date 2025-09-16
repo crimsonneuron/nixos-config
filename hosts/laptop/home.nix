@@ -258,7 +258,7 @@
   services.fprintd = {
     enable=true;
     tod.enable=true;
-  }
+  };
 
    #systemd.user.services = {
      #xwayland-satellite = {
