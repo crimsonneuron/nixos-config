@@ -33,4 +33,4 @@ do
     input_string+="$name\n"
 done
 chosen=$(printf "$input_string" | tofi --prompt-text="Char: " --require-match=false --font="/home/crimson/.nix-profile/share/fonts/truetype/NerdFonts/FantasqueSansM/FantasqueSansMNerdFont-Regular.ttf" -c "/home/crimson/nixos/dotfiles/tofi/dmenu")
-echo "${characters[$chosen]}" | wl-copy
+printf "${characters[$chosen]}" | wl-copy
