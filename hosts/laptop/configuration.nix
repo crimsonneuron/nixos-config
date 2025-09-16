@@ -196,6 +196,11 @@
   security.polkit.enable=true;
   security.pam.services.hyprlock={};
 
+  services.fprintd = {
+    enable=true;
+    tod.enable=true;
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

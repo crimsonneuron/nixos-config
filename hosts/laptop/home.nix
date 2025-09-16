@@ -255,10 +255,6 @@
 
   services.swayidle.enable=true;
   services.polkit-gnome.enable=true;
-  services.fprintd = {
-    enable=true;
-    tod.enable=true;
-  };
 
    #systemd.user.services = {
      #xwayland-satellite = {
