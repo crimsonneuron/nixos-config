@@ -37,6 +37,7 @@
     playerctl
     ncmpcpp
     wayfarer
+    zoxide
 
     libqalculate
 
