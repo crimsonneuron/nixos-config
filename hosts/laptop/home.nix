@@ -238,7 +238,7 @@
     enable = true;
     settings ={
       program_options = {
-        file_manager = "${pkgs.alacritty}/bin/alacritty -e ${pkgs.ranger}/bin/ranger";
+        file_manager = "${pkgs.kitty}/bin/kitty -e ${pkgs.yazi}/bin/yazi";
       };
     };
   };

@@ -10,7 +10,7 @@ in
       [Desktop Entry]
       Type=Application
       Name=Calculator
-      Exec=/usr/bin/env bash -lc 'python /home/crimson/nixos/scripts/python/qalc.py'
+      Exec=/usr/bin/env bash -lc 'cd /home/crimson && python /home/crimson/nixos/scripts/python/audioswitch.py 2>&1 | logger -t audioswitch'
       Terminal=false
   '';
     #poweroff.sh 
@@ -18,21 +18,21 @@ in
       [Desktop Entry]
       Type=Application
       Name=Poweroff 
-      Exec=/usr/bin/env bash -lc '/home/crimson/nixos/scripts/bash/poweroff.sh'
+      Exec=/usr/bin/env bash -lc 'cd /home/crimson && /home/crimson/nixos/scripts/bash/poweroff.sh'
       Terminal=false
     '';
     "${desktop_path}/audioswitch.desktop".text = ''
       [Desktop Entry]
       Type=Application 
       Name=Audioswitch
-      Exec=/usr/bin/env bash -lc 'python /home/crimson/nixos/scripts/python/audioswitch.py'
+      Exec=/usr/bin/env bash -lc 'cd /home/crimson && python /home/crimson/nixos/scripts/python/audioswitch.py'
       Terminal=false
     '';
     "${desktop_path}/character.desktop".text = ''
       [Desktop Entry]
       Type=Application
       Name=Character
-      Exec=/usr/bin/env bash -lc '/home/crimson/nixos/scripts/bash/character_picker.sh'
+      Exec=/usr/bin/env bash -lc 'cd /home/crimson && /home/crimson/nixos/scripts/bash/character_picker.sh'
       Terminal=false
     '';
   };

@@ -151,8 +151,8 @@
   environment.systemPackages = with pkgs; [
     neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    alacritty
-    ranger
+    kitty 
+    yazi 
     p7zip
 
     gcc

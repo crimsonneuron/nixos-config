@@ -32,5 +32,7 @@ for name in "${!characters[@]}"
 do
     input_string+="$name\n"
 done
+env > /tmp/tofi-env.txt
+pwd >>/tmp/tofi-env.txt
 chosen=$(printf "$input_string" | tofi --prompt-text="Char: " --require-match=false --font="/home/crimson/.nix-profile/share/fonts/truetype/NerdFonts/FantasqueSansM/FantasqueSansMNerdFont-Regular.ttf" -c "/home/crimson/nixos/dotfiles/tofi/dmenu")
 printf "${characters[$chosen]}" | wl-copy
