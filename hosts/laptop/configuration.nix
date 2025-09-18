@@ -202,7 +202,7 @@
             return polkit.result.YES;
           }
         }
-    }
+    });
   '';
   security.pam.services.hyprlock={};
   services.fprintd = {
