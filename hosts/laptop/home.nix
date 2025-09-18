@@ -373,6 +373,7 @@
       </fontconfig>
     '';
     "tofi/config".source = ../../dotfiles/tofi/fullscreen;
+    "hyprlock/config".source = ../../dotfiles/hyprlock/laptop-config.conf;
 
   };
 
