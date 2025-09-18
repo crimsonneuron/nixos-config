@@ -40,7 +40,7 @@
     youtube-music
     ncmpcpp
     wayfarer
-
+    zoxide
     libqalculate
 
 
@@ -258,11 +258,6 @@
   };
   services.udiskie = {
     enable = true;
-    settings ={
-      program_options = {
-        file_manager = "${pkgs.kitty}/bin/kitty -e ${pkgs.yazi}/bin/ranger";
-      };
-    };
   };
   services.mpd = {
     enable=true;
