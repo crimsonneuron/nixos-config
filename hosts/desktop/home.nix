@@ -22,7 +22,7 @@
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/scripts.nix
-    ../../modules/home-manager/hyprlock.nix
+    ../../modules/home-manager/utils/hyprlock.nix
   ];
 
   home.packages = with pkgs; [
