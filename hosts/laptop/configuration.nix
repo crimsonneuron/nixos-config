@@ -194,6 +194,16 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
   security.polkit.enable=true;
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject)) {
+      if (action.id == "net.reactivated.fprint.device.enroll" ||
+        action.id == "net.reactivated.fprint.device.verify") {
+          if subject.isInGroup("wheel")) {
+            return polkit.result.YES;
+          }
+        }
+    }
+  '';
   security.pam.services.hyprlock={};
   services.fprintd = {
     enable=true;
