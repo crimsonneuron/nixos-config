@@ -195,13 +195,13 @@
   # services.openssh.enable = true;
   security.polkit.enable=true;
   security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject)) {
+    polkit.addRule(function(action, subject) {
       if (action.id == "net.reactivated.fprint.device.enroll" ||
-        action.id == "net.reactivated.fprint.device.verify") {
-          if subject.isInGroup("wheel")) {
-            return polkit.result.YES;
-          }
+          action.id == "net.reactivated.fprint.device.verify") {
+        if (subject.isInGroup("wheel")) {
+          return polkit.Result.YES;
         }
+      }
     });
   '';
   security.pam.services.hyprlock={};
