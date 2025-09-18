@@ -176,6 +176,7 @@
         export EDITOR=nvim
         export VISUAL=nvim
         export DISPLAY=:0
+        eval \"$(zoxide init zsh)"
         " ;
 };
   zen-browser= {
