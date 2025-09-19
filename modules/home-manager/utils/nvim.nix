@@ -216,14 +216,14 @@
         vim.fn.sign_define(opts.name, {
           texthl = opts.name,
           text = opts.text,
-          numhl = ''
+          numhl = ""
         })
       end
 
-      sign({name = 'DiagnosticSignError', text = '🔥'})
-      sign({name = 'DiagnosticSignWarn', text = '⚠️'})
-      sign({name = 'DiagnosticSignHint', text = '💡'})
-      sign({name = 'DiagnosticSignInfo', text = 'ℹ️'})
+      sign({name = "DiagnosticSignError", text = "🔥"})
+      sign({name = "DiagnosticSignWarn", text = "⚠️"})
+      sign({name = "DiagnosticSignHint", text = "💡"})
+      sign({name = "DiagnosticSignInfo", text = "ℹ️"})
 
       -- Diagnostic configuration
       vim.diagnostic.config({
@@ -233,10 +233,10 @@
           underline = true,
           severity_sort = false,
           float = {
-              border = 'rounded',
-              source = 'always',
-              header = '',
-              prefix = '',
+              border = "rounded",
+              source = "always",
+              header = "",
+              prefix = "",
           },
       })
 
