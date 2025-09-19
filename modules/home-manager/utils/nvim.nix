@@ -1,5 +1,5 @@
-{ pkgs, inputs, ... }: {
-  imports = [inputs.nixvim.homeManagerModules.nixvim];
+{ pkgs,inputs, ... }: {
+  imports= [inputs.nixvim.homeManagerModules.nixvim];
   programs.nixvim = {
     enable = true;
 
@@ -132,6 +132,7 @@
       # Completion
       cmp = {
         enable = true;
+        autoEnableSources = true;  # This automatically enables source plugins
         settings = {
           snippet = {
             expand = "function(args) require('luasnip').lsp_expand(args.body) end";
@@ -148,12 +149,11 @@
             "<CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })";
           };
           sources = [
-            { name = "path"; }
             { name = "nvim_lsp"; keyword_length = 3; }
-            { name = "nvim_lsp_signature_help"; }
-            { name = "nvim_lua"; keyword_length = 2; }
-            { name = "buffer"; keyword_length = 2; }
             { name = "luasnip"; keyword_length = 2; }
+            { name = "path"; }
+            { name = "buffer"; keyword_length = 2; }
+            { name = "nvim_lua"; keyword_length = 2; }
             { name = "calc"; }
           ];
           window = {
@@ -178,9 +178,8 @@
         };
       };
 
-      # Snippet support with LuaSnip (the correct one for NixVim)
+      # Snippet support with LuaSnip
       luasnip.enable = true;
-      cmp-luasnip.enable = true;
 
       # Auto pairs
       nvim-autopairs = {
