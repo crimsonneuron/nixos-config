@@ -247,6 +247,6 @@
               vim.bo.expandtab = true
           end
       })
-''
+'';
   };
 }
