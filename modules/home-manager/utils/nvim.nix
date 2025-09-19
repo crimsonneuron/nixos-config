@@ -1,5 +1,5 @@
 { pkgs, inputs, ... }: {
-  imports= [inputs.nixvim.homeManagerModules.nixvim];
+  imports = [inputs.nixvim.homeManagerModules.nixvim];
   programs.nixvim = {
     enable = true;
 
@@ -134,7 +134,7 @@
         enable = true;
         settings = {
           snippet = {
-            expand = "function(args) vim.fn['vsnip#anonymous'](args.body) end";
+            expand = "function(args) require('luasnip').lsp_expand(args.body) end";
           };
           mapping = {
             "<C-p>" = "cmp.mapping.select_prev_item()";
@@ -153,7 +153,7 @@
             { name = "nvim_lsp_signature_help"; }
             { name = "nvim_lua"; keyword_length = 2; }
             { name = "buffer"; keyword_length = 2; }
-            { name = "vsnip"; keyword_length = 2; }
+            { name = "luasnip"; keyword_length = 2; }
             { name = "calc"; }
           ];
           window = {
@@ -166,7 +166,7 @@
               function(entry, item)
                 local menu_icon = {
                   nvim_lsp = 'λ',
-                  vsnip = '⋗',
+                  luasnip = '⋗',
                   buffer = 'Ω',
                   path = '🖫',
                 }
@@ -178,9 +178,9 @@
         };
       };
 
-      # Snippet support
-      cmp-vsnip.enable = true;
-      vim-vsnip.enable = true;
+      # Snippet support with LuaSnip (the correct one for NixVim)
+      luasnip.enable = true;
+      cmp-luasnip.enable = true;
 
       # Auto pairs
       nvim-autopairs = {
