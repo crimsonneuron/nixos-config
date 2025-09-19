@@ -11,6 +11,10 @@
     #slippi-nix.url = "github:lytedev/slippi-nix";
     ssbm-nix.url = "github:NormalFall/ssbm-nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, ... }@inputs: 

@@ -1,7 +1,4 @@
-{ pkgs, inputs, ... }:
-
-{
-  imports = [inputs.nixvim.homeManagerModules.nixvim];
+{ pkgs, ... }: {
   programs.nixvim = {
     enable = true;
 
@@ -189,22 +186,28 @@
         enable = true;
       };
 
-      # Rust tools (if available in nixvim)
-      rust-tools = {
-        enable = true;
-        server = {
-          on_attach = ''
-            function(_, bufnr)
-              vim.keymap.set("n", "<C-space>", require("rust-tools").hover_actions.hover_actions, { buffer = bufnr })
-              vim.keymap.set("n", "<Leader>a", require("rust-tools").code_action_group.code_action_group, { buffer = bufnr })
-            end
-          '';
-        };
-      };
+
     };
+
+    # Extra packages for plugins not directly supported by NixVim
+    extraPlugins = with pkgs.vimPlugins; [
+      rust-tools-nvim
+    ];
 
     # Extra Lua configuration for things that don't have direct NixVim equivalents
     extraConfigLua = ''
+      -- Rust-tools setup
+      local rt = require("rust-tools")
+      rt.setup({
+        server = {
+          on_attach = function(_, bufnr)
+            -- Hover actions
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            -- Code action groups
+            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+          end,
+        },
+      })
       -- Shortmess configuration
       vim.opt.shortmess = vim.opt.shortmess + { c = true }
 
@@ -213,7 +216,7 @@
         vim.fn.sign_define(opts.name, {
           texthl = opts.name,
           text = opts.text,
-          numhl = \' \' 
+          numhl = ''
         })
       end
 
@@ -222,6 +225,7 @@
       sign({name = 'DiagnosticSignHint', text = '💡'})
       sign({name = 'DiagnosticSignInfo', text = 'ℹ️'})
 
+      -- Diagnostic configuration
       vim.diagnostic.config({
           virtual_text = false,
           signs = true,
@@ -231,16 +235,18 @@
           float = {
               border = 'rounded',
               source = 'always',
-              header = "",
-              prefix = "",
+              header = '',
+              prefix = '',
           },
       })
 
+      -- Auto commands
       vim.cmd([[
           autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
           autocmd FileType json,jsonc setlocal concealcursor=nvic
       ]])
 
+      -- Nix file specific settings
       vim.api.nvim_create_autocmd("FileType", {
           pattern = "nix",
           callback = function()
@@ -250,6 +256,13 @@
               vim.bo.expandtab = true
           end
       })
-'';
+
+      -- Vimspector options (if you're using it)
+      vim.cmd([[
+          let g:vimspector_sidebar_width = 85
+          let g:vimspector_bottombar_height = 15
+          let g:vimspector_terminal_maxwidth = 70
+      ]])
+    '';
   };
 }
