@@ -1,5 +1,5 @@
 { pkgs,inputs, ... }: {
-  imports= [inputs.nixvim.homeManagerModules.nixvim];
+  imports=[inputs.nixvim.homeManagerModules.nixvim];
   programs.nixvim = {
     enable = true;
 
@@ -157,8 +157,12 @@
             { name = "calc"; }
           ];
           window = {
-            completion = "cmp.config.window.bordered()";
-            documentation = "cmp.config.window.bordered()";
+            completion = {
+              border = "rounded";
+            };
+            documentation = {
+              border = "rounded";
+            };
           };
           formatting = {
             fields = ["menu" "abbr" "kind"];
