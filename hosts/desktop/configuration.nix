@@ -170,6 +170,7 @@
 
     #Games
     vulkan-tools
+    xwayland-satellite
 
   ];
 
