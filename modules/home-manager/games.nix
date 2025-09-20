@@ -21,7 +21,7 @@ in
         [Desktop Entry]
         Type=Application
         Name=Titanfall 2
-        Exec=sh -c "~/Projects/Bash/niri-wine-window-fixer.sh & lutris lutris:rungame/titanfall-2"
+        Exec= lutris lutris:rungame/titanfall-2"
         Icon=/home/crimson/.local/share/icons/hicolor/128x128/apps/lutris_titanfall-2.png
         Categories=Game;
       '';
