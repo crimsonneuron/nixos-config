@@ -1,17 +1,17 @@
-# modules/neovim.nix
-{ pkgs, ... }:
-
-{
+{ pkgs,inputs, ... }: {
+  imports = [inputs.nixvim.homeManagerModules.nixvim];
   programs.nixvim = {
     enable = true;
 
-    # Set leader keys
+    # Global variables (from vars.lua)
     globals = {
       mapleader = ",";
-      maplocalleader = "\\";
+      localleader = "\\";
+      t_co = 256;
+      background = "dark";
     };
 
-    # Options (opts.lua equivalent)
+    # Options (from opts.lua)
     opts = {
       # Context
       colorcolumn = "80";
@@ -21,13 +21,12 @@
       signcolumn = "yes";
 
       # Filetypes
-      encoding = "utf-8";
-      fileencoding = "utf-8";
+      encoding = "utf8";
+      fileencoding = "utf8";
 
       # Theme
-      syntax = "ON";
       termguicolors = true;
-      background = "light"; # Note: This overrides the 'dark' set in vars.lua
+      background = "light";  # Note: you had this set to light in opts.lua
 
       # Search
       ignorecase = true;
@@ -46,27 +45,23 @@
       splitbelow = true;
 
       # Completion
-      completeopt = [ "menuone" "noselect" "noinsert" ];
-      shortmess = "filnxtToOFc"; # Approximation, adds 'c'
+      completeopt = ["menuone" "noselect" "noinsert"];
+      updatetime = 300;
 
-      # Diagnostics & UI (from autocmds and set commands)
-      # updatetime is usually handled by Nixvim's LSP module
-      # signcolumn is set above
-      # Conceal settings for json/jsonc would need specific buffer configuration
-      # Folding options are set in the treesitter section below
+      # Folding
+      foldmethod = "expr";
+      foldexpr = "nvim_treesitter#foldexpr()";
+      foldlevel = 999;
+      foldlevelstart = 999;
     };
 
-    # Colorscheme (opts.lua)
-    colorschemes.kanagawa.enable = true;
+    # Colorscheme
+    colorschemes.kanagawa = {
+      enable = true;
+    };
 
-    # Variables (vars.lua equivalent)
-    # t_co=256 is usually default
-    # background is set in opts
-    # packpath modification is usually not needed in Nixvim
-
-    # Keymaps (keys.lua equivalent)
+    # Keymaps (from keys.lua)
     keymaps = [
-      # Remap escape
       {
         mode = "i";
         key = "jk";
@@ -76,172 +71,202 @@
           silent = true;
         };
       }
-      # Toggle Telescope find files (Note: ff is a common key for this)
       {
         mode = "n";
         key = "ff";
-        action = "<cmd>Telescope find_files<cr>";
-        options.noremap = true;
+        action = ":Telescope find_files<CR>";
+        options = {
+          noremap = true;
+          silent = true;
+        };
       }
-      # Rust Tools keymaps (Defined in LSP section below)
-      # {
-      #   mode = "n";
-      #   key = "<C-space>";
-      #   action = "<Plug>(rust-tools-hover-actions)";
-      #   options = { silent = true; };
-      # }
-      # {
-      #   mode = "n";
-      #   key = "<Leader>a";
-      #   action = "<Plug>(rust-tools-code-action-group)";
-      #   options = { silent = true; };
-      # }
     ];
 
-    # Plugins Configuration
+    # Plugin configurations
     plugins = {
-      # Ensure required plugins are installed
-      telescope.enable = true;
-      nvim-autopairs.enable = true;
-      nvim-cmp.enable = true;
-      cmp-nvim-lsp.enable = true; # For nvim_lsp source
-      cmp-vsnip.enable = true;    # For vsnip source
-      cmp-buffer.enable = true;   # For buffer source
-      cmp-path.enable = true;     # For path source
-      cmp-calc.enable = true;     # For calc source
-      vim-vsnip.enable = true;    # Required for cmp-vsnip
-      nvim-treesitter = {
+      # File finder
+      telescope = {
         enable = true;
-        # ensureInstalled = [ "lua" "rust" ]; # Uncomment if you want specific parsers
-        # autoInstall = true; # Nixvim handles this differently, usually via ensureInstalled
-        nixvimInjections = true; # Enable Nix specific injections
-        indent = true;
-        folding = true; # Enables treesitter folding
-        rainbow = {
-          enable = true;
-          extendedMode = true;
-          maxFileLines = null;
+        keymaps = {
+          "<leader>ff" = "find_files";
+          "<leader>fg" = "live_grep";
+          "<leader>fb" = "buffers";
+          "<leader>fh" = "help_tags";
         };
-        # parserInstallDir is handled by Nixvim
       };
-      # LSP Configuration
+
+      # Treesitter
+      treesitter = {
+        enable = true;
+        settings = {
+          highlight = {
+            enable = true;
+            additional_vim_regex_highlighting = false;
+          };
+          indent = {
+            enable = true;
+          };
+          rainbow = {
+            enable = true;
+            extended_mode = true;
+            max_file_lines = null;
+          };
+        };
+      };
+
+      # LSP
       lsp = {
         enable = true;
-        # Enable servers
         servers = {
-          rust-analyzer.enable = true;
-          nil_ls.enable = true; # For Nix
+          rust-analyzer = {
+            enable = true;
+            installCargo = false;
+            installRustc = false;
+          };
+          nil-ls = {
+            enable = true;
+          };
         };
-        # Configure diagnostics signs and float
-        # This part configures the appearance and behavior of diagnostics
-        # It roughly corresponds to the sign_define and vim.diagnostic.config parts
-        # and the autocmd for CursorHold in your init.lua
-        # The keymap for diagnostics is usually provided by default or the which-key plugin
-        # Signs
-        # signs = {
-        #   DiagnosticSignError = { text = ""; texthl = "DiagnosticSignError"; };
-        #   DiagnosticSignWarn = { text = ""; texthl = "DiagnosticSignWarn"; };
-        #   DiagnosticSignHint = { text = ""; texthl = "DiagnosticSignHint"; };
-        #   DiagnosticSignInfo = { text = ""; texthl = "DiagnosticSignInfo"; };
-        # };
-        # Diagnostic Configuration
-        # diagnostics = {
-        #   virtualText = false;
-        #   signs = true;
-        #   updateInInsert = true;
-        #   underline = true;
-        #   severitySort = false;
-        #   float = {
-        #     border = "rounded";
-        #     source = "always";
-        #     header = "";
-        #     prefix = "";
-        #   };
-        # };
-        # Keymaps for LSP functions (like hover, definition, etc.)
-        # These are common defaults, you can customize them
-        # keymaps = {
-        #   silent = true;
-        #   lspBuf = {
-        #     gd = "<cmd>lua vim.lsp.buf.definition()<CR>";
-        #     gD = "<cmd>lua vim.lsp.buf.declaration()<CR>";
-        #     gr = "<cmd>lua vim.lsp.buf.references()<CR>";
-        #     gi = "<cmd>lua vim.lsp.buf.implementation()<CR>";
-        #     K = "<cmd>lua vim.lsp.buf.hover()<CR>";
-        #     "<C-k>" = "<cmd>lua vim.lsp.buf.signature_help()<CR>";
-        #     "<F2>" = "<cmd>lua vim.lsp.buf.rename()<CR>";
-        #     "<F4>" = "<cmd>lua vim.lsp.buf.code_action()<CR>";
-        #     ge = "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>";
-        #     g0 = "<cmd>lua vim.lsp.buf.document_symbol()<CR>";
-        #     gW = "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>";
-        #   };
-        # };
       };
-      # Rust Tools configuration (if you want to use rust-tools.nvim features beyond LSP)
-      # rust-tools = {
-      #   enable = true;
-      #   # server = {
-      #   #   onAttach = ''
-      #   #     function(_, bufnr)
-      #   #       -- Hover actions
-      #   #       vim.keymap.set("n", "<C-space>", require('rust-tools').hover_actions.hover_actions, { buffer = bufnr })
-      #   #       -- Code action groups
-      #   #       vim.keymap.set("n", "<Leader>a", require('rust-tools').code_action_group.code_action_group, { buffer = bufnr })
-      #   #     end
-      #   #   '';
-      #   # };
-      # };
-      # Vimspector configuration (if you are using vimspector)
-      # vimspector = {
-      #   enable = true;
-      #   settings = {
-      #     sidebar_width = 85;
-      #     bottombar_height = 15;
-      #     terminal_maxwidth = 70;
-      #   };
-      # };
+
+      # Completion
+      cmp = {
+        enable = true;
+        autoEnableSources = true;  # This automatically enables source plugins
+        settings = {
+          snippet = {
+            expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+          };
+          mapping = {
+            "<C-p>" = "cmp.mapping.select_prev_item()";
+            "<C-n>" = "cmp.mapping.select_next_item()";
+            "<S-Tab>" = "cmp.mapping.select_prev_item()";
+            "<Tab>" = "cmp.mapping.select_next_item()";
+            "<C-S-f>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-f>" = "cmp.mapping.scroll_docs(4)";
+            "<C-Space>" = "cmp.mapping.complete()";
+            "<C-e>" = "cmp.mapping.close()";
+            "<CR>" = "cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true })";
+          };
+          sources = [
+            { name = "nvim_lsp"; keyword_length = 3; }
+            { name = "luasnip"; keyword_length = 2; }
+            { name = "path"; }
+            { name = "buffer"; keyword_length = 2; }
+            { name = "nvim_lua"; keyword_length = 2; }
+            { name = "calc"; }
+          ];
+          window = {
+            completion = {
+              border = "rounded";
+            };
+            documentation = {
+              border = "rounded";
+            };
+          };
+          formatting = {
+            fields = ["menu" "abbr" "kind"];
+            format = ''
+              function(entry, item)
+                local menu_icon = {
+                  nvim_lsp = 'λ',
+                  luasnip = '⋗',
+                  buffer = 'Ω',
+                  path = '🖫',
+                }
+                item.menu = menu_icon[entry.source.name]
+                return item
+              end
+            '';
+          };
+        };
+      };
+
+      # Snippet support with LuaSnip
+      luasnip.enable = true;
+
+      # Auto pairs
+      nvim-autopairs = {
+        enable = true;
+      };
+
+
     };
 
-    # Extra configuration (for parts not directly supported by Nixvim modules)
+    # Extra packages for plugins not directly supported by NixVim
+    extraPlugins = with pkgs.vimPlugins; [
+      rust-tools-nvim
+    ];
+
+    # Extra Lua configuration for things that don't have direct NixVim equivalents
     extraConfigLua = ''
-      -- Set updatetime for CursorHold (if needed, often default is fine)
-      vim.api.nvim_set_option('updatetime', 300)
+      -- Rust-tools setup
+      local rt = require("rust-tools")
+      rt.setup({
+        server = {
+          on_attach = function(_, bufnr)
+            -- Hover actions
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            -- Code action groups
+            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+          end,
+        },
+      })
+      -- Shortmess configuration
+      vim.opt.shortmess = vim.opt.shortmess + { c = true }
 
-      -- Autocmd for CursorHold diagnostic float (handled by LSP diagnostics config above)
-      -- vim.api.nvim_create_autocmd("CursorHold", {
-      --   pattern = "*",
-      --   callback = function()
-      --     vim.diagnostic.open_float(nil, { focusable = false })
-      --   end,
-      -- })
+      -- LSP Diagnostics signs
+      local sign = function(opts)
+        vim.fn.sign_define(opts.name, {
+          texthl = opts.name,
+          text = opts.text,
+          numhl = ""
+        })
+      end
 
-      -- Autocmd for FileType json/jsonc conceal (Nixvim might have specific ways)
-      -- Consider using `programs.nixvim.plugins.treesitter.context` or similar
-      -- vim.api.nvim_create_autocmd("FileType", {
-      --   pattern = { "json", "jsonc" },
-      --   callback = function()
-      --     vim.opt_local.concealcursor = "nvic"
-      --   end,
-      -- })
+      sign({name = "DiagnosticSignError", text = "🔥"})
+      sign({name = "DiagnosticSignWarn", text = "⚠️"})
+      sign({name = "DiagnosticSignHint", text = "💡"})
+      sign({name = "DiagnosticSignInfo", text = "ℹ️"})
 
-      -- Autocmd for Nix filetype settings
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "nix",
-        callback = function()
-          vim.bo.tabstop=2
-          vim.bo.shiftwidth=2
-          vim.bo.softtabstop=2
-          vim.bo.expandtab=true
-        end
+      -- Diagnostic configuration
+      vim.diagnostic.config({
+          virtual_text = false,
+          signs = true,
+          update_in_insert = true,
+          underline = true,
+          severity_sort = false,
+          float = {
+              border = "rounded",
+              source = "always",
+              header = "",
+              prefix = "",
+          },
       })
 
-      -- Treesitter folding setup (often handled by plugins.nvim-treesitter.folding)
-      -- vim.wo.foldmethod = 'expr'
-      -- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+      -- Auto commands
+      vim.cmd([[
+          autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+          autocmd FileType json,jsonc setlocal concealcursor=nvic
+      ]])
 
-      -- Completion Plugin Setup (Handled by plugins.nvim-cmp)
-      -- The cmp setup in your init.lua is largely covered by the Nixvim plugin options
-      -- You might need to add specific sources or mappings via extraOptions or extraConfigLua if defaults aren't enough
+      -- Nix file specific settings
+      vim.api.nvim_create_autocmd("FileType", {
+          pattern = "nix",
+          callback = function()
+              vim.bo.tabstop = 2
+              vim.bo.shiftwidth = 2
+              vim.bo.softtabstop = 2
+              vim.bo.expandtab = true
+          end
+      })
+
+      -- Vimspector options (if you're using it)
+      vim.cmd([[
+          let g:vimspector_sidebar_width = 85
+          let g:vimspector_bottombar_height = 15
+          let g:vimspector_terminal_maxwidth = 70
+      ]])
     '';
   };
 }
