@@ -279,7 +279,6 @@ layout {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar" 
 spawn-at-startup "sh" "-c" "swaybg -i /home/crimson/Pictures/Wallpapers/nasa_mirror_1920x1080.png"
-spawn-at-startup "xwayland-satellite"
 
 environment {
     DISPLAY ":0"

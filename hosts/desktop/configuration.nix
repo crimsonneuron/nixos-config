@@ -171,9 +171,6 @@
     #Games
     vulkan-tools
 
-    #Niri:
-    xwayland-satellite
-
   ];
 
   systemd.user.services."init-session" = {
