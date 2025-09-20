@@ -19,6 +19,7 @@
   imports = [
     inputs.zen-browser.homeModules.beta
     inputs.spicetify-nix.homeManagerModules.default 
+    inputs.nixvim.homeManagerModules.nixvim
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/scripts.nix
@@ -112,6 +113,9 @@
     ncmpcpp = {
       enable=true;
       mpdMusicDir = /mnt/storage/music;
+    };
+    nixvim = {
+      enable=true;
     };
     lutris = {
       enable=true;
