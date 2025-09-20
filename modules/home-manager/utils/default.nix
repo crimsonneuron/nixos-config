@@ -1,6 +1,9 @@
 inputs:
 
 let
+  system = "x86_64-linux"; # or make this configurable if needed
+  pkgs = inputs.nixpkgs.legacyPackages.${system};
+  
   # Get all .nix files in the current directory except default.nix itself
   nixFiles = builtins.filter (name: 
     name != "default.nix" && 
@@ -10,7 +13,7 @@ let
   # Import each .nix file and create an attribute set
   importedModules = builtins.listToAttrs (map (file: {
     name = builtins.substring 0 (builtins.stringLength file - 4) file;
-    value = import (./. + "/${file}") inputs;
+    value = import (./. + "/${file}") (inputs // { inherit pkgs; });
   }) nixFiles);
 
 in
