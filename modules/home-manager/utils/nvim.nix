@@ -1,198 +1,247 @@
-{ config, pkgs, lib,inputs, ... }:
+# modules/neovim.nix
+{ pkgs, ... }:
 
 {
-  imports = [inputs.nixvim.homeManagerModules.nixvim];
-  # Neovim configuration module for NixOS with flakes
-  programs.neovim = {
+  programs.nixvim = {
     enable = true;
-    defaultEditor = true;
-    
-    # Basic configuration from vars.txt and opts.txt
-    extraConfig = ''
-      set t_Co=256
-      let g:background = "dark"
-      set colorcolumn=80
-      set number
-      set relativenumber
-      set scrolloff=4
-      set signcolumn=yes
-      set encoding=utf8
-      set fileencoding=utf8
-      syntax on
-      set termguicolors
-      colorscheme kanagawa
-      set ignorecase
-      set smartcase
-      set incsearch
-      set nohlsearch
-      set expandtab
-      set shiftwidth=4
-      set softtabstop=4
-      set tabstop=4
-      set splitright
-      set splitbelow
-      set completeopt=menuone,noselect,noinsert
-      set shortmess+=c
-      let &updatetime=300
-      set signcolumn=yes
-      autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-      autocmd FileType json,jsonc setlocal concealcursor=nvic
-      set foldmethod=expr
-      set foldexpr=nvim_treesitter#foldexpr()
-    '';
-    
-    # Leader key setup from init.txt
-    customRC = ''
-      let mapleader=","
-      let maplocalleader="\\"
-      
-      " Key mappings from keys.txt
-      inoremap jk <Esc>
-      nnoremap ff :Telescope find_files<CR>
-    '';
-    
-    # Plugins from init.txt
-    plugins = with pkgs.vimPlugins; [
-      nvim-treesitter
-      nvim-lspconfig
-      nvim-cmp
-      cmp-nvim-lsp
-      cmp-path
-      cmp-buffer
-      cmp-vsnip
-      cmp-lua
-      cmp-nvim-lsp-signature-help
-      nvim-autopairs
-      telescope-nvim
-      nvim-lua
-      nvim-tree-lua
-      rust-tools-nvim
-      kanagawa-nvim
-    ];
-    
-    # Complex Lua configuration
-    afterInit = ''
-      -- Setup LSP capabilities
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-      
-      -- Diagnostic signs from init.txt
-      vim.fn.sign_define('DiagnosticSignError', {text = '', texthl = 'DiagnosticSignError'})
-      vim.fn.sign_define('DiagnosticSignWarn', {text = '', texthl = 'DiagnosticSignWarn'})
-      vim.fn.sign_define('DiagnosticSignHint', {text = '', texthl = 'DiagnosticSignHint'})
-      vim.fn.sign_define('DiagnosticSignInfo', {text = '', texthl = 'DiagnosticSignInfo'})
-      
-      -- LSP configuration from init.txt
-      require('lspconfig').rust_analyzer.setup({
-        capabilities = capabilities,
-      })
-      require('lspconfig').nil_ls.setup({
-        capabilities = capabilities,
-      })
-      
-      -- Rust tools configuration from init.txt
-      require('rust-tools').setup({
-        server = {
-          on_attach = function(_, bufnr)
-            -- Hover actions
-            vim.keymap.set("n", "<C-space>", require('rust-tools.hover_actions').hover_actions, { buffer = bufnr, silent = true })
-            -- Code action groups
-            vim.keymap.set("n", "<Leader>a", require('rust-tools.code_action_group').code_action_group, { buffer = bufnr, silent = true })
-          end,
-        },
-      })
-      
-      -- Diagnostic configuration from init.txt
-      vim.diagnostic.config({
-        virtual_text = false,
-        signs = true,
-        update_in_insert = true,
-        underline = true,
-        severity_sort = false,
-        float = {
-          border = 'rounded',
-          source = 'always',
-          header = '',
-          prefix = '',
-        },
-      })
-      
-      -- Completion configuration from init.txt
-      local cmp = require'cmp'
-      cmp.setup({
-        -- Enable LSP snippets
-        snippet = {
-          expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
-          end,
-        },
-        mapping = {
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
-          ['<C-n>'] = cmp.mapping.select_next_item(),
-          -- Add tab support
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-          ['<Tab>'] = cmp.mapping.select_next_item(),
-          ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.close(),
-          ['<CR>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
-            select = true,
-          })
-        },
-        -- Installed sources:
-        sources = {
-          { name = 'path' },
-          { name = 'nvim_lsp', keyword_length = 3 },
-          { name = 'nvim_lsp_signature_help'},
-          { name = 'nvim_lua', keyword_length = 2},
-          { name = 'buffer', keyword_length = 2 },
-          { name = 'vsnip', keyword_length = 2 },
-          { name = 'calc'},
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        formatting = {
-          fields = {'menu', 'abbr', 'kind'},
-          format = function(entry, item)
-            local menu_icon ={
-              nvim_lsp = 'λ',
-              vsnip = '⋗',
-              buffer = 'Ω',
-              path = '🖫',
-            }
-            item.menu = menu_icon[entry.source.name]
-            return item
-          end,
-        },
-      })
-      
-      -- Treesitter configuration from init.txt
-      require('nvim-treesitter.configs').setup {
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = { enable = true }, 
-        rainbow = {
-          enable = true,
-          extended_mode = true,
-          max_file_lines = nil,
-        },
+
+    # Set leader keys
+    globals = {
+      mapleader = ",";
+      maplocalleader = "\\";
+    };
+
+    # Options (opts.lua equivalent)
+    opts = {
+      # Context
+      colorcolumn = "80";
+      number = true;
+      relativenumber = true;
+      scrolloff = 4;
+      signcolumn = "yes";
+
+      # Filetypes
+      encoding = "utf-8";
+      fileencoding = "utf-8";
+
+      # Theme
+      syntax = "ON";
+      termguicolors = true;
+      background = "light"; # Note: This overrides the 'dark' set in vars.lua
+
+      # Search
+      ignorecase = true;
+      smartcase = true;
+      incsearch = true;
+      hlsearch = false;
+
+      # Whitespace
+      expandtab = true;
+      shiftwidth = 4;
+      softtabstop = 4;
+      tabstop = 4;
+
+      # Splits
+      splitright = true;
+      splitbelow = true;
+
+      # Completion
+      completeopt = [ "menuone" "noselect" "noinsert" ];
+      shortmess = "filnxtToOFc"; # Approximation, adds 'c'
+
+      # Diagnostics & UI (from autocmds and set commands)
+      # updatetime is usually handled by Nixvim's LSP module
+      # signcolumn is set above
+      # Conceal settings for json/jsonc would need specific buffer configuration
+      # Folding options are set in the treesitter section below
+    };
+
+    # Colorscheme (opts.lua)
+    colorschemes.kanagawa.enable = true;
+
+    # Variables (vars.lua equivalent)
+    # t_co=256 is usually default
+    # background is set in opts
+    # packpath modification is usually not needed in Nixvim
+
+    # Keymaps (keys.lua equivalent)
+    keymaps = [
+      # Remap escape
+      {
+        mode = "i";
+        key = "jk";
+        action = "<Esc>";
+        options = {
+          noremap = true;
+          silent = true;
+        };
       }
-      
-      -- Autocmd for Nix files from init.txt
+      # Toggle Telescope find files (Note: ff is a common key for this)
+      {
+        mode = "n";
+        key = "ff";
+        action = "<cmd>Telescope find_files<cr>";
+        options.noremap = true;
+      }
+      # Rust Tools keymaps (Defined in LSP section below)
+      # {
+      #   mode = "n";
+      #   key = "<C-space>";
+      #   action = "<Plug>(rust-tools-hover-actions)";
+      #   options = { silent = true; };
+      # }
+      # {
+      #   mode = "n";
+      #   key = "<Leader>a";
+      #   action = "<Plug>(rust-tools-code-action-group)";
+      #   options = { silent = true; };
+      # }
+    ];
+
+    # Plugins Configuration
+    plugins = {
+      # Ensure required plugins are installed
+      telescope.enable = true;
+      nvim-autopairs.enable = true;
+      nvim-cmp.enable = true;
+      cmp-nvim-lsp.enable = true; # For nvim_lsp source
+      cmp-vsnip.enable = true;    # For vsnip source
+      cmp-buffer.enable = true;   # For buffer source
+      cmp-path.enable = true;     # For path source
+      cmp-calc.enable = true;     # For calc source
+      vim-vsnip.enable = true;    # Required for cmp-vsnip
+      nvim-treesitter = {
+        enable = true;
+        # ensureInstalled = [ "lua" "rust" ]; # Uncomment if you want specific parsers
+        # autoInstall = true; # Nixvim handles this differently, usually via ensureInstalled
+        nixvimInjections = true; # Enable Nix specific injections
+        indent = true;
+        folding = true; # Enables treesitter folding
+        rainbow = {
+          enable = true;
+          extendedMode = true;
+          maxFileLines = null;
+        };
+        # parserInstallDir is handled by Nixvim
+      };
+      # LSP Configuration
+      lsp = {
+        enable = true;
+        # Enable servers
+        servers = {
+          rust-analyzer.enable = true;
+          nil_ls.enable = true; # For Nix
+        };
+        # Configure diagnostics signs and float
+        # This part configures the appearance and behavior of diagnostics
+        # It roughly corresponds to the sign_define and vim.diagnostic.config parts
+        # and the autocmd for CursorHold in your init.lua
+        # The keymap for diagnostics is usually provided by default or the which-key plugin
+        # Signs
+        # signs = {
+        #   DiagnosticSignError = { text = ""; texthl = "DiagnosticSignError"; };
+        #   DiagnosticSignWarn = { text = ""; texthl = "DiagnosticSignWarn"; };
+        #   DiagnosticSignHint = { text = ""; texthl = "DiagnosticSignHint"; };
+        #   DiagnosticSignInfo = { text = ""; texthl = "DiagnosticSignInfo"; };
+        # };
+        # Diagnostic Configuration
+        # diagnostics = {
+        #   virtualText = false;
+        #   signs = true;
+        #   updateInInsert = true;
+        #   underline = true;
+        #   severitySort = false;
+        #   float = {
+        #     border = "rounded";
+        #     source = "always";
+        #     header = "";
+        #     prefix = "";
+        #   };
+        # };
+        # Keymaps for LSP functions (like hover, definition, etc.)
+        # These are common defaults, you can customize them
+        # keymaps = {
+        #   silent = true;
+        #   lspBuf = {
+        #     gd = "<cmd>lua vim.lsp.buf.definition()<CR>";
+        #     gD = "<cmd>lua vim.lsp.buf.declaration()<CR>";
+        #     gr = "<cmd>lua vim.lsp.buf.references()<CR>";
+        #     gi = "<cmd>lua vim.lsp.buf.implementation()<CR>";
+        #     K = "<cmd>lua vim.lsp.buf.hover()<CR>";
+        #     "<C-k>" = "<cmd>lua vim.lsp.buf.signature_help()<CR>";
+        #     "<F2>" = "<cmd>lua vim.lsp.buf.rename()<CR>";
+        #     "<F4>" = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+        #     ge = "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>";
+        #     g0 = "<cmd>lua vim.lsp.buf.document_symbol()<CR>";
+        #     gW = "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>";
+        #   };
+        # };
+      };
+      # Rust Tools configuration (if you want to use rust-tools.nvim features beyond LSP)
+      # rust-tools = {
+      #   enable = true;
+      #   # server = {
+      #   #   onAttach = ''
+      #   #     function(_, bufnr)
+      #   #       -- Hover actions
+      #   #       vim.keymap.set("n", "<C-space>", require('rust-tools').hover_actions.hover_actions, { buffer = bufnr })
+      #   #       -- Code action groups
+      #   #       vim.keymap.set("n", "<Leader>a", require('rust-tools').code_action_group.code_action_group, { buffer = bufnr })
+      #   #     end
+      #   #   '';
+      #   # };
+      # };
+      # Vimspector configuration (if you are using vimspector)
+      # vimspector = {
+      #   enable = true;
+      #   settings = {
+      #     sidebar_width = 85;
+      #     bottombar_height = 15;
+      #     terminal_maxwidth = 70;
+      #   };
+      # };
+    };
+
+    # Extra configuration (for parts not directly supported by Nixvim modules)
+    extraConfigLua = ''
+      -- Set updatetime for CursorHold (if needed, often default is fine)
+      vim.api.nvim_set_option('updatetime', 300)
+
+      -- Autocmd for CursorHold diagnostic float (handled by LSP diagnostics config above)
+      -- vim.api.nvim_create_autocmd("CursorHold", {
+      --   pattern = "*",
+      --   callback = function()
+      --     vim.diagnostic.open_float(nil, { focusable = false })
+      --   end,
+      -- })
+
+      -- Autocmd for FileType json/jsonc conceal (Nixvim might have specific ways)
+      -- Consider using `programs.nixvim.plugins.treesitter.context` or similar
+      -- vim.api.nvim_create_autocmd("FileType", {
+      --   pattern = { "json", "jsonc" },
+      --   callback = function()
+      --     vim.opt_local.concealcursor = "nvic"
+      --   end,
+      -- })
+
+      -- Autocmd for Nix filetype settings
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "nix",
         callback = function()
-          vim.bo.tabstop = 2
-          vim.bo.shiftwidth = 2
-          vim.bo.softtabstop = 2
-          vim.bo.expandtab = true
+          vim.bo.tabstop=2
+          vim.bo.shiftwidth=2
+          vim.bo.softtabstop=2
+          vim.bo.expandtab=true
         end
       })
+
+      -- Treesitter folding setup (often handled by plugins.nvim-treesitter.folding)
+      -- vim.wo.foldmethod = 'expr'
+      -- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+
+      -- Completion Plugin Setup (Handled by plugins.nvim-cmp)
+      -- The cmp setup in your init.lua is largely covered by the Nixvim plugin options
+      -- You might need to add specific sources or mappings via extraOptions or extraConfigLua if defaults aren't enough
     '';
   };
 }
