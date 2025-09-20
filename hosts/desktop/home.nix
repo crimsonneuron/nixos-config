@@ -50,7 +50,6 @@
     
     rustc
     cargo
-    rust-analyzer
 
     wl-clipboard
     python313
@@ -77,6 +76,8 @@
     font-awesome
     nerd-fonts.code-new-roman
     nerd-fonts.fantasque-sans-mono
+    nil 
+    rust-analyzer
 
     mesa-demos
     feh

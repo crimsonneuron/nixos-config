@@ -1,6 +1,4 @@
-{ pkgs,inputs, ... }: {
-  imports=[inputs.nixvim.homeManagerModules.nixvim];
-
+{ pkgs, ... }: {
   programs.nixvim = {
     enable = true;
 
@@ -115,22 +113,15 @@
         };
       };
 
-      # LSP
-      lsp = {
-        enable = true;
-        
-        # Only enable specific servers we want
-        servers = {
-          rust-analyzer = {
-            enable = true;
-            installCargo = false;
-            installRustc = false;
-          };
-          nil-ls = {
-            enable = true;
-          };
-        };
-      };
+      # LSP - commented out to avoid auto-installation issues
+      # We'll configure this manually in extraConfigLua
+      # lsp = {
+      #   enable = true;
+      #   servers = {
+      #     rust-analyzer.enable = true;
+      #     nil-ls.enable = true;
+      #   };
+      # };
 
       # Completion
       cmp = {
@@ -199,10 +190,19 @@
     # Extra packages for plugins not directly supported by NixVim
     extraPlugins = with pkgs.vimPlugins; [
       rust-tools-nvim
+      nvim-lspconfig  # Add this for manual LSP setup
     ];
 
     # Extra Lua configuration for things that don't have direct NixVim equivalents
     extraConfigLua = ''
+      -- Manual LSP setup to avoid NixVim auto-installation issues
+      local lspconfig = require('lspconfig')
+
+      -- Rust analyzer setup
+      lspconfig.rust_analyzer.setup({})
+
+      -- Nix language server setup  
+      lspconfig.nil_ls.setup({})
       -- Rust-tools setup
       local rt = require("rust-tools")
       rt.setup({
