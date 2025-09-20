@@ -26,7 +26,7 @@
 
       # Theme
       termguicolors = true;
-      background = "light";  # Note: you had this set to light in opts.lua
+      background = "dark";  
 
       # Search
       ignorecase = true;
