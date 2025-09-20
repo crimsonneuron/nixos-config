@@ -1,7 +1,7 @@
-{pkgs,lib, ...}:
+{pkgs,lib,osConfig, ...}:
 
 let 
-  hostname = lib.removeSuffix "\n" (builtins.readFile /etc/hostname);
+  hostname = osConfig.networking.hostName; 
   isLaptop = hostname == "lsla";
   baseRightModules = ["group/expand" "bluetooth" "network" "battery"];
   allModules = baseRightModules ++ lib.optional isLaptop "battery";
