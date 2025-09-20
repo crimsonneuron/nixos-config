@@ -53,7 +53,6 @@
 
     wl-clipboard
     python313
-    nil
 
     tree-sitter
     unzip
@@ -76,8 +75,8 @@
     font-awesome
     nerd-fonts.code-new-roman
     nerd-fonts.fantasque-sans-mono
-    nil 
     rust-analyzer
+    nil
 
     mesa-demos
     feh
