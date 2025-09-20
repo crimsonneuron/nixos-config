@@ -189,10 +189,10 @@
       };
 
     swaylock.enable=true;
-    waybar = {
-      enable=true;
-      #systemd.enable=true;
-    };
+     #waybar = {
+       #enable=true;
+       ##systemd.enable=true;
+     #};
   };
 
   games = {
@@ -322,8 +322,8 @@
   xdg.configFile = {
     "niri/config.kdl".source = ../../dotfiles/niri/desktop-config.kdl;
 
-    "waybar/config.jsonc".source = ../../dotfiles/waybar/config.jsonc;
-    "waybar/style.css".source = ../../dotfiles/waybar/style.css;
+     #"waybar/config.jsonc".source = ../../dotfiles/waybar/config.jsonc;
+     #"waybar/style.css".source = ../../dotfiles/waybar/style.css;
 
     "containers/registries.conf".text = ''
       [registries.search]
