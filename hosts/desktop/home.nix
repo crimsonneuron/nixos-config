@@ -116,7 +116,7 @@
     };
     nixvim = {
       enable=true;
-      nixpkgs.useGlobalPkgs=true;
+      nixpkgs.useGlobalPackages =true;
     };
     lutris = {
       enable=true;
