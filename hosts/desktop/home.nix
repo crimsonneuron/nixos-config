@@ -120,6 +120,11 @@
       extraPackages = with pkgs; [
         dockerfile-language-server-nodejs  # or whatever the real name is
     ];
+      plugins = {
+        lsp.enable=false;
+        treesitter.enable=false;
+        cmp.enable=false;
+      };
     };
     lutris = {
       enable=true;
