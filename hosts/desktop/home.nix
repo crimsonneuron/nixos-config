@@ -23,7 +23,7 @@
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/scripts.nix
     ../../modules/home-manager/utils/hyprlock.nix
-    #../../modules/home-manager/utils/nvim.nix
+    ../../modules/home-manager/utils/nvim.nix
   ];
 
   home.packages = with pkgs; [
