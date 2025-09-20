@@ -10,7 +10,7 @@ in
       [Desktop Entry]
       Type=Application
       Name=Calculator
-      Exec=/usr/bin/env bash -lc 'cd /home/crimson && python /home/crimson/nixos/scripts/python/audioswitch.py 2>&1 | logger -t audioswitch'
+      Exec=python ~/nixos/scripts/python/qalc.py
       Terminal=false
   '';
     #poweroff.sh 

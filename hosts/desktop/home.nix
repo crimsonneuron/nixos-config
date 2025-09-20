@@ -83,7 +83,7 @@
     icoutils
     jq
     pywal
-    tofi
+    fuzzel
 
     #Games (NB:Steam in configued in config):
     prismlauncher

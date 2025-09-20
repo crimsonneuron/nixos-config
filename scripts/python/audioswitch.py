@@ -15,7 +15,7 @@ def get_choice():
         choice_string+=choice.common_name
         choice_string+="\n"
     echo = sp.Popen(["echo", choice_string],stdout=sp.PIPE)
-    p1 = sp.Popen(["tofi", "--prompt-text=Source: ", "--font=/home/crimson/.nix-profile/share/fonts/truetype/NerdFonts/FantasqueSansM/FantasqueSansMNerdFont-Regular.ttf"], stdin=echo.stdout, stdout=sp.PIPE)
+    p1 = sp.Popen(["fuzzel", "--dmenu", "--prompt \"Output\""], stdin=echo.stdout, stdout=sp.PIPE)
     return p1.communicate()[0].decode('utf-8').strip()
 
 def get_sinks():

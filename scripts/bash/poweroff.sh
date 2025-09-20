@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 are_you_sure() {
-    yn=$(echo -e "yes\nno" | tofi --prompt-text "Are you sure? ")
+    yn=$(echo -e "yes\nno" | fuzzel --dmenu --prompt "Are you sure? ")
     if [ "$yn" = "yes" ]; then
         eval "$1"
     else
@@ -11,7 +11,7 @@ are_you_sure() {
 
 }
 choices="shutdown\nsuspend\nlock\nhibernate\nreboot"
-chosen=$(echo -e "$choices"| tofi --prompt-text "Power: ")
+chosen=$(echo -e "$choices"| fuzzel --dmenu --prompt "Power: ")
 
 
 case "$chosen" in 
