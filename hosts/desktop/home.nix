@@ -117,6 +117,9 @@
     nixvim = {
       enable=true;
       nixpkgs.useGlobalPackages =true;
+      extraPackages = with pkgs; [
+        dockerfile-language-server-nodejs  # or whatever the real name is
+    ];
     };
     lutris = {
       enable=true;
