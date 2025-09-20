@@ -23,6 +23,7 @@
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/scripts.nix
     ../../modules/home-manager/utils/hyprlock.nix
+    ../../modules/home-manager/utils/nvim.nix
   ];
 
   home.packages = with pkgs; [
@@ -106,43 +107,7 @@
          ];
        };
      };
-     };   
-    neovim = {
-      enable=true;
-      defaultEditor=true;
-
-      plugins = with pkgs.vimPlugins; [
-        #nvim plugins:
-        lualine-nvim
-        nvim-web-devicons
-    
-        kanagawa-nvim
-        
-        tagbar
-        indentLine
-        vim-fugitive
-        nvim-autopairs
-        nvim-lspconfig
-        rust-tools-nvim
-        nvim-cmp
-        cmp-nvim-lsp
-        cmp-nvim-lua
-        cmp-nvim-lsp-signature-help
-        cmp-vsnip
-        cmp-path
-        cmp-buffer
-        vim-vsnip
-        nvim-treesitter.withAllGrammars
-       ];
-      extraPackages = with pkgs.tree-sitter-grammars; [
-        tree-sitter-nix
-        tree-sitter-rust
-        tree-sitter-lua
-        tree-sitter-python
-        tree-sitter-json
-            
-      ];
-  };
+   };   
     zsh = {
       enable=true;
       
