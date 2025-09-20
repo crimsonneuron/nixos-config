@@ -19,12 +19,11 @@
   imports = [
     inputs.zen-browser.homeModules.beta
     inputs.spicetify-nix.homeManagerModules.default 
-    #inputs.nixvim.homeManagerModules.nixvim
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/scripts.nix
     ../../modules/home-manager/utils/hyprlock.nix
-    #../../modules/home-manager/utils/nvim.nix
+    ../../modules/home-manager/utils/nvim.nix
   ];
 
   home.packages = with pkgs; [
@@ -114,18 +113,6 @@
       enable=true;
       mpdMusicDir = /mnt/storage/music;
     };
-     #nixvim = {
-       #enable=true;
-       #nixpkgs.useGlobalPackages =true;
-       #extraPackages = with pkgs; [
-         #dockerfile-language-server-nodejs  # or whatever the real name is
-     #];
-       #plugins = {
-         #lsp.enable=false;
-         #treesitter.enable=false;
-         #cmp.enable=false;
-       #};
-     #};
     lutris = {
       enable=true;
     };
