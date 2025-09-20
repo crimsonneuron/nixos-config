@@ -1,5 +1,6 @@
 { pkgs,inputs, ... }: {
-  imports = [inputs.nixvim.homeManagerModules.nixvim];
+  imports=[inputs.nixvim.homeManagerModules.nixvim];
+
   programs.nixvim = {
     enable = true;
 
@@ -117,6 +118,8 @@
       # LSP
       lsp = {
         enable = true;
+        
+        # Only enable specific servers we want
         servers = {
           rust-analyzer = {
             enable = true;
