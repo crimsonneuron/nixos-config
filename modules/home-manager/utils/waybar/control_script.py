@@ -127,23 +127,29 @@ def start_cava():
         CAVA_PID_FILE.write_text(str(process.pid))
         
         # Convert raw bytes to safe Unicode bars
-        bar_chars = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+        bar_chars = ["▁", "▂", "▃", "▄", "▅"]
         
         while True:
             if process.poll() is not None:
                 break
                 
             try:
-                # Read raw bytes (number should match your bars setting)
+                # Read raw bytes in smaller chunks for faster response
                 raw_data = process.stdout.read(12)
                 if not raw_data:
-                    break
+                    time.sleep(0.01)  # Small delay to prevent CPU spinning
+                    continue
+                
+                # Skip if we get invalid data (all zeros or all max values)
+                if all(b == 0 for b in raw_data) or all(b >= 250 for b in raw_data):
+                    continue
                 
                 # Convert bytes to bar visualization using safe Unicode
                 bars = ""
                 for byte in raw_data:
-                    bar_index = min(byte, 7)  # Clamp to 0-7 range
-                    bars += bar_chars[bar_index]
+                    # More aggressive clamping and scaling
+                    scaled_byte = min(byte * 8 // 256, 4)  # Scale 0-255 to 0-7
+                    bars += bar_chars[scaled_byte]
                 
                 output = {
                     "text": f"♪ {bars}",
@@ -155,6 +161,7 @@ def start_cava():
                 
             except Exception as e:
                 break
+                
                 
     except FileNotFoundError:
         return {
