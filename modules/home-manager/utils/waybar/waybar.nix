@@ -17,13 +17,19 @@ in
         position = "top";
         reload_style_on_change = true;
         modules-left = ["custom/notification" "clock" "tray"];
-        modules-center = ["custom/mpris-visualizer"];
+        modules-center = ["custom/media-toggle"];
         modules-right = allModules; 
-        "custom/mpris-visualizer" = {
-          format = "{}";
-          return-type = "json";
-          exec = "./control_script.sh";
-          on-click-right = "pkill -SIGRTMIN+1 -f control_script.sh";
+        "custom/media-toggle" = {
+            format = "{}";
+            return-type = "json";
+            exec = "~/.config/waybar/media-toggle.py";
+            on-click = "playerctl play-pause";
+            on-click-right = "~/.config/waybar/media-toggle.py toggle";
+            on-click-middle = "playerctl next";
+            on-scroll-up = "playerctl volume 0.05+";
+            on-scroll-down = "playerctl volume 0.05-";
+            escape = true;
+            restart-interval = 1;
         };
         "custom/notification" = {
           tooltip = false;
