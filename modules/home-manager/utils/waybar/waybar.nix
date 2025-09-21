@@ -22,7 +22,7 @@ in
         "custom/media-toggle" = {
             format = "{}";
             return-type = "json";
-            exec = "~/.config/waybar/media-toggle.py";
+            exec = "./control_script.py";
             on-click = "playerctl play-pause";
             on-click-right = "~/.config/waybar/media-toggle.py toggle";
             on-click-middle = "playerctl next";
