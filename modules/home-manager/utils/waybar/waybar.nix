@@ -22,9 +22,9 @@ in
         "custom/media-toggle" = {
             format = "{}";
             return-type = "json";
-            exec = "./control_script.py";
+            exec = "~/nixos/modules/home-manager/utils/waybar/control_script.py";
             on-click = "playerctl play-pause";
-            on-click-right = "./control_script.py toggle";
+            on-click-right = "~/nixos/modules/home-manager/utils/waybar/control_script.py toggle";
             on-click-middle = "playerctl next";
             on-scroll-up = "playerctl volume 0.05+";
             on-scroll-down = "playerctl volume 0.05-";
