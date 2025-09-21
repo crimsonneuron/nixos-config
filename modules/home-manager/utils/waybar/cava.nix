@@ -14,7 +14,7 @@
       input.sensitivity= 100;
 
       output.method = "raw";
-      output.raw_target = /dev/stdout;
+      output.raw_target = "/dev/stdout";
       output.bit_format = "8bit";
       output.ascii_max_range = 7;
 
