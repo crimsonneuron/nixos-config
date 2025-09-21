@@ -80,6 +80,15 @@
           silent = true;
         };
       }
+      {
+        mode = "x";
+        key = "jk";
+        action = "<Esc>";
+        options = {
+          noremap=true;
+          silent=true;
+        };
+      }
     ];
 
     # Plugin configurations

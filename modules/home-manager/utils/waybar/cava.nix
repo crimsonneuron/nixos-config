@@ -9,7 +9,7 @@
       general.spacing =0;
       
       
-      input.method = "pipewire";
+      input.method = "pulse";
       input.source= "auto";
 
       output.method = "raw";
