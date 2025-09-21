@@ -11,7 +11,7 @@
       
       input.method = "pipewire";
       input.source= "auto";
-      input.sensitivity= 100;
+      input.sensitivity= 10;
 
       output.method = "raw";
       output.raw_target = "/dev/stdout";
@@ -20,8 +20,8 @@
 
       smoothing.monstercat = 1;
       smoothing.waves = 0;
-      smoothing.noise-reduction =0.77;
-      smoothing.gravity = 100;
+      smoothing.noise-reduction =0.95;
+      smoothing.gravity = 200;
       smoothing.ignore =0;
     };
   };
