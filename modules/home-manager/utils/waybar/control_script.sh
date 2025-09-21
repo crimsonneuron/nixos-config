@@ -6,7 +6,7 @@
 STATE_FILE="/dev/shm/waybar_mpris_cava_state"
 
 # Cava configuration file path
-CAVA_CONFIG="$HOME/.config/cava/cava-waybar-config"
+CAVA_CONFIG="$HOME/.config/cava/config"
 
 # --- Function to toggle state ---
 toggle_state() {
