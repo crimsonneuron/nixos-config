@@ -19,7 +19,10 @@
       output.ascii_max_range = 7;
 
       smoothing.monstercat = 1;
+      smoothing.waves = 0;
       smoothing.noise-reduction =0.77;
+      smoothing.gravity = 100;
+      smoothing.ignore =0;
     };
   };
 }

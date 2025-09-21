@@ -29,7 +29,7 @@ in
             on-scroll-up = "playerctl volume 0.05+";
             on-scroll-down = "playerctl volume 0.05-";
             escape = true;
-            restart-interval = 1;
+            restart-interval = 0;
         };
         "custom/notification" = {
           tooltip = false;
