@@ -13,9 +13,10 @@
       input.source= "auto";
       input.sensitivity= 100;
 
-      output.method = "ncurses";
+      output.method = "raw";
+      output.raw_target = /dev/stdout;
+      output.bit_format = "8bit";
       output.ascii_max_range = 7;
-      output.bar_delimiter = "0";
 
       smoothing.monstercat = 1;
       smoothing.noise-reduction =0.77;

@@ -54,13 +54,25 @@ def get_mpris_info():
             stderr=subprocess.DEVNULL
         ).decode().strip()
         
-        player = subprocess.check_output(
-            ["playerctl", "metadata", "mpris:trackid"], 
-            stderr=subprocess.DEVNULL
-        ).decode().strip().split(".")[-2] if subprocess.check_output(
-            ["playerctl", "metadata", "mpris:trackid"], 
-            stderr=subprocess.DEVNULL
-        ).decode().strip() else "unknown"
+        # Get player name safely
+        try:
+            trackid = subprocess.check_output(
+                ["playerctl", "metadata", "mpris:trackid"], 
+                stderr=subprocess.DEVNULL
+            ).decode().strip()
+            
+            # Extract player name from trackid (e.g., org.mpris.MediaPlayer2.spotify)
+            parts = trackid.split(".")
+            player = parts[-2] if len(parts) >= 2 else "unknown"
+        except:
+            # Fallback: get player name directly
+            try:
+                player = subprocess.check_output(
+                    ["playerctl", "-l"], 
+                    stderr=subprocess.DEVNULL
+                ).decode().strip().split('\n')[0]
+            except:
+                player = "unknown"
         
         # Format output
         if status == "Playing":
@@ -72,9 +84,9 @@ def get_mpris_info():
         
         # Player-specific icons
         player_icons = {
-            "spotify": "",
-            "YoutubeMusic": "",
-            "firefox": "",
+            "spotify": "",
+            "youtube-music-desktop-app": "",
+            "firefox": "🌍",
             "chromium": "🌍"
         }
         
@@ -108,33 +120,38 @@ def start_cava():
             ["cava"],
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
-            text=True
+            text=False  # Read as bytes for raw output
         )
         
         # Save PID
         CAVA_PID_FILE.write_text(str(process.pid))
         
-        # Read cava output - assuming your config outputs text characters
+        # Convert raw bytes to safe Unicode bars
+        bar_chars = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
+        
         while True:
             if process.poll() is not None:
                 break
                 
             try:
-                # Read a line of output from cava
-                line = process.stdout.readline()
-                if not line:
+                # Read raw bytes (number should match your bars setting)
+                raw_data = process.stdout.read(12)
+                if not raw_data:
                     break
                 
-                # Clean up the line and use it directly
-                cava_output = line.strip()
-                if cava_output:
-                    output = {
-                        "text": f"♪ {cava_output}",
-                        "tooltip": "Audio Visualizer (Right-click for media info)",
-                        "class": "cava active"
-                    }
-                    
-                    print(json.dumps(output), flush=True)
+                # Convert bytes to bar visualization using safe Unicode
+                bars = ""
+                for byte in raw_data:
+                    bar_index = min(byte, 7)  # Clamp to 0-7 range
+                    bars += bar_chars[bar_index]
+                
+                output = {
+                    "text": f"♪ {bars}",
+                    "tooltip": "Audio Visualizer (Right-click for media info)",
+                    "class": "cava active"
+                }
+                
+                print(json.dumps(output), flush=True)
                 
             except Exception as e:
                 break
@@ -171,13 +188,15 @@ def main():
         sys.exit(0)
     
     # Main loop
-    current_state = get_state()
-    
-    if current_state == "cava":
-        start_cava()
-    else:
-        # MPRIS mode - output once and exit (waybar will re-run)
-        while True:
+    while True:
+        current_state = get_state()
+        
+        if current_state == "cava":
+            start_cava()
+            # If cava exits, switch back to mpris
+            set_state("mpris")
+        else:
+            # MPRIS mode - output and continue
             output = get_mpris_info()
             print(json.dumps(output), flush=True)
             time.sleep(1)
