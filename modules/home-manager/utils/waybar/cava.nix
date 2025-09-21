@@ -4,7 +4,7 @@
   programs.cava = {
     enable=true;
     settings = {
-      general.framerate = 60;
+      general.framerate = 15;
       general.bars = 16;
       general.spacing =0;
       
