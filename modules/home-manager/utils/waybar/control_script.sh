@@ -39,7 +39,7 @@ while true; do
     else
         # Run playerctl to follow MPRIS changes and format for Waybar's JSON
         # This command will only output when the song/status changes.
-        playerctl --follow metadata --format '{"text": " {{artist}} - {{title}}", "alt": "{{status}}", "tooltip": "{{playerName}}: {{title}}", "class": "{{status}}"}' &
+        playerctl --follow metadata --format '{"text": " {{artist}} - {{title}}", "alt": "{{status}}", "tooltip": "{{playerName}}: {{title}}", "class": "{{status}}"}' &
     fi
 
     CHILD_PID=$!
