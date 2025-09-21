@@ -7,6 +7,7 @@ let
   allModules = baseRightModules ++ lib.optional isLaptop "battery";
 in
 {
+  imports = [./cava.nix];
   programs.waybar = {
     enable=true;
      
@@ -16,9 +17,14 @@ in
         position = "top";
         reload_style_on_change = true;
         modules-left = ["custom/notification" "clock" "tray"];
-        modules-center = ["mpris"];
+        modules-center = ["custom/mpris-visualizer"];
         modules-right = allModules; 
-        
+        "custom/mpris-visualizer" = {
+          format = "{}";
+          return-type = "json";
+          exec = "./control_script.sh";
+          on-click-right = "pkill -SIGRTMIN+1 -f control_script.sh";
+        };
         "custom/notification" = {
           tooltip = false;
           format = "";
