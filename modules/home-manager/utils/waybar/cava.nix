@@ -10,7 +10,7 @@
       
       
       input.method = "pulse";
-      input.source= "auto";
+      input.source= "84";
 
       output.method = "raw";
       output.raw_target = "/dev/stdout";
