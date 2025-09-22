@@ -22,8 +22,7 @@
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/scripts.nix
-    ../../modules/home-manager/utils/hyprlock.nix
-    ../../modules/home-manager/utils/nvim.nix
+    ../../modules/home-manager/utils.nix
   ];
 
   home.packages = with pkgs; [
@@ -80,7 +79,6 @@
     icoutils
     jq
     pywal
-    fuzzel
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
