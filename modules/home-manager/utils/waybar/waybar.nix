@@ -7,7 +7,7 @@ let
   allModules = baseRightModules ++ lib.optional isLaptop "battery";
 in
 {
-  imports = [./cava.nix];
+  programs.cava.enable=true;
   programs.waybar = {
     enable=true;
      
@@ -17,27 +17,53 @@ in
         position = "top";
         reload_style_on_change = true;
         modules-left = ["custom/notification" "clock" "tray"];
-        modules-center = ["custom/media-toggle"];
+        modules-center = ["mpris" "custom/distro" "cava"];
         modules-right = allModules; 
-        "custom/media-toggle" = {
-            format = "{}";
-            return-type = "json";
-            exec = "~/nixos/modules/home-manager/utils/waybar/control_script.py";
-            on-click = "playerctl play-pause";
-            on-click-right = "~/nixos/modules/home-manager/utils/waybar/control_script.py toggle";
-            on-click-middle = "playerctl next";
-            on-scroll-up = "playerctl volume 0.05+";
-            on-scroll-down = "playerctl volume 0.05-";
-            escape = true;
-            restart-interval = 0;
-        };
+         #"custom/media-toggle" = {
+             #format = "{}";
+             #return-type = "json";
+             #exec = "~/nixos/modules/home-manager/utils/waybar/control_script.py";
+             #on-click = "playerctl play-pause";
+             #on-click-right = "~/nixos/modules/home-manager/utils/waybar/control_script.py toggle";
+             #on-click-middle = "playerctl next";
+             #on-scroll-up = "playerctl volume 0.05+";
+             #on-scroll-down = "playerctl volume 0.05-";
+             #escape = true;
+             #restart-interval = 0;
+         #};
+
         "custom/notification" = {
           tooltip = false;
           format = "";
           on-click = "swaync-client -t -sw";
           escape = true;
         };
-
+        cava = {
+          framerate = 30;
+          autosens = 1;
+          sensitivity = 100;
+          bars = 14;
+          lower_cutoff_freq = 50;
+          higher_cutoff_freq = 10000;
+          hide_on_silence = false;
+          method = "pulse";
+          source="auto";
+          stereo = true;
+          reverse = false;
+          bar_delimiter = 0;
+          monstercat = false;
+          waves = false;
+          noise_reduction = 0.77;
+          input_delay = 2;
+          format-icons =["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
+          actions = {
+            on-click-right = "mode";
+          };
+        };
+        "custom/distro" = {
+          format = "";
+          on-click ="neofetch";
+        }; 
         mpris = {
           format = "{player_icon} {dynamic}";
           format-paused = "{status_icon} <i>{dynamic}</i>";
