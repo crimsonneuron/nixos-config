@@ -168,10 +168,10 @@
       };
 
     swaylock.enable=true;
-    waybar = {
-      enable=true;
-      #systemd.enable=true;
-    };
+     #waybar = {
+       #enable=true;
+       #systemd.enable=true;
+     #};
   };
 
   games = {
@@ -306,8 +306,8 @@
     "nvim/lua".source = ../../dotfiles/nvim/lua;
     "niri/config.kdl".source = ../../dotfiles/niri/laptop-config.kdl;
 
-    "waybar/config.jsonc".source = ../../dotfiles/waybar/laptop-config.jsonc;
-    "waybar/style.css".source = ../../dotfiles/waybar/laptop-style.css;
+     #"waybar/config.jsonc".source = ../../dotfiles/waybar/laptop-config.jsonc;
+     #"waybar/style.css".source = ../../dotfiles/waybar/laptop-style.css;
 
     "containers/registries.conf".text = ''
       [registries.search]
