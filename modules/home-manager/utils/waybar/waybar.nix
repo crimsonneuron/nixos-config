@@ -55,7 +55,7 @@ in
           waves = false;
           noise_reduction = 0.77;
           input_delay = 2;
-          format-icons =["▁" "▂" "▃" "▄" "▅" "▆" "▇" "█" ];
+          format-icons =["▁" "▂" "▃" "▄" "▅"];
           actions = {
             on-click-right = "mode";
           };
@@ -67,17 +67,18 @@ in
         mpris = {
           format = "{player_icon} {dynamic}";
           format-paused = "{status_icon} <i>{dynamic}</i>";
+          format-stopped = "🎵 Nothing playing";
           player-icons = {
             default = "🎵";
             YoutubeMusic = "󰗃";
             spotify = "󰓇";
             firefox = "";
-
           };
           status-icons= {
             paused = "";
             playing = "";
           };
+          max-length = 20;
         };
         
         clock = {
