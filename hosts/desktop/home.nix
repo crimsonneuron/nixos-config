@@ -45,7 +45,7 @@
 
 
 
-    ungoogled-chromium
+    chromium
     vlc
     yt-dlp
     
