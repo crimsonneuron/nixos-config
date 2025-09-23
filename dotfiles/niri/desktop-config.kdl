@@ -376,7 +376,7 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Return hotkey-overlay-title="Open a Terminal:kitty  " { spawn "kitty"; }
     Alt+Space hotkey-overlay-title="Run an Application: tofi" { spawn "fuzzel";}
-    Mod+B hotkey-overlay-title="Open a browser: Zen Broswer" { spawn "zen"; }
+    Mod+B hotkey-overlay-title="Open a browser: Zen Broswer" { spawn "zen-beta"; }
     Mod+Pause hotkey-overlay-title="Run a Script: Poweroff" {spawn "sh" "-c" "/home/crimson/nixos/scripts/bash/poweroff.sh";}
 
 
