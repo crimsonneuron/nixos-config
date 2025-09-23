@@ -37,7 +37,6 @@
     beeper
     element-desktop
     playerctl
-    youtube-music
     ncmpcpp
     wayfarer
     zoxide
