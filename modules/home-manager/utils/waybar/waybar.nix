@@ -337,9 +337,6 @@ in
               padding: 0px 5px;
               transition: all .3s ease; 
           }
-          #mpris:empty::before {
-            content: "🎵 No media playing";
-          }
         '';
 
   };
