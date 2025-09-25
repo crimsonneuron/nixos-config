@@ -40,9 +40,9 @@ in
         };
         "custom/no-media" = {
           exec = "~/nixos/modules/home-manager/utils/waybar/check_mpris.sh";
-          exec-interval = 3;
+          exec-interval = 0.5;
           return-type = "json";
-          format = "No Media Playing";
+          format = "{}";
           tooltip = false;
         };
         cava = {
