@@ -38,6 +38,13 @@ in
           on-click = "swaync-client -t -sw";
           escape = true;
         };
+        "custom/no-media" = {
+          exec = "~/nixos/modules/home-manager/utils/waybar/check_mpris.sh";
+          exec-interval = 3;
+          return-type = "json";
+          format = "This shouldn't appear";
+          tooltip = false;
+        };
         cava = {
           framerate = 30;
           autosens = 1;
