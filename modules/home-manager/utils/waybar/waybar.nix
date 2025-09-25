@@ -3,7 +3,7 @@
 let 
   hostname = osConfig.networking.hostName; 
   isLaptop = hostname == "lsla";
-  baseRightModules = ["group/expand" "bluetooth" "network" "battery"];
+  baseRightModules = ["group/expand" "bluetooth" "network" ];
   allModules = baseRightModules ++ lib.optional isLaptop "battery";
 in
 {
