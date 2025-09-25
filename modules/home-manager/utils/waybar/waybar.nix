@@ -68,6 +68,8 @@ in
           format = "{player_icon} {dynamic}";
           format-paused = "{status_icon} <i>{dynamic}</i>";
           format-stopped = "🎵 Nothing playing";
+          tooltip=true;
+          tooltip-format = "{player}: {title}";
           player-icons = {
             default = "🎵";
             YoutubeMusic = "󰗃";
