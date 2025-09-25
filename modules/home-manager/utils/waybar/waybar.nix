@@ -40,7 +40,7 @@ in
         };
         "custom/no-media" = {
           exec = "~/nixos/modules/home-manager/utils/waybar/check_mpris.sh";
-          exec-interval = 1;
+          interval = 1;
           return-type = "json";
           format = "{}";
           tooltip = false;
