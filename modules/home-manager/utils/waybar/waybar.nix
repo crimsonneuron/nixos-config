@@ -42,7 +42,7 @@ in
           exec = "~/nixos/modules/home-manager/utils/waybar/check_mpris.sh";
           exec-interval = 3;
           return-type = "json";
-          format = "This shouldn't appear";
+          format = "No Media Playing";
           tooltip = false;
         };
         cava = {
