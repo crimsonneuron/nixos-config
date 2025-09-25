@@ -17,7 +17,7 @@ in
         position = "top";
         reload_style_on_change = true;
         modules-left = ["custom/notification" "clock" "tray"];
-        modules-center = ["mpris" "custom/distro" "cava"];
+        modules-center = ["mpris" "custom/no-media" "custom/distro" "cava"];
         modules-right = allModules; 
          #"custom/media-toggle" = {
              #format = "{}";
