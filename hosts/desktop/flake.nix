@@ -27,8 +27,7 @@
     {
       nixosConfigurations = {
 	      desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs;
-          };
+          specialArgs = {inherit inputs pkgs-unstable;};
             modules = [
               ./configuration.nix
               inputs.home-manager.nixosModules.default
