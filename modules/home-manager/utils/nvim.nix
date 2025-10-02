@@ -139,7 +139,7 @@
            #qmlls = {
              #enable=true;
            #};
-         #};
+         };
       };
 
       # Completion
