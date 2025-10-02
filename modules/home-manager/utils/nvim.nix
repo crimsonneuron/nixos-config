@@ -136,10 +136,10 @@
           nil_ls = {
             enable = true;
           };
-          qmlls = {
-            enable=true;
-          };
-        };
+           #qmlls = {
+             #enable=true;
+           #};
+         #};
       };
 
       # Completion
