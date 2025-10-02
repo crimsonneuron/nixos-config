@@ -136,6 +136,9 @@
           nil_ls = {
             enable = true;
           };
+          qmlls = {
+            enable=true;
+          };
         };
       };
 
@@ -199,6 +202,8 @@
       nvim-autopairs = {
         enable = true;
       };
+
+      nvim-surround.enable=true;
 
 
     };
