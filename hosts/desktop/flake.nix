@@ -30,7 +30,11 @@
           specialArgs = {inherit inputs pkgs-unstable;};
             modules = [
               ./configuration.nix
-              inputs.home-manager.nixosModules.default
+              inputs.home-manager.nixosModules.default {
+                home-manager.extraSpecialArgs = {
+                  inherit inputs pkgs-unstable;
+                };
+              }
             ];
           };
      };
