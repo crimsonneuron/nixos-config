@@ -276,6 +276,16 @@
           end
       })
 
+      vim.api.nvim_create_autocm("FileType", {
+        pattern = "qml",
+        callback = function()
+          vim.bo.tabstop = 2
+          vim.bo.shiftwidth = 2
+          vim.bo.softtabstop = 2
+          vim.bo.expandtab = true
+        end
+      })
+
       -- Vimspector options (if you're using it)
       vim.cmd([[
           let g:vimspector_sidebar_width = 85
