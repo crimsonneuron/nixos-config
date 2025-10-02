@@ -301,7 +301,8 @@
     DISPLAY = ":0";
   };
   
-  xdg.configFile = {
+  xdg = {
+    configFile = {
      #"nvim/init.lua".source = ../../dotfiles/nvim/init.lua;
      #"nvim/lua".source = ../../dotfiles/nvim/lua;
     "niri/config.kdl".source = ../../dotfiles/niri/laptop-config.kdl;
@@ -338,6 +339,18 @@
     "tofi/config".source = ../../dotfiles/tofi/fullscreen;
 
   };
+  mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/html" = "zen-beta.desktop";
+      "x-scheme-handler/http" = "zen-beta.desktop";
+      "x-scheme-handler/https" = "zen-beta.desktop";
+      "x-scheme-handler/about" = "zen-beta.desktop";
+      "x-scheme-handler/unknown" = "zen-beta.desktop";
+      };
+    };
+  };
+}
 
 
 
