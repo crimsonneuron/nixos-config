@@ -22,11 +22,13 @@
   let 
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
+    pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
   in 
     {
       nixosConfigurations = {
 	      desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs;};
+          specialArgs = {inherit inputs;
+          };
             modules = [
               ./configuration.nix
               inputs.home-manager.nixosModules.default
