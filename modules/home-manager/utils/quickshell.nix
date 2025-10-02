@@ -1,4 +1,4 @@
-{pkgs, config, lib,...}:
+{pkgs,pkgs-unstable, config, lib,...}:
 
 {
   home.packages = [
