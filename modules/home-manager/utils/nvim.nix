@@ -276,7 +276,7 @@
           end
       })
 
-      vim.api.nvim_create_autocm("FileType", {
+      vim.api.nvim_create_autocmd("FileType", {
         pattern = "qml",
         callback = function()
           vim.bo.tabstop = 2
