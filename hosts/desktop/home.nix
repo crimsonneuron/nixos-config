@@ -294,7 +294,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-    "./local/share/fonts" = {
+    "./.local/share/fonts" = {
       source= ../../resources/fonts;
       recursive = true;
     };
