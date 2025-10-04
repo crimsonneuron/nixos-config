@@ -293,6 +293,12 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+    "./local/share/fonts" = {
+      source= ../../resources/fonts;
+      recursive = true;
+    };
+
     
     
   };
