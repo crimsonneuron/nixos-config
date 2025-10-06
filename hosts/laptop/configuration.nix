@@ -205,7 +205,7 @@
     });
   '';
   security.pam.services.hyprlock={};
-  security.pam.services.ly.fprintAuth=true;
+  security.pam.services.ly.fprintAuth=false;
   services.fprintd = {
     enable=true;
     tod.enable=true;
