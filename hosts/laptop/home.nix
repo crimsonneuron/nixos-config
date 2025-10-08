@@ -110,9 +110,9 @@
       enable=true;
       
       shellAliases = {
-        rebuild = "sudo nixos-rebuild switch --flake ~/nixos/hosts/laptop#laptop";
+        rebuild = "sudo nixos-rebuild switch --flake ~/nixos#laptop";
         cleanup = "sudo nix-collect-garbage -d";
-        test = "sudo nixos-rebuild test --flake ~/nixos#desktop";
+        test = "sudo nixos-rebuild test --flake ~/nixos#laptop";
         # homerebuild = "home-manager switch --flake ~/nixos#desktop";
       };
       initExtra = " 
