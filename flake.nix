@@ -29,7 +29,7 @@
 	      desktop = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs pkgs-unstable;};
             modules = [
-              ./configuration.nix
+              ./hosts/desktop/configuration.nix
               inputs.home-manager.nixosModules.default {
                 home-manager.extraSpecialArgs = {
                   inherit inputs pkgs-unstable;
@@ -40,7 +40,7 @@
         laptop = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs pkgs-unstable;};
           modules = [
-            ./configuration.nix
+            ./hosts/laptop/configuration.nix
             inputs.home-manager.nixosModules.default {
             home-manager.extraSpecialArgs = {
               inherit inputs pkgs-unstable;
