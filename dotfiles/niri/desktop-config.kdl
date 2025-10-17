@@ -284,6 +284,10 @@ environment {
     DISPLAY ":0"
 }
 
+overview {
+    zoom: 0.5
+}
+
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
