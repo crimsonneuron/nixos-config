@@ -31,7 +31,6 @@
       withOpenASAR = true;
       withVencord = false;
     })
-    obsidian
     cutechess
     kdePackages.okular
     pomodoro-gtk
