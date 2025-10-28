@@ -10,7 +10,7 @@
         test = "sudo nixos-rebuild test --flake ~/nixos#laptop";
         # homerebuild = "home-manager switch --flake ~/nixos#desktop";
       };
-      initContent.exports = ''
+      initContent = ''
         export EDITOR=nvim
         export VISUAL=nvim
         export DISPLAY=:0
