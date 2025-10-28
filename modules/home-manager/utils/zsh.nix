@@ -2,7 +2,11 @@
 let
   isLaptop = builtins.pathExists /sys/class/power_supply/BAT0 ||
     builtins.pathExists /sys/class/power_supply/BAT1;
+<<<<<<< HEAD
   flakeString = if isLaptop then " --flake ~/nixos#laptop" else " --flake ~/nixos#laptop";
+=======
+  flakeString = if isLaptop then " --flake ~/nixos#laptop" else " --flake ~/nixos#desktop";
+>>>>>>> zsh-fixing
 in
 {
     programs.zsh = {
