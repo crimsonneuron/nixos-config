@@ -2,7 +2,7 @@
 let
   isLaptop = builtins.pathExists /sys/class/power_supply/BAT0 ||
     builtins.pathExists /sys/class/power_supply/BAT1;
-  flakeString = if isLaptop then "--flake ~/nixos#laptop" else "--flake ~/nixos#laptop";
+  flakeString = if isLaptop then " --flake ~/nixos#laptop" else " --flake ~/nixos#laptop";
 in
 {
     programs.zsh = {
@@ -21,8 +21,8 @@ in
         export EDITOR=nvim
         export VISUAL=nvim
         export DISPLAY=:0
-        eval \"$(zoxide init zsh)\"
-        alias :q=exit
+        eval "$(zoxide init zsh)"
+        alias -- :q=exit
         '';
 };
 }
