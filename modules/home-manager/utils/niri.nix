@@ -205,7 +205,7 @@ in
       "Mod+W".action = toggle-column-tabbed-display;
 
       # Screenshots
-      "Print".action = spawn "sh" "-c" "grim -g \"($slurp)\" | wl-copy";
+      "Print".action = screenshot;
       #"Ctrl+Print".action = screenshot-screen;
       #"Alt+Print".action = screenshot-window;
 
