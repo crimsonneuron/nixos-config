@@ -1,4 +1,4 @@
-{lib, inputs, config, ...}:
+{lib, inputs, config,pkgs, ...}:
 
 let 
   isLaptop = builtins.pathExists "/sys/class/power_supply/BAT0" ||
@@ -6,6 +6,10 @@ let
   wallpaperPath = if isLaptop then "rocket_desert_wallpaper.png" else "nasa_mirror_1920x1080.png";
 in
 {
+  home.packages = with pkgs; [
+    grim
+    slurp
+  ];
   programs.niri.settings = {
     input = {
       keyboard.xkb = {
@@ -201,7 +205,7 @@ in
       "Mod+W".action = toggle-column-tabbed-display;
 
       # Screenshots
-      #"Print".action = screenshot;
+      "Print".action = screenshot;
       #"Ctrl+Print".action = screenshot-screen;
       #"Alt+Print".action = screenshot-window;
 
