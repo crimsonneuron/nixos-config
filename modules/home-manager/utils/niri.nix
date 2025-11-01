@@ -28,9 +28,8 @@ in
         position = {
           x=1920;
           y=0;
-        }
+        };
       };
-       
     };
     layout = {
       gaps = 16;
