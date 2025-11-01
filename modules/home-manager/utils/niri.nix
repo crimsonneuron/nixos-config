@@ -13,7 +13,7 @@ in
         options = "grp:ralt_rshift_toggle";
       };
     };
-    output = if isLaptop then {
+    outputs = if isLaptop then {
     } else {
       "DP-2" = {
         scale = 2;
