@@ -14,12 +14,6 @@ in
       };
     };
     output = if isLaptop then {
-      "HDMI-A-2" = {
-        position = {
-          x=1920;
-          y=0;
-        };
-      };
     } else {
       "DP-2" = {
         scale = 2;
@@ -29,6 +23,14 @@ in
         };
         focus-at-startup = true;
       };
+      "HDMI-A-2" = {
+        scale = 1;
+        position = {
+          x=1920;
+          y=0;
+        }
+      }
+       
     };
     layout = {
       gaps = 16;
