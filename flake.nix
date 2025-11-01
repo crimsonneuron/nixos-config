@@ -16,6 +16,7 @@
       url = "github:nix-community/nixvim/nixos-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri-flake.url = "github:sodiboo/niri-flake";
   };
 
   outputs = { self, nixpkgs,nixpkgs-unstable, ... }@inputs: 
