@@ -176,18 +176,6 @@ in
       "Mod+8".action = focus-workspace 8;
       "Mod+9".action = focus-workspace 9;
 
-      # Move column to workspace by number
-      "Mod+Ctrl+1".action = move-column-to-workspace 1;
-      "Mod+Ctrl+2".action = move-column-to-workspace 2;
-      "Mod+Ctrl+3".action = move-column-to-workspace 3;
-      "Mod+Ctrl+4".action = move-column-to-workspace 4;
-      "Mod+Ctrl+5".action = move-column-to-workspace 5;
-      "Mod+Ctrl+6".action = move-column-to-workspace 6;
-      "Mod+Ctrl+7".action = move-column-to-workspace 7;
-      "Mod+Ctrl+8".action = move-column-to-workspace 8;
-      "Mod+Ctrl+9".action = move-column-to-workspace 9;
-
-      # Window layout
       "Mod+BracketLeft".action = consume-or-expel-window-left;
       "Mod+BracketRight".action = consume-or-expel-window-right;
       "Mod+Comma".action = consume-window-into-column;
