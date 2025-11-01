@@ -3,7 +3,7 @@
 let 
   isLaptop = builtins.pathExists "/sys/class/power_supply/BAT0" ||
     builtins.pathExists "/sys/class/power_supply/BAT1";
-  wallpaperPath = if isLaptop then "rocket_desert_wallpaper.png" else "nasa-mirror-1920x1080.png";
+  wallpaperPath = if isLaptop then "rocket_desert_wallpaper.png" else "nasa_mirror_1920x1080.png";
 in
 {
   programs.niri.settings = {
