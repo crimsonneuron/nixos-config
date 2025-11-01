@@ -312,8 +312,6 @@
   
   xdg = {
     configFile = {
-    "niri/config.kdl".source = ../../dotfiles/niri/desktop-config.kdl;
-
      #"waybar/config.jsonc".source = ../../dotfiles/waybar/config.jsonc;
      #"waybar/style.css".source = ../../dotfiles/waybar/style.css;
 
