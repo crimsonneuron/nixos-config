@@ -53,7 +53,7 @@ in
     overview = { zoom = 0.33;};
     spawn-at-startup = [
       {argv = ["waybar"];}
-      {argv = ["swaybg" "-i" ("/home/crimson/Wallpapers"+wallpaperPath)];}
+      {argv = ["swaybg" "-i" ("/home/crimson/Pictures/Wallpapers/"+wallpaperPath)];}
     ];
     hotkey-overlay.skip-at-startup = true;
 
