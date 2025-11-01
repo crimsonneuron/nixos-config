@@ -7,6 +7,7 @@
     ./hyprlock.nix
     ./quickshell.nix
     ./zsh.nix
+    ./niri.nix
     ./waybar
   ];
 }
