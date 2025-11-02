@@ -17,7 +17,7 @@ in
       };
     };
     switch-events = {
-      lid-close.spawn = ["hyprlock"];
+      lid-close.action.spawn = ["hyprlock"];
     };
     outputs = if isLaptop then {
     } else {
