@@ -16,6 +16,9 @@ in
         options = "grp:ralt_rshift_toggle";
       };
     };
+    switch-events = {
+      lid-close.spawn = ["hyprlock"];
+    };
     outputs = if isLaptop then {
     } else {
       "DP-2" = {
