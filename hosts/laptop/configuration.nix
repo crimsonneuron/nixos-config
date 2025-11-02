@@ -11,6 +11,7 @@
       inputs.home-manager.nixosModules.default
       # ../../modules/nixos/games.nix
       ../../modules/nixos/keyboard.nix
+      ../../modules/nixos/niri.nix
     ];
 
   # Bootloader.
@@ -53,7 +54,6 @@
 
   hardware.graphics.enable=true;
 
-  programs.niri.enable = true;
 
   hardware.bluetooth = {
     enable = true;
@@ -157,8 +157,6 @@
     #podman
 
     #rocm:
-    #Niri:
-    xwayland-satellite
     libfprint-2-tod1-broadcom
 
   ];

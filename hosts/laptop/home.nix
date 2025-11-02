@@ -284,7 +284,7 @@
     configFile = {
      #"nvim/init.lua".source = ../../dotfiles/nvim/init.lua;
      #"nvim/lua".source = ../../dotfiles/nvim/lua;
-    "niri/config.kdl".source = ../../dotfiles/niri/laptop-config.kdl;
+      #"niri/config.kdl".source = ../../dotfiles/niri/laptop-config.kdl;
 
      #"waybar/config.jsonc".source = ../../dotfiles/waybar/laptop-config.jsonc;
      #"waybar/style.css".source = ../../dotfiles/waybar/laptop-style.css;
