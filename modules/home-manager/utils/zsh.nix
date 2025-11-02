@@ -1,7 +1,6 @@
-{pkgs, config, ...}: 
+{pkgs, config, osConfig, ...}: 
 let
-  isLaptop = builtins.pathExists /sys/class/power_supply/BAT0 ||
-    builtins.pathExists /sys/class/power_supply/BAT1;
+  isLaptop = osConfig.networking.hostName == "lsla";
   flakeString = if isLaptop then " --flake ~/nixos#laptop" else " --flake ~/nixos#desktop";
 in
 {

@@ -1,8 +1,7 @@
-{lib, inputs, config,pkgs, ...}:
+{lib, inputs, config,pkgs, osConfig, ...}:
 
 let 
-  isLaptop = builtins.pathExists "/sys/class/power_supply/BAT0" ||
-    builtins.pathExists "/sys/class/power_supply/BAT1";
+  isLaptop = osConfig.networking.hostName == "lsla";
   wallpaperPath = if isLaptop then "rocket_desert_wallpaper.png" else "nasa_mirror_1920x1080.png";
 in
 {
