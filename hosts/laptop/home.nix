@@ -157,10 +157,6 @@
      #};
   };
 
-  games = {
-    enable=true;
-    melee=true;
-  };
 
 
 
