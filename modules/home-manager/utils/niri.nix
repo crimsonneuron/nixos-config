@@ -13,7 +13,7 @@ in
     input = {
       keyboard.xkb = {
         layout = "us, gr";
-        options = "grp:ralt_rshift_toggle";
+        options = "grp:alt_caps_toggle";
       };
     };
     switch-events = {
