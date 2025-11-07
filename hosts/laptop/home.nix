@@ -26,10 +26,7 @@
   ];
 
   home.packages = with pkgs; [
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = false;
-    })
+    vesktop
     cutechess
     beeper
     youtube-music
