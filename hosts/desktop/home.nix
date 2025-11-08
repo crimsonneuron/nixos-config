@@ -27,11 +27,7 @@
   ];
 
   home.packages = with pkgs; [
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = false;
-    })
-    cutechess
+    vesktop
     kdePackages.okular
     pomodoro-gtk
     beeper
