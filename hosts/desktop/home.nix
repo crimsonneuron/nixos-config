@@ -347,7 +347,7 @@
         "x-scheme-handler/https" = "zen-beta.desktop";
         "x-scheme-handler/about" = "zen-beta.desktop";
         "x-scheme-handler/unknown" = "zen-beta.desktop";
-        "inode/directory" = ["thunar.desktop"]
+        "inode/directory" = ["thunar.desktop"];
       };
     };
   };
