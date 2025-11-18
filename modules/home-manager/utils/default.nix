@@ -8,6 +8,7 @@
     ./quickshell.nix
     ./zsh.nix
     ./niri.nix
+    ./yazi.nix
     ./waybar
   ];
 }
