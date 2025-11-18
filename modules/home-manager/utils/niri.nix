@@ -8,6 +8,7 @@ in
   home.packages = with pkgs; [
     grim
     slurp
+    brightnessctl
   ];
   programs.niri.settings = {
     input = {
