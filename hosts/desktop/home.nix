@@ -27,6 +27,7 @@
   ];
 
   home.packages = with pkgs; [
+    zoom-us
     vesktop
     kdePackages.okular
     pomodoro-gtk
