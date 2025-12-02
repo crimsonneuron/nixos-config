@@ -18,7 +18,7 @@ in
       };
     };
     switch-events = {
-      lid-close.action.spawn = ["hyprlock"];
+      lid-close.action.spawn = ["sh" "-c" "qs ipc call lockshell enableLock"];
     };
     outputs = if isLaptop then {
     } else {
@@ -61,6 +61,7 @@ in
     spawn-at-startup = [
       {argv = ["waybar"];}
       {argv = ["swaybg" "-i" ("/home/crimson/Pictures/Wallpapers/"+wallpaperPath)];}
+      {argv = ["quickshell"];}
     ];
     hotkey-overlay.skip-at-startup = true;
 
@@ -70,7 +71,7 @@ in
       "Mod+B".action = spawn "zen-beta";
       "Alt+Space".action = spawn "fuzzel";
       "Mod+Pause".action = spawn "sh" "-c" "/home/crimson/nixos/scripts/bash/poweroff.sh";
-      "Super+Alt+L".action = spawn "hyprlock";
+      "Super+Alt+L".action = spawn "sh" "-c" "qs ipc call lockshell enableLock";
       "Super+Alt+S".action = spawn "sh" "-c" "pkill orca || exec orca";
 
       # Audio controls
