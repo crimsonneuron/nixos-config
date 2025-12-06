@@ -3,7 +3,7 @@
   imports = [
     inputs.noctalia.homeModules.default
   ];
-
+  programs.quickshell.enable=true;
   programs.noctalia-shell = {
     enable = true;
     settings = {

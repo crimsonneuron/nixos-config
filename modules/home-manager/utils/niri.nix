@@ -71,9 +71,8 @@ in
     };
     overview = { zoom = 0.33;};
     spawn-at-startup = [
-      {argv = ["waybar"];}
+      {argv = ["qs" "-c" "noctalia-shell"];}
       {argv = ["swaybg" "-i" ("/home/crimson/Pictures/Wallpapers/"+wallpaperPath)];}
-      {argv = ["quickshell"];}
     ];
     hotkey-overlay.skip-at-startup = true;
 
