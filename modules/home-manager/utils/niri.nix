@@ -25,10 +25,10 @@ in
         matches = [];
         clip-to-geometry = true;
         geometry-corner-radius = {
-          bottom-right = 20;
-          bottom-left = 20;
-          top-right =20;
-          top-left = 20;
+          bottom-right = 20.0;
+          bottom-left = 20.0;
+          top-right =20.0;
+          top-left = 20.0;
         };
       }
     ];
