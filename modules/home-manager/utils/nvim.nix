@@ -128,7 +128,7 @@
       lsp = {
         enable = true;
         servers = {
-        nil-ls = {
+        nil_ls = {
             enable = true;
           };
            #qmlls = {
