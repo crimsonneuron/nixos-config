@@ -9,7 +9,7 @@
     settings = {
       settingsVersion = 26;
       bar = {
-        position = "top";
+        position = "left";
         backgroundOpacity = 1;
         monitors = [ ];
         density = "default";
@@ -104,7 +104,7 @@
         settingsPanelAttachToBar = false;
       };
       location = {
-        name = "Tokyo";
+        name = "NYC";
         weatherEnabled = true;
         weatherShowEffects = true;
         useFahrenheit = false;
