@@ -2,10 +2,10 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   	zen-browser.url = "github:0xc000022070/zen-browser-flake";
@@ -13,7 +13,7 @@
     ssbm-nix.url = "github:NormalFall/ssbm-nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.05";
+      url = "github:nix-community/nixvim/nixos-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri-flake.url = "github:sodiboo/niri-flake";
