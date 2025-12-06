@@ -204,7 +204,9 @@
       };
 
       nvim-surround.enable=true;
-
+      rust-tools = {
+        enable=true; 
+      };
 
     };
 
