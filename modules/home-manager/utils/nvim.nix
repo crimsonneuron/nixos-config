@@ -204,7 +204,7 @@
       };
 
       nvim-surround.enable=true;
-      rust-tools = {
+      rustaceanvim= {
         enable=true; 
       };
 
