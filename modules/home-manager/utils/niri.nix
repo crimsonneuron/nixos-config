@@ -20,11 +20,13 @@ in
     switch-events = {
       lid-close.action.spawn = ["hyprlock"];
     };
-    window-rules = {
-      matches = [];
-      clip-to-geometry = true;
-      geometry-corner-radius = 20;
-    };
+    window-rules = [
+      {
+        matches = [];
+        clip-to-geometry = true;
+        geometry-corner-radius = 20;
+      }
+    ];
     outputs = if isLaptop then {
     } else {
       "DP-2" = {
