@@ -232,5 +232,8 @@ in
       "Mod+Shift+P".action = power-off-monitors;
       };
   };
+  debug = {
+    honor-xdg-activation-with-invalid-serial = [];
+  };
 }
 
