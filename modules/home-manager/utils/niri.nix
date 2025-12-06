@@ -24,7 +24,12 @@ in
       {
         matches = [];
         clip-to-geometry = true;
-        geometry-corner-radius = 20;
+        geometry-corner-radius = {
+          bottom-right = 20;
+          bottom-left = 20;
+          top-right =20;
+          top-left = 20;
+        };
       }
     ];
     outputs = if isLaptop then {
