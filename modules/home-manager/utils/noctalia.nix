@@ -15,7 +15,7 @@
         position = "left";
         backgroundOpacity = 1;
         monitors = [ ];
-        density = "default";
+        density = "comfortable";
         showCapsule = true;
         capsuleOpacity = 1;
         floating = false;
@@ -43,15 +43,18 @@
             {
               id = "MediaMini";
             }
-          ];
-          center = [
             {
               id = "Workspace";
             }
           ];
+          center = [
+            {
+              id = "AudioVisualizer";
+            }
+          ];
           right = [
             {
-              id = "ScreenRecorder";
+              id = "WallpaperSelector";
             }
             {
               id = "Tray";
@@ -110,12 +113,12 @@
         name = "NYC";
         weatherEnabled = true;
         weatherShowEffects = true;
-        useFahrenheit = false;
-        use12hourFormat = false;
+        useFahrenheit = true;
+        use12hourFormat = true;
         showWeekNumberInCalendar = false;
         showCalendarEvents = true;
         showCalendarWeather = true;
-        analogClockInCalendar = false;
+        analogClockInCalendar = true;
         firstDayOfWeek = -1;
       };
       calendar = {
@@ -147,7 +150,7 @@
         colorRange = "limited";
         showCursor = true;
         audioSource = "default_output";
-        videoSource = "portal";
+        videoSource = "screen";
       };
       wallpaper = {
         enabled = true;
@@ -179,7 +182,7 @@
       appLauncher = {
         enableClipboardHistory = false;
         enableClipPreview = true;
-        position = "center";
+        position = "bottom_center";
         pinnedExecs = [ ];
         useApp2Unit = false;
         sortByMostUsed = true;
@@ -187,7 +190,7 @@
         customLaunchPrefixEnabled = false;
         customLaunchPrefix = "";
         viewMode = "list";
-        showCategories = true;
+        showCategories = false;
       };
       controlCenter = {
         position = "close_to_bar_button";
@@ -349,13 +352,13 @@
         enableDdcSupport = false;
       };
       colorSchemes = {
-        useWallpaperColors = false;
+        useWallpaperColors = true;
         predefinedScheme = "Noctalia (default)";
         darkMode = true;
         schedulingMode = "off";
         manualSunrise = "06:30";
         manualSunset = "18:30";
-        matugenSchemeType = "scheme-fruit-salad";
+        matugenSchemeType = "scheme-content";
         generateTemplatesForPredefined = true;
       };
       templates = {
@@ -363,12 +366,12 @@
         qt = false;
         kcolorscheme = false;
         alacritty = false;
-        kitty = false;
+        kitty = true;
         ghostty = false;
         foot = false;
         wezterm = false;
         fuzzel = false;
-        discord = false;
+        discord = true;
         pywalfox = false;
         vicinae = false;
         walker = false;
