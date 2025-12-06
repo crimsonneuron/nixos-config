@@ -18,7 +18,7 @@ in
       };
     };
     switch-events = {
-      lid-close.action.spawn = ["hyprlock"];
+      lid-close.action.spawn = ["noctalia-shell" "ipc" "call" "lockScreen" "lock"];
     };
     window-rules = [
       {
@@ -71,8 +71,7 @@ in
     };
     overview = { zoom = 0.33;};
     spawn-at-startup = [
-      {argv = ["qs" "-c" "noctalia-shell"];}
-      {argv = ["swaybg" "-i" ("/home/crimson/Pictures/Wallpapers/"+wallpaperPath)];}
+      {argv = ["noctalia-shell"];}
     ];
     hotkey-overlay.skip-at-startup = true;
 
@@ -80,7 +79,8 @@ in
       "Mod+Shift+Slash".action = show-hotkey-overlay;
       "Mod+Return".action = spawn "kitty";
       "Mod+B".action = spawn "zen-beta";
-      "Alt+Space".action = spawn "fuzzel";
+      "Mod+D".action = spawn "vesktop";
+      "Alt+Space".action = spawn "sh" "-c" "noctalia-shell ipc call launcher toggle";
       "Mod+Pause".action = spawn "sh" "-c" "/home/crimson/nixos/scripts/bash/poweroff.sh";
       "Super+Alt+L".action = spawn "sh" "-c" "hyprlock";
       "Super+Alt+S".action = spawn "sh" "-c" "pkill orca || exec orca";

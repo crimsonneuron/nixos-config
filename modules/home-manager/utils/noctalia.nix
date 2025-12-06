@@ -1,5 +1,8 @@
 { pkgs, inputs, ... }:
 {
+  home.packages = with pkgs; [
+    gpu-screen-recorder
+  ];
   imports = [
     inputs.noctalia.homeModules.default
   ];
@@ -25,7 +28,7 @@
             {
               icon = "rocket";
               id = "CustomButton";
-              leftClickExec = "qs -c noctalia-shell ipc call launcher toggle";
+              leftClickExec = "noctalia-shell ipc call launcher toggle";
             }
             {
               id = "Clock";
@@ -149,7 +152,7 @@
       wallpaper = {
         enabled = true;
         overviewEnabled = false;
-        directory = "";
+        directory = "/home/crimson/Pictures/Wallpapers";
         monitorDirectories = [ ];
         enableMultiMonitorDirectories = false;
         recursiveSearch = false;
@@ -180,7 +183,7 @@
         pinnedExecs = [ ];
         useApp2Unit = false;
         sortByMostUsed = true;
-        terminalCommand = "xterm -e";
+        terminalCommand = "kitty -e";
         customLaunchPrefixEnabled = false;
         customLaunchPrefix = "";
         viewMode = "list";
