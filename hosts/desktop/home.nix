@@ -135,13 +135,12 @@
   };
   git = {
     enable=true;
-    userName="crimsonneuron";
-    userEmail="james.r.devereux@gmail.com";
-    extraConfig = {
+    settings= {
+      user.name="crimsonneuron";
+      user.email="james.r.devereux@gmail.com";
       init.defaultBranch = "main";
       core.editor="nvim";
     };
-    delta.enable=true;
   };
   spicetify = 
     let 
