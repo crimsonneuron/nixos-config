@@ -231,9 +231,10 @@ in
       "Ctrl+Alt+Delete".action = quit;
       "Mod+Shift+P".action = power-off-monitors;
       };
-  };
-  debug = {
-    honor-xdg-activation-with-invalid-serial = [];
+
+    debug = {
+      honor-xdg-activation-with-invalid-serial = [];
+    };
   };
 }
 
