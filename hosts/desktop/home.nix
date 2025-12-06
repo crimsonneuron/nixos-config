@@ -85,7 +85,7 @@
     osu-lazer-bin
 
     mangohud
-    protonup
+    protonup-ng
     bottles
     gamescope
 

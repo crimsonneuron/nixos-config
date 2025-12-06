@@ -1,5 +1,5 @@
 { pkgs,inputs, ... }: {
-  imports = [inputs.nixvim.homeManagerModules.nixvim];
+  imports = [inputs.nixvim.homeModules.nixvim];
   programs.nixvim = {
     enable = true;
 
@@ -208,10 +208,10 @@
 
     };
 
-    # Extra packages for plugins not directly supported by NixVim
-    extraPlugins = with pkgs.vimPlugins; [
-      rust-tools-nvim
-    ];
+    # # Extra packages for plugins not directly supported by NixVim
+    # extraPlugins = with pkgs.vimPlugins; [
+    #   rust-tools-nvim
+    # ];
 
     # Extra Lua configuration for things that don't have direct NixVim equivalents
     extraConfigLua = ''
