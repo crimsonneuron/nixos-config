@@ -82,7 +82,7 @@ in
       "Mod+D".action = spawn "vesktop";
       "Alt+Space".action = spawn "sh" "-c" "noctalia-shell ipc call launcher toggle";
       "Mod+Pause".action = spawn "sh" "-c" "/home/crimson/nixos/scripts/bash/poweroff.sh";
-      "Super+Alt+L".action = spawn "sh" "-c" "hyprlock";
+      "Super+Alt+L".action = spawn "sh" "-c" "noctalia-shell ipc call sessionMenu toggle";
       "Super+Alt+S".action = spawn "sh" "-c" "pkill orca || exec orca";
 
       # Audio controls

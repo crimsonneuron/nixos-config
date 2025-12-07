@@ -38,9 +38,6 @@
               id = "SystemMonitor";
             }
             {
-              id = "ActiveWindow";
-            }
-            {
               id = "MediaMini";
             }
             {
