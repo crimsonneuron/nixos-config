@@ -45,7 +45,7 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
+  
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
 
@@ -134,7 +134,17 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nix.extraOptions = "experimental-features = nix-command flakes";
+  nix = {
+    extraOptions = "experimental-features = nix-command flakes";
+    settings = {
+      extra-substituters = [
+        "https://vicinae.cachix.org"
+      ];
+      extra-trusted-public-keys = [
+        "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" 
+      ];
+    };
+  };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
