@@ -21,7 +21,6 @@
     inputs.spicetify-nix.homeManagerModules.default 
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/games.nix
-    ../../modules/home-manager/scripts.nix
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/utils
   ];
