@@ -51,6 +51,9 @@
 
   services.displayManager.ly.enable=true;
   services.udisks2.enable=true;
+  services.upower = {
+    enable =true;
+  };
 
   hardware.graphics.enable=true;
 
