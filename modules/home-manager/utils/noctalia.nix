@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     gpu-screen-recorder
+    upower
   ];
   imports = [
     inputs.noctalia.homeModules.default
