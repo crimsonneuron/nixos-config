@@ -26,13 +26,9 @@
         widgets = {
           left = [
             {
-              icon = "rocket";
-              id = "CustomButton";
-              leftClickExec = "noctalia-shell ipc call launcher toggle";
-            }
-            {
               id = "Clock";
               usePrimaryColor = false;
+              formatVertical = "hh mm AP - MM dd";
             }
             {
               id = "SystemMonitor";
@@ -70,6 +66,9 @@
             }
             {
               id = "ControlCenter";
+              customIconPath = "";
+              icon ="";
+              useDistroLogo= true;
             }
           ];
         };
