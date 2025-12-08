@@ -72,6 +72,7 @@ in
     overview = { zoom = 0.33;};
     spawn-at-startup = [
       {argv = ["noctalia-shell"];}
+      {argv = ["vicinae server"];}
     ];
     hotkey-overlay.skip-at-startup = true;
 
@@ -80,7 +81,7 @@ in
       "Mod+Return".action = spawn "kitty";
       "Mod+B".action = spawn "zen-beta";
       "Mod+D".action = spawn "vesktop";
-      "Alt+Space".action = spawn "sh" "-c" "noctalia-shell ipc call launcher toggle";
+      "Alt+Space".action = spawn "sh" "-c" "vicinae toggle";
       "Mod+Pause".action = spawn "sh" "-c" "/home/crimson/nixos/scripts/bash/poweroff.sh";
       "Super+Alt+L".action = spawn "sh" "-c" "noctalia-shell ipc call sessionMenu toggle";
       "Super+Alt+S".action = spawn "sh" "-c" "pkill orca || exec orca";
