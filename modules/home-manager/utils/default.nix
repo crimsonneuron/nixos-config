@@ -6,7 +6,7 @@
     ./zsh.nix
     ./niri.nix
     ./yazi.nix
-    #    ./noctalia.nix
-    ./vicinae.nix
+    ./noctalia.nix
+    # ./vicinae.nix
   ];
 }
