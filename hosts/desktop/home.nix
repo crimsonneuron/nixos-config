@@ -51,7 +51,7 @@
     unzip
     wget
     curl
-    neofetch
+    fastfetch
     jq
     btop
     fzf
