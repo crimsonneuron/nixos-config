@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     obsidian
     veracrypt
+    bitwarden-cli
   ];
 
   home.activation.createObsidianVault = lib.hm.dag.entryAfter ["writeBoundary"] ''
