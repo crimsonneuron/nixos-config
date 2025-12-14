@@ -262,7 +262,7 @@
         criticalColor = "";
       };
       dock = {
-        enabled = true;
+        enabled = false;
         displayMode = "auto_hide";
         backgroundOpacity = 1;
         floatingRatio = 1;
