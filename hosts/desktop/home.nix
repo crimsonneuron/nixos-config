@@ -23,6 +23,7 @@
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/utils
+    ../../modules/home-manager/unity.nix
   ];
 
   home.packages = with pkgs; [
