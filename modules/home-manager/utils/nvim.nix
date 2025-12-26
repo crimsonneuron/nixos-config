@@ -131,10 +131,13 @@
         nil_ls = {
             enable = true;
           };
+        omnisharp ={
+            enable=true;
+          };
            #qmlls = {
              #enable=true;
            #};
-         };
+          }; 
       };
 
       # Completion
