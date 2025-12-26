@@ -27,8 +27,6 @@
 
   home.packages = with pkgs; [
     vesktop
-    kdePackages.okular
-    pomodoro-gtk
     beeper
     element-desktop
     playerctl
@@ -40,7 +38,7 @@
     chromium
     vlc
     yt-dlp
-    
+    pinta    
     rustc
     cargo
 
