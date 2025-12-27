@@ -14,7 +14,7 @@
     '';
 
   home.file = {
-    "~/.local/share/applications/ObsidianDecrypt.desktop".text = ''
+    ".local/share/applications/ObsidianDecrypt.desktop".text = ''
       [Desktop Entry]
       Type=Application
       Name=ObsidianDecrypt
