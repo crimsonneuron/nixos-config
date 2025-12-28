@@ -134,10 +134,17 @@
         omnisharp ={
             enable=true;
           };
+        clojure_lsp ={
+            enable=true;
+          };
            #qmlls = {
              #enable=true;
            #};
           }; 
+      };
+
+      conjure = {
+        enable=true;
       };
 
       # Completion
