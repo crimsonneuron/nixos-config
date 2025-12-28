@@ -128,18 +128,23 @@
       lsp = {
         enable = true;
         servers = {
-          rust_analyzer = {
+        nil_ls = {
             enable = true;
-            installCargo = false;
-            installRustc = false;
           };
-          nil_ls = {
-            enable = true;
+        omnisharp ={
+            enable=true;
+          };
+        clojure_lsp ={
+            enable=true;
           };
            #qmlls = {
              #enable=true;
            #};
-         };
+          }; 
+      };
+
+      conjure = {
+        enable=true;
       };
 
       # Completion
@@ -204,7 +209,9 @@
       };
 
       nvim-surround.enable=true;
-
+      rustaceanvim= {
+        enable=true; 
+      };
 
     };
 
@@ -215,18 +222,6 @@
 
     # Extra Lua configuration for things that don't have direct NixVim equivalents
     extraConfigLua = ''
-      -- Rust-tools setup
-      local rt = require("rust-tools")
-      rt.setup({
-        server = {
-          on_attach = function(_, bufnr)
-            -- Hover actions
-            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
-            -- Code action groups
-            vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-          end,
-        },
-      })
       -- Shortmess configuration
       vim.opt.shortmess = vim.opt.shortmess + { c = true }
 

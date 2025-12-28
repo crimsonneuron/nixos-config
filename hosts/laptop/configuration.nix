@@ -45,12 +45,15 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
+  
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
 
   services.displayManager.ly.enable=true;
   services.udisks2.enable=true;
+  services.upower = {
+    enable =true;
+  };
 
   hardware.graphics.enable=true;
 
@@ -134,7 +137,17 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  nix.extraOptions = "experimental-features = nix-command flakes";
+  nix = {
+    extraOptions = "experimental-features = nix-command flakes";
+    settings = {
+      extra-substituters = [
+        "https://vicinae.cachix.org"
+      ];
+      extra-trusted-public-keys = [
+        "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" 
+      ];
+    };
+  };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -157,7 +170,6 @@
     #podman
 
     #rocm:
-    libfprint-2-tod1-broadcom
 
   ];
 
@@ -192,24 +204,6 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
   security.polkit.enable=true;
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (action.id == "net.reactivated.fprint.device.enroll" ||
-          action.id == "net.reactivated.fprint.device.verify") {
-        if (subject.isInGroup("wheel")) {
-          return polkit.Result.YES;
-        }
-      }
-    });
-  '';
-  security.pam.services.hyprlock={};
-  security.pam.services.ly.fprintAuth=false;
-  services.fprintd = {
-    enable=true;
-    tod.enable=true;
-    tod.driver = pkgs.libfprint-2-tod1-broadcom;
-  };
-
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

@@ -18,8 +18,20 @@ in
       };
     };
     switch-events = {
-      lid-close.action.spawn = ["sh" "-c" "qs ipc call lockshell enableLock"];
+      lid-close.action.spawn = ["noctalia-shell" "ipc" "call" "lockScreen" "lock"];
     };
+    window-rules = [
+      {
+        matches = [];
+        clip-to-geometry = true;
+        geometry-corner-radius = {
+          bottom-right = 20.0;
+          bottom-left = 20.0;
+          top-right =20.0;
+          top-left = 20.0;
+        };
+      }
+    ];
     outputs = if isLaptop then {
     } else {
       "DP-2" = {
@@ -59,9 +71,8 @@ in
     };
     overview = { zoom = 0.33;};
     spawn-at-startup = [
-      {argv = ["waybar"];}
-      {argv = ["swaybg" "-i" ("/home/crimson/Pictures/Wallpapers/"+wallpaperPath)];}
-      {argv = ["quickshell"];}
+      {argv = ["noctalia-shell"];}
+      {argv = ["vicinae server"];}
     ];
     hotkey-overlay.skip-at-startup = true;
 
@@ -69,9 +80,10 @@ in
       "Mod+Shift+Slash".action = show-hotkey-overlay;
       "Mod+Return".action = spawn "kitty";
       "Mod+B".action = spawn "zen-beta";
-      "Alt+Space".action = spawn "fuzzel";
+      "Mod+D".action = spawn "vesktop";
+      "Alt+Space".action = spawn "sh" "-c" "vicinae toggle";
       "Mod+Pause".action = spawn "sh" "-c" "/home/crimson/nixos/scripts/bash/poweroff.sh";
-      "Super+Alt+L".action = spawn "sh" "-c" "qs ipc call lockshell enableLock";
+      "Super+Alt+L".action = spawn "sh" "-c" "noctalia-shell ipc call sessionMenu toggle";
       "Super+Alt+S".action = spawn "sh" "-c" "pkill orca || exec orca";
 
       # Audio controls
@@ -219,6 +231,10 @@ in
       "Ctrl+Alt+Delete".action = quit;
       "Mod+Shift+P".action = power-off-monitors;
       };
+
+    debug = {
+      honor-xdg-activation-with-invalid-serial = [];
+    };
   };
 }
 

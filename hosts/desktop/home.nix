@@ -21,16 +21,14 @@
     inputs.spicetify-nix.homeManagerModules.default 
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/games.nix
-    ../../modules/home-manager/scripts.nix
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/utils
+    ../../modules/home-manager/unity.nix
+    ../../modules/home-manager/clojure.nix
   ];
 
   home.packages = with pkgs; [
-    zoom-us
     vesktop
-    kdePackages.okular
-    pomodoro-gtk
     beeper
     element-desktop
     playerctl
@@ -42,7 +40,7 @@
     chromium
     vlc
     yt-dlp
-    
+    pinta    
     rustc
     cargo
 
@@ -53,11 +51,10 @@
     unzip
     wget
     curl
-    neofetch
+    fastfetch
     jq
     btop
     fzf
-    swaynotificationcenter
     keyd
  
     libnotify
@@ -135,13 +132,12 @@
   };
   git = {
     enable=true;
-    userName="crimsonneuron";
-    userEmail="james.r.devereux@gmail.com";
-    extraConfig = {
+    settings= {
+      user.name="crimsonneuron";
+      user.email="james.r.devereux@gmail.com";
       init.defaultBranch = "main";
       core.editor="nvim";
     };
-    delta.enable=true;
   };
   spicetify = 
     let 
