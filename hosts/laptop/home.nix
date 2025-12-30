@@ -22,6 +22,7 @@
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/utils
+    ../../modules/home-manager/clojure.nix
   ];
 
   home.packages = with pkgs; [
