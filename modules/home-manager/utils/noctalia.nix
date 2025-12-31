@@ -96,7 +96,7 @@
         allowPanelsOnScreenWithoutBar = true;
       };
       ui = {
-        fontDefault = "";
+        fontDefault = "CodeNewRoman Nerd Font Mono";
         fontFixed = "";
         fontDefaultScale = 1;
         fontFixedScale = 1;
