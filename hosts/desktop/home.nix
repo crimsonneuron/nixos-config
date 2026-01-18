@@ -19,7 +19,6 @@
   imports = [
     inputs.zen-browser.homeModules.beta
     inputs.spicetify-nix.homeManagerModules.default 
-    inputs.papa-n2
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/obsidian.nix
