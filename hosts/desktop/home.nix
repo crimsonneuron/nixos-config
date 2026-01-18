@@ -174,7 +174,7 @@
     enable=true;
     titanfall2=true;
     melee=true;
-    northstar =true;
+    #northstar =true;
   };
 
 
