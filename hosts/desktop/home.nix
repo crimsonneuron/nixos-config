@@ -63,7 +63,6 @@
     #gnome-tweaks
     swaybg
     flameshot
-    pavucontrol
     networkmanagerapplet
     font-awesome
     nerd-fonts.code-new-roman

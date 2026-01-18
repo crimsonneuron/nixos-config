@@ -172,6 +172,7 @@
     home-manager
     
     gnome-remote-desktop
+    wiremix
 
     #distrobox
     #podman
