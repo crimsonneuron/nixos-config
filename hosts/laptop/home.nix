@@ -48,6 +48,7 @@
     wl-clipboard
     python313
     nil
+    calibre
 
     tree-sitter
     unzip
