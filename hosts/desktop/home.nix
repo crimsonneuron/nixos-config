@@ -43,6 +43,7 @@
     pinta    
     rustc
     cargo
+    calibre
 
     wl-clipboard
     python313
