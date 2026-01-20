@@ -4,19 +4,26 @@ import getpass
 import os
 import sys
 import time
+import shutil
 
 # --- CONFIGURATION SECTION ---
-# The full path to the encrypted file on your USB drive
+# 1. The full path to the encrypted file on your USB drive
 # Example: "/run/media/myuser/MY_USB_NAME/vault.hc"
 ENCRYPTED_CONTAINER_PATH = "/run/media/crimson/SPHINCS/encryVault.vc"
 
-# The directory where you want it mounted (Obsidian looks here)
+# 2. The directory where you want it mounted (Obsidian looks here)
 MOUNT_POINT = "/run/media/veracrypt1"
 
-# The name of the item in Bitwarden that holds the USB encryption password
+# 3. Where to store the backups (Local disk is best)
+# The script will create this folder if it doesn't exist.
+BACKUP_DIR = "/home/crimson/Backups/ObsidianVault"
+# Number of backups to keep (3 is a safe balance)
+BACKUP_RETENTION = 3
+
+# 4. The name of the item in Bitwarden that holds the USB encryption password
 BW_ITEM_NAME = "SPHINCS Drive"
 
-# Command to launch Obsidian (NixOS usually puts binaries in path)
+# 5. Command to launch Obsidian
 OBSIDIAN_CMD = "obsidian"
 # -----------------------------
 
@@ -36,8 +43,51 @@ def run_command(command, input_text=None, env=None, capture_output=True):
         print(f"Error executing command: {e}")
         return None
 
+def perform_rotation_backup(source_file, backup_dir, retention):
+    """
+    Rotates backups (file.1, file.2, file.3) and copies the new one.
+    """
+    filename = os.path.basename(source_file)
+    
+    if not os.path.exists(backup_dir):
+        try:
+            os.makedirs(backup_dir)
+        except OSError as e:
+            print(f"❌ Could not create backup directory: {e}")
+            return False
+
+    print(f"    Rotation strategy: Keeping last {retention} copies.")
+
+    # 1. Delete the oldest backup if it exists
+    oldest_backup = os.path.join(backup_dir, f"{filename}.{retention}")
+    if os.path.exists(oldest_backup):
+        os.remove(oldest_backup)
+
+    # 2. Shift existing backups down (e.g., .2 -> .3, .1 -> .2)
+    # We loop backwards from retention-1 down to 1
+    for i in range(retention - 1, 0, -1):
+        current = os.path.join(backup_dir, f"{filename}.{i}")
+        next_slot = os.path.join(backup_dir, f"{filename}.{i+1}")
+        
+        if os.path.exists(current):
+            # Use move/rename to shift
+            try:
+                os.rename(current, next_slot)
+            except OSError as e:
+                print(f"    ⚠️ Warning: Failed to rotate backup {i} to {i+1}: {e}")
+
+    # 3. Copy source to .1 (The newest backup)
+    new_backup_path = os.path.join(backup_dir, f"{filename}.1")
+    print(f"    Copying current drive to: {new_backup_path}...")
+    try:
+        shutil.copy2(source_file, new_backup_path)
+        return True
+    except IOError as e:
+        print(f"❌ Copy failed: {e}")
+        return False
+
 def main():
-    print("--- 🔓 Obsidian Vault Autoloader ---")
+    print("--- 🔓 Obsidian Vault Autoloader & Backup ---")
 
     # 1. Pre-flight Check: Is the USB plugged in?
     if not os.path.exists(ENCRYPTED_CONTAINER_PATH):
@@ -53,7 +103,7 @@ def main():
             subprocess.Popen(OBSIDIAN_CMD, shell=True)
         sys.exit(0)
 
-    # 3. Gather Credentials
+    # 3. Gather Credentials (Do this first so we don't backup if user cancels)
     print("\nPlease enter credentials (input is hidden):")
     try:
         bw_master_pass = getpass.getpass("🔑 Bitwarden Master Password: ")
@@ -62,47 +112,50 @@ def main():
         print("\nOperation cancelled.")
         sys.exit(0)
 
-    print("\n[1/4] Unlocking Bitwarden Vault...")
+    # --- NEW STEP: BACKUP ---
+    print(f"\n[1/5] Backing up encrypted container...")
+    backup_success = perform_rotation_backup(ENCRYPTED_CONTAINER_PATH, BACKUP_DIR, BACKUP_RETENTION)
     
-    # Unlock Bitwarden and get Session Key
-    # We pass the existing environment so we don't lose PATH, but add nothing else yet.
+    if backup_success:
+        print("✅ Backup successful.")
+    else:
+        print("⚠️ BACKUP FAILED.")
+        cont = input("    Do you want to continue mounting without a fresh backup? (y/N): ")
+        if cont.lower() != 'y':
+            print("Aborting.")
+            sys.exit(1)
+    # ------------------------
+
+    print("\n[2/5] Unlocking Bitwarden Vault...")
     bw_env = os.environ.copy()
     
-    # 'bw unlock --raw' returns just the session key
+    # Unlock Bitwarden
     unlock_res = run_command(f"bw unlock '{bw_master_pass}' --raw")
-    
     if unlock_res.returncode != 0:
         print("❌ Failed to unlock Bitwarden. Check your master password.")
-        print(f"Debug: {unlock_res.stderr}")
         sys.exit(1)
         
     session_key = unlock_res.stdout.strip()
     bw_env["BW_SESSION"] = session_key
 
-    # Retrieve the USB Password
-    print(f"[2/4] Retrieving password for '{BW_ITEM_NAME}'...")
+    # Retrieve USB Password
+    print(f"[3/5] Retrieving password for '{BW_ITEM_NAME}'...")
     get_pass_res = run_command(f"bw get password '{BW_ITEM_NAME}'", env=bw_env)
-    
     if get_pass_res.returncode != 0:
         print(f"❌ Failed to retrieve item '{BW_ITEM_NAME}'. Check the name.")
         sys.exit(1)
         
     usb_password = get_pass_res.stdout.strip()
 
-    # 4. Mount VeraCrypt
-    print(f"[3/4] Mounting VeraCrypt volume to {MOUNT_POINT}...")
+    # Mount VeraCrypt
+    print(f"[4/5] Mounting VeraCrypt volume to {MOUNT_POINT}...")
     
-    # We verify sudo first to avoid awkward timeouts later
+    # Pre-validate sudo
     sudo_check = run_command(f"sudo -S -v", input_text=f"{sudo_pass}\n")
     if sudo_check.returncode != 0:
         print("❌ Sudo authentication failed.")
         sys.exit(1)
 
-    # Construct VeraCrypt command
-    # -t: text mode
-    # --pim 0: assumes no PIM
-    # -k "": assumes no keyfile
-    # --protect-hidden no: standard option to avoid questions
     vc_cmd = (
         f"sudo -S veracrypt -t --mount '{ENCRYPTED_CONTAINER_PATH}' '{MOUNT_POINT}' "
         f"--password '{usb_password}' --pim 0 -k '' --protect-hidden no"
@@ -118,16 +171,14 @@ def main():
 
     print("✅ Drive mounted successfully.")
 
-    # 5. Launch Obsidian
-    print("[4/4] Launching Obsidian...")
-    # Using Popen to detach the process so closing the terminal doesn't kill Obsidian
+    # Launch Obsidian
+    print("[5/5] Launching Obsidian...")
     subprocess.Popen(
         f"{OBSIDIAN_CMD} > /dev/null 2>&1 &", 
         shell=True, 
         start_new_session=True
     )
     
-    # Give a brief pause to see the success message
     time.sleep(1.5)
 
 if __name__ == "__main__":
