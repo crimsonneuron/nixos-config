@@ -1,4 +1,4 @@
-{config, lib, pkgs, inputs,...}: 
+{config, lib, pkgs, inputs, papa-n2, ...}: 
 with lib;
 let 
   cfg = config.games;
