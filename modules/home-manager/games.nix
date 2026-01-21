@@ -30,9 +30,9 @@ in
         Icon=/home/crimson/.local/share/icons/hicolor/128x128/apps/lutris_titanfall-2.png
         Categories=Game;
       '';
-      # home.packages = mkIf northstar [
-      #   papa-n2.packages.${pkgs.system}.default
-      # ];
+       home.packages = mkIf northstar [
+         papa-n2.packages.${pkgs.system}.default
+       ];
     };
     
     # Melee configuration - this goes directly at config root level
