@@ -30,7 +30,7 @@ in
         Icon=/home/crimson/.local/share/icons/hicolor/128x128/apps/lutris_titanfall-2.png
         Categories=Game;
       '';
-       home.packages = mkIf northstar [
+       home.packages = mkIf cfg.northstar [
          papa-n2.packages.${pkgs.system}.default
        ];
     };
