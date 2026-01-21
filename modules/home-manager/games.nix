@@ -31,7 +31,7 @@ in
         Categories=Game;
       '';
        home.packages = mkIf cfg.northstar [
-         inputs.papa-n2.packages.${pkgs.system}.default
+         inputs.papa-n2
        ];
     };
     
