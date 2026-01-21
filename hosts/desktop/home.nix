@@ -20,11 +20,12 @@
     inputs.zen-browser.homeModules.beta
     inputs.spicetify-nix.homeManagerModules.default 
     #inputs.ssbm-nix.homeManagerModule
-    ../../modules/home-manager/games.nix
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/utils
     ../../modules/home-manager/unity.nix
-    ../../modules/home-manager/clojure.nix
+
+    ../../modules/home-manager/games.nix
+    ../../modules/home-manager/languages.nix
   ];
 
   home.packages = with pkgs; [
@@ -177,6 +178,12 @@
     meleePath = "/mnt/storage/games/Slippi/isos/Super Smash Bros. Melee (USA) (En,Ja) (v1.02).iso";
     northstar =true;
     osu = true;
+  };
+
+  languages = {
+    enable =true;
+    rust = true;
+    OCaml = true;
   };
 
 
