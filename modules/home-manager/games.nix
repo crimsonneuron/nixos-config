@@ -39,7 +39,7 @@ in
         inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.viper
     ]
     ++ lib.optionals cfg.osu [
-        inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.osu
+        inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.osu-lazer-bin
       ];
 
 
