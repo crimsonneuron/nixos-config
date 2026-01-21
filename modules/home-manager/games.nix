@@ -1,4 +1,4 @@
-{config, lib, pkgs, inputs, papa-n2, ...}: 
+{config, lib, pkgs, inputs, ...}: 
 with lib;
 let 
   cfg = config.games;
@@ -31,7 +31,7 @@ in
         Categories=Game;
       '';
        home.packages = mkIf cfg.northstar [
-         papa-n2.packages.${pkgs.system}.default
+         inputs.papa-n2.packages.${pkgs.system}.default
        ];
     };
     
