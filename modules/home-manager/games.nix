@@ -11,7 +11,7 @@ in
   options.games = {
     enable = mkEnableOption "Games Module";
     titanfall2 = mkEnableOption "Titanfall 2";
-    #    northstar = mkEnableOption "Northstar";
+    northstar = mkEnableOption "Northstar";
     melee = mkEnableOption "Super Smash Bros Melee";
     meleePath = mkOption {
       type = types.str;
