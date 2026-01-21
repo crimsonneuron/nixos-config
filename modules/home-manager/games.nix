@@ -30,11 +30,12 @@ in
         Icon=/home/crimson/.local/share/icons/hicolor/128x128/apps/lutris_titanfall-2.png
         Categories=Game;
       '';
-       home.packages = mkIf cfg.northstar [
-         inputs.papa-n2.defaultPackage.${pkgs.system}
-       ];
     };
-    
+
+  home.packages = mkIf cfg.northstar [
+     inputs.papa-n2.defaultPackage.${pkgs.system}
+  ];
+
     # Melee configuration - this goes directly at config root level
     ssbm.slippi-launcher = mkIf cfg.melee {
       enable = true;
