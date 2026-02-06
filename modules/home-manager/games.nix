@@ -18,6 +18,7 @@ in
       description = "Path to the default iso file";
     };
     osu = mkEnableOption "Osu!";
+    chess = mkEnableOption "Chess";
   };
   
   config = mkIf cfg.enable {
@@ -40,7 +41,10 @@ in
     ]
     ++ lib.optionals cfg.osu [
         inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.osu-lazer-bin
-      ];
+      ]
+    ++ lib.optionals cfg.chess [
+      pkgs.arena   
+    ];
 
 
    

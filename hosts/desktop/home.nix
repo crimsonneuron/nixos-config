@@ -178,6 +178,7 @@
     meleePath = "/mnt/storage/games/Slippi/isos/Super Smash Bros. Melee (USA) (En,Ja) (v1.02).iso";
     northstar =true;
     osu = true;
+    chess=true;
   };
 
   languages = {
