@@ -43,7 +43,7 @@ in
         inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.osu-lazer-bin
       ]
     ++ lib.optionals cfg.chess [
-      pkgs.arena   
+      pkgs.cutechess
     ];
 
 
