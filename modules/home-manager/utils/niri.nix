@@ -13,7 +13,7 @@ in
   programs.niri.settings = {
     input = {
       keyboard.xkb = {
-        layout = "us, gr";
+        layout = "us, gr(polytonic)";
         options = "grp:alt_caps_toggle";
       };
     };
