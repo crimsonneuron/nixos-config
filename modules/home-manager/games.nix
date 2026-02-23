@@ -55,10 +55,6 @@ in
         enable = true;
         isoPath = cfg.meleePath;
       };
-      gcc = {
-        rules.enable =true; #drivers for a oem gcc adapter
-        oc-kmod.enable = true; #hacked to support faster updates
-      };
-    };
+     };
   };
 }
