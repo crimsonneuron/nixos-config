@@ -23,6 +23,7 @@
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/utils
     ../../modules/home-manager/clojure.nix
+    ../../modules/home-manager/games.nix
   ];
 
   home.packages = with pkgs; [
@@ -36,6 +37,7 @@
     zoxide
 
     libqalculate
+    libinput
 
 
     vlc
@@ -156,22 +158,6 @@
 
 
 
-
-   #slippi-launcher= {
-     #isoPath = "/mnt/storage/games/Slippi/isos/Super Smash Bros. Melee (USA) (En,Ja) (v1.02).iso";
- #
-     ##default path: /mnt/storage/games/Slippi/Super Smash Bros. Melee (USA) (En,Ja) (v1.02).iso
-     ##20xx path: /mnt/storage/games/Slippi/isos/SSBM, 20XXHP 5.0.2.iso
-     #launchMeleeOnPlay = true;
-     #rootSlpPath = "/mnt/storage/games/Slippi/replays/";
-     #useMonthlySubfolders  =true;
-   #};
-
-   #ssbm.slippi-launcher = {
-     #enable=true;
-     #isoPath = "/mnt/storage/games/Slippi/isos/Super Smash Bros. Melee (USA) (En,Ja) (v1.02).iso";
-   #};
-
   services.podman = {
     enable=true;
   };
@@ -197,45 +183,12 @@
   services.swayidle.enable=true;
   services.polkit-gnome.enable=true;
 
-   #systemd.user.services = {
-     #xwayland-satellite = {
-       #Unit = {
-         #Description = "Thing for doing x11 only things";
-         #BindsTo = ["graphical-session.target"];
-         #PartOf = ["graphical-session.target"];
-         #After = ["graphical-session.target"];
-         #Requisite = ["graphical-session.target"];
-       #};
-       #Service = {
-         #Type ="notify";
-         #NotifyAccess= "all";
-         #ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite :0";
-         #Restart = "on-failure";
-         #Environment = "DISPLAY=:0";
-       #};
-       #Install = {
-         #WantedBy = ["graphical-session.target"];
-       #};
-     #};
- #
-     #swaybg = {
-       #Unit = {
-         #Description = "swaybg background setting";
-         #BindsTo = ["graphical-session.target"];
-         #PartOf = ["graphical-session.target"];
-         #After = ["graphical-session.target"];
-         #Requisite = ["graphical-session.target"];
-       #};
- #
-       #Service = {
-         #ExecStart = "${pkgs.swaybg}/bin/swaybg -i /home/crimson/Pictures/Wallpapers/nasa_mirror_1920x1080.png";
-       #};
-       #Install = {
-         #WantedBy = ["graphical-session.target"];
-       #};
-     #};
-  #};
- #
+  games = {
+    enable =true;
+    melee = true;
+    meleePath = "/home/crimson/Games/Melee/Melee ISO File.iso";
+  }
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

@@ -13,6 +13,10 @@ in
     titanfall2 = mkEnableOption "Titanfall 2";
     #    northstar = mkEnableOption "Northstar";
     melee = mkEnableOption "Super Smash Bros Melee";
+    meleePath = mkOption {
+      type = types.str;
+      description = "Path to the default iso file";
+    };
   };
   
   config = mkIf cfg.enable {
@@ -34,7 +38,12 @@ in
     # Melee configuration - this goes directly at config root level
     ssbm.slippi-launcher = mkIf cfg.melee {
       enable = true;
-      isoPath = "/mnt/storage/games/Slippi/isos/Super Smash Bros. Melee (USA) (En,Ja) (v1.02).iso";
+      assertions  = [{
+        assertion = cfg.meleePath != "";
+        message = "meleePath must be set if melee is enabled";
+      }];
+
+      isoPath = meleePath;
     };
   };
 }
