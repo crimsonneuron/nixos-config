@@ -39,7 +39,7 @@ in
     ssbm.slippi-launcher = mkIf cfg.melee {
       enable = true;
 
-      isoPath = meleePath;
+      isoPath = cfg.meleePath;
     };
   };
 }
