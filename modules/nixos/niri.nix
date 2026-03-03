@@ -7,5 +7,10 @@
     enable = true;
     package = pkgs.niri;
   };
+
+  environment.systemPackages = with pkgs; [
+    xwayland-satellite
+  ];
+
   services.dbus.packages = [pkgs.nautilus];
 }
