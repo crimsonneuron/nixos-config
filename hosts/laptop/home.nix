@@ -187,7 +187,7 @@
     enable =true;
     melee = true;
     meleePath = "/home/crimson/Games/Melee/Melee ISO File.iso";
-  }
+  };
 
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
