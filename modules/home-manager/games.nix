@@ -38,7 +38,6 @@ in
     # Melee configuration - this goes directly at config root level
     ssbm.slippi-launcher = mkIf cfg.melee {
       enable = true;
-
       isoPath = cfg.meleePath;
     };
   };
