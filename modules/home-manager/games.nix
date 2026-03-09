@@ -50,10 +50,15 @@ in
    
 
 
-    # Melee configuration - this goes directly at config root level
-    ssbm.slippi-launcher = mkIf cfg.melee {
-      enable = true;
-      isoPath = cfg.meleePath;
+    ssbm = mkIf cfg.melee {
+      slippi-launcher = {
+        enable = true;
+        isoPath = cfg.meleePath;
+      };
+      gcc = {
+        rules.enable =true; #drivers for a oem gcc adapter
+        oc-kmod.enable = true; #hacked to support faster updates
+      };
     };
   };
 }
