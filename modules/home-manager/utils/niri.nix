@@ -81,6 +81,7 @@ in
       "Mod+Return".action = spawn "kitty";
       "Mod+B".action = spawn "zen-beta";
       "Mod+D".action = spawn "vesktop";
+      "Mod+M".action = spawn "sh" "-c" "chromium --profile-directory=Default --app-id=cinhimbnkkaeohfgghhklpknlkffjgod";
       "Alt+Space".action = spawn "sh" "-c" "vicinae toggle";
       "Mod+Pause".action = spawn "sh" "-c" "/home/crimson/nixos/scripts/bash/poweroff.sh";
       "Super+Alt+L".action = spawn "sh" "-c" "noctalia-shell ipc call sessionMenu toggle";
