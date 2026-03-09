@@ -17,6 +17,7 @@ in
       type = types.str;
       description = "Path to the default iso file";
     };
+    osu = mkEnableOption "Osu!";
   };
   
   config = mkIf cfg.enable {
@@ -32,9 +33,18 @@ in
       '';
     };
 
-  home.packages = mkIf cfg.northstar [
-     inputs.papa-n2.defaultPackage.${pkgs.system}
-  ];
+    home.packages = []
+      ++ lib.optionals cfg.northstar [
+        inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.northstar-proton
+        inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.viper
+    ]
+    ++ lib.optionals cfg.osu [
+        inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.osu
+      ];
+
+
+   
+
 
     # Melee configuration - this goes directly at config root level
     ssbm.slippi-launcher = mkIf cfg.melee {

@@ -79,7 +79,6 @@
 
     #Games (NB:Steam in configued in config):
     prismlauncher
-    osu-lazer-bin
 
     mangohud
     protonup-ng
@@ -175,7 +174,9 @@
     enable=true;
     titanfall2=true;
     melee=true;
+    meleePath = "/mnt/storage/games/Slippi/isos/Super Smash Bros. Melee (USA) (En,Ja) (v1.02).iso";
     northstar =true;
+    osu = true;
   };
 
 

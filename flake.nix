@@ -21,8 +21,9 @@
     vicinae = {
       url = "github:vicinaehq/vicinae";
     };
-    papa-n2 = {
-      url = "github:AnActualEmerald/papa";
+
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
     };
   };
 
