@@ -10,6 +10,7 @@
       nil              # nil_ls for Nix
       ripgrep          # telescope live_grep
       ocamlPackages.ocaml-lsp
+      ocamlPackages.utop
     
     ];
 
