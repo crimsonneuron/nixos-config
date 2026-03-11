@@ -4,7 +4,7 @@ let
   cfg =config.languages;
 in
 {
- option.languages = {
+ options.languages = {
     enable = mkEnableOption "Programming Languages Module";
     rust = mkEnableOption "Rust";
     OCaml = mkEnableOption "OCaml";
