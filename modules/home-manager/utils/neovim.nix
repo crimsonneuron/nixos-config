@@ -15,7 +15,7 @@
     extraLuaPackages = ps: [ ];
 
     plugins.dev.myconfig = {
-      pure   = ../../dotfiles/nvim;          # used in normal builds
+      pure   = ../../../dotfiles/nvim;          # used in normal builds
       impure = "/home/crimson/nixos/dotfiles/nvim";  # TODO: update to your actual path
     };
 
