@@ -12,10 +12,7 @@
     #slippi-nix.url = "github:lytedev/slippi-nix";
     ssbm-nix.url = "github:NormalFall/ssbm-nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    nixvim = {
-      url = "github:nix-community/nixvim/nixos-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    mnw.url = "github:Gerg-L/mnw";
     niri-flake.url = "github:sodiboo/niri-flake";
     noctalia = {
         url = "github:noctalia-dev/noctalia-shell";

@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./nvim.nix
+    ./neovim.nix
     ./zsh.nix
     ./niri.nix
     ./yazi.nix
