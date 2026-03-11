@@ -124,6 +124,7 @@
       init.defaultBranch = "main";
       core.editor="nvim";
     };
+  };
  
   spicetify = 
     let 
