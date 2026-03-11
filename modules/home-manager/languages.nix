@@ -18,7 +18,7 @@ in
   ] ++ lib.optionals cfg.OCaml[
     pkgs.opam
     pkgs.ocaml
-    pkgs.utop
+    pkgs.ocamlPackages.utop
   ] ++ [];
     };
 }
