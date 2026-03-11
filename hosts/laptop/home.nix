@@ -22,7 +22,9 @@
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/utils
-    ../../modules/home-manager/clojure.nix
+
+    #Toggled
+    ../../modules/home-manager/languages.nix
     ../../modules/home-manager/games.nix
   ];
 
@@ -43,9 +45,6 @@
     vlc
     yt-dlp
     
-    rustc
-    cargo
-    rust-analyzer
 
     wl-clipboard
     python313
@@ -189,6 +188,12 @@
     enable =true;
     melee = true;
     meleePath = "/home/crimson/Games/Melee/Melee ISO File.iso";
+  };
+
+  languages = {
+    enable=true;
+    rust =true;
+    OCaml = true;
   };
 
 
