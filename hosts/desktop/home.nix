@@ -45,6 +45,7 @@
     rustc
     cargo
     calibre
+    sioyek
 
     wl-clipboard
     python313
