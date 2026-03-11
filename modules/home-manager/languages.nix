@@ -11,13 +11,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = lib.optionals cfg.rust.enable [
+    home.packages = lib.optionals cfg.rust[
       rustc
       cargo
       rust-analyzer
-  ] ++ lib.optionals cfg.OCaml.enable [
+  ] ++ lib.optionals cfg.OCaml[
     opam
     ocaml
-  ];
+  ] ++ [];
     };
 }
