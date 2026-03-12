@@ -16,7 +16,7 @@ in
       pkgs.cargo
       pkgs.rust-analyzer
   ] ++ lib.optionals cfg.OCaml[
-    pkgs.opam
+    pkgs.dune
     pkgs.ocaml
     pkgs.ocamlPackages.utop
   ] ++ [];
