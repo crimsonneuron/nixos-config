@@ -50,6 +50,7 @@
     python313
     nil
     calibre
+    sioyek
 
     tree-sitter
     unzip
