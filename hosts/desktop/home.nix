@@ -111,6 +111,7 @@
          ];
        };
      };
+    };
         
   zen-browser= {
    enable=true;
