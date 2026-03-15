@@ -29,15 +29,11 @@
 
   home.packages = with pkgs; [
     vesktop
-    beeper
-    element-desktop
-    playerctl
     ncmpcpp
     wayfarer
     zoxide
     libqalculate
     xfce.thunar
-    chromium
     vlc
     yt-dlp
     pinta    
@@ -68,7 +64,6 @@
     font-awesome
     nerd-fonts.code-new-roman
     nerd-fonts.fantasque-sans-mono
-    rust-analyzer
     nil
 
     mesa-demos
@@ -105,10 +100,6 @@
       enable=true;
       mpdMusicDir = /mnt/storage/music;
     };
-    lutris = {
-      enable=true;
-    };
-    distrobox = {
      enable=true;
      enableSystemdUnit = true;
      containers = {
@@ -169,7 +160,7 @@
        #enable=true;
        ##systemd.enable=true;
      #};
-  };
+  
 
   games = {
     enable=true;
