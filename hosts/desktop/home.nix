@@ -100,6 +100,7 @@
       enable=true;
       mpdMusicDir = /mnt/storage/music;
     };
+    distrobox = {
      enable=true;
      enableSystemdUnit = true;
      containers = {
