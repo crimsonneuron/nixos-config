@@ -28,7 +28,23 @@
 
       # Core
       nvim-web-devicons
-      nvim-treesitter.withAllGrammars
+      (nvim-treesitter.withPlugins (p: with p; [
+        nix 
+        ocaml 
+        clojure 
+        rust 
+        lua 
+        json 
+        toml 
+        yaml
+        bash 
+        c
+        c_sharp
+        java
+        python
+        vimdoc
+        latex
+      ]))
       telescope-nvim
       plenary-nvim           # telescope dependency
 
