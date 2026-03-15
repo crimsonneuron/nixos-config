@@ -110,7 +110,7 @@
          ];
        };
      };
-     };   
+        
   zen-browser= {
    enable=true;
    policies = {
@@ -155,12 +155,7 @@
       colorScheme = "mocha";
       };
 
-    swaylock.enable=true;
-     #waybar = {
-       #enable=true;
-       ##systemd.enable=true;
-     #};
-  
+  };
 
   games = {
     enable=true;
