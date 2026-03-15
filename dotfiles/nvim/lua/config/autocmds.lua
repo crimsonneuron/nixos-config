@@ -37,6 +37,17 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+--2-space indent for OCaml
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "ml",
+    callback = function()
+        vim.bo.tabstop     = 2
+        vim.bo.shiftwidth  = 2
+        vim.bo.softtabstop = 2
+        vim.bo.expandtab   = true
+    end,
+})
+
 -- Diagnostic signs
 local function sign(name, text)
   vim.fn.sign_define(name, { texthl = name, text = text, numhl = "" })
