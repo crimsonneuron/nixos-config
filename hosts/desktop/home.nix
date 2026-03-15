@@ -22,7 +22,6 @@
     #inputs.ssbm-nix.homeManagerModule
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/utils
-    ../../modules/home-manager/unity.nix
 
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/languages.nix
