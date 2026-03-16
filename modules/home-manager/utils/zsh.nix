@@ -21,7 +21,7 @@ in
         export VISUAL=nvim
         export DISPLAY=:0
         eval "$(zoxide init zsh)"
-        PROMPT='%F{#DBC713}%n@%m%f:%F{#DBC713}%~$f>'
+        PROMPT='%F{#DBC713}%n@%m%f:%F{#DBC713}%~%f>'
         alias -- :q=exit
 
         '';
