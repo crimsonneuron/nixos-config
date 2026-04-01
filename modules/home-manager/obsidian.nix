@@ -18,7 +18,7 @@
       [Desktop Entry]
       Type=Application
       Name=ObsidianDecrypt
-      Exec=kitty --hold sh -c "~/nixos/scripts/python/obsilogin.py"
+      Exec=kitty --hold sh -c "~/nixos/scripts/bash/obsilogin.sh"
       Icon=utilities-terminal
       Terminal=false
     '';
