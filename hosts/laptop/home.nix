@@ -37,6 +37,7 @@
     ncmpcpp
     wayfarer
     zoxide
+    ffmpeg
 
     libqalculate
     libinput
