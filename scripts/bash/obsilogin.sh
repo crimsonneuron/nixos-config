@@ -2,19 +2,42 @@
 # vc-open.sh — Mount a VeraCrypt volume from a USB drive, with rotating encrypted backups.
 #
 # CONFIGURE THESE:
-ENCRYPTED_FILE="/run/media/crimson/SPHINCS/encryVault.vc"  # The VeraCrypt volume file — its presence also confirms the USB is plugged in
-
-MOUNT_POINT="/run/media/veracrypt1"                     # Where to mount the decrypted volume
-BACKUP_DIR="$HOME/Backups/ObsidianVault"                    # Where rotating backups are stored
+ENCRYPTED_FILE="/path/to/your/veracrypt/volume"  # The VeraCrypt volume file — its presence also confirms the USB is plugged in
+MOUNT_POINT="/mnt/veracrypt1"                     # Where to mount the decrypted volume
+BACKUP_DIR="$HOME/.vc-backups"                    # Where rotating backups are stored
 MAX_BACKUPS=3                                      # Number of rotating backups to keep
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
 die() { echo "error: $*" >&2; exit 1; }
 
+is_mounted() { veracrypt --text --list 2>/dev/null | grep -qF "$ENCRYPTED_FILE"; }
+
 # ── preflight ────────────────────────────────────────────────────────────────
 
 command -v veracrypt >/dev/null 2>&1 || die "veracrypt is not installed or not in PATH"
+
+# ── already-mounted branch ────────────────────────────────────────────────────
+
+if is_mounted; then
+    echo "Volume is already mounted at $MOUNT_POINT."
+    read -rp "Unmount it? [y/N] " CONFIRM
+    if [[ "$CONFIRM" =~ ^[Yy]$ ]]; then
+        read -rsp "sudo password: " SUDO_PASS; echo
+        echo "$SUDO_PASS" | sudo -S veracrypt --text --dismount "$ENCRYPTED_FILE" 2>&1
+        STATUS=$?
+        SUDO_PASS=""; unset SUDO_PASS
+        if [[ $STATUS -ne 0 ]]; then
+            die "unmount failed (exit $STATUS) — is a file inside still open?"
+        fi
+        echo "Unmounted."
+    else
+        echo "Leaving volume mounted. Exiting."
+    fi
+    exit 0
+fi
+
+# ── drive check ──────────────────────────────────────────────────────────────
 
 [[ -f "$ENCRYPTED_FILE" ]] || die "USB drive not detected or volume not found: $ENCRYPTED_FILE"
 
@@ -65,7 +88,7 @@ VC_PASS=""; SUDO_PASS=""
 unset VC_PASS SUDO_PASS
 
 if [[ $STATUS -ne 0 ]]; then
-    die "veracrypt failed (exit $STATUS) — wrong password, or volume already mounted?"
+    die "veracrypt failed (exit $STATUS) — wrong password?"
 fi
 
 echo "Mounted at $MOUNT_POINT"
