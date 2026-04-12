@@ -65,6 +65,7 @@
     keyd
  
     libnotify
+    rtorrent
 
     #gnome-tweaks
     swaybg

@@ -2,9 +2,9 @@
 # vc-open.sh — Mount a VeraCrypt volume from a USB drive, with rotating encrypted backups.
 #
 # CONFIGURE THESE:
-ENCRYPTED_FILE="/path/to/your/veracrypt/volume"  # The VeraCrypt volume file — its presence also confirms the USB is plugged in
-MOUNT_POINT="/mnt/veracrypt1"                     # Where to mount the decrypted volume
-BACKUP_DIR="$HOME/.vc-backups"                    # Where rotating backups are stored
+ENCRYPTED_FILE="/run/media/crimson/SPHINCS/encryVault.vc"  # The VeraCrypt volume file — its presence also confirms the USB is plugged in
+MOUNT_POINT="/run/media/veracrypt1"                     # Where to mount the decrypted volume
+BACKUP_DIR="$HOME/Backups/ObsidianVault"                    # Where rotating backups are stored
 MAX_BACKUPS=3                                      # Number of rotating backups to keep
 
 # ── helpers ──────────────────────────────────────────────────────────────────
