@@ -73,6 +73,7 @@ in
     spawn-at-startup = [
       {argv = ["noctalia-shell"];}
       {argv = ["vicinae server"];}
+      {argv = ["dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"];}
     ];
     hotkey-overlay.skip-at-startup = true;
 
