@@ -28,7 +28,7 @@
   ];
 
   home.packages = with pkgs; [
-    vesktop
+    (vesktop.override { electron = pkgs.electron_32;})
     ncmpcpp
     wayfarer
     zoxide
