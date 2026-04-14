@@ -12,6 +12,7 @@
       # ../../modules/nixos/games.nix
       ../../modules/nixos/keyboard.nix
       ../../modules/nixos/niri.nix
+      ../../modules/nixos/keyboard.nix
     ];
 
   # Bootloader.
