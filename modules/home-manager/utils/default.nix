@@ -7,6 +7,5 @@
     ./niri.nix
     ./yazi.nix
     ./noctalia.nix
-    ./vicinae.nix
   ];
 }
