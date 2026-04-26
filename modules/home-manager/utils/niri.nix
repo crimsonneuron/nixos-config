@@ -236,6 +236,7 @@ in
 
     debug = {
       honor-xdg-activation-with-invalid-serial = [];
+      wait-for-frame-completion-before-queueing = [];
     };
   };
 }

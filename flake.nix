@@ -20,44 +20,53 @@
     };
     vicinae = {
       url = "github:vicinaehq/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
     };
+    tuigreet = {
+      url = "github:NotAShelf/tuigreet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
   };
 
 
-  outputs = { self, nixpkgs,nixpkgs-unstable, ... }@inputs: 
-  let 
+  outputs = { self, nixpkgs, nixpkgs-unstable, tuigreet, ... }@inputs:
+  let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
     pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
-  in 
-    {
-      nixosConfigurations = {
-	      desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs pkgs-unstable;};
-            modules = [
-              ./hosts/desktop/configuration.nix
-              inputs.home-manager.nixosModules.default {
-                home-manager.extraSpecialArgs = {
-                  inherit inputs pkgs-unstable;
-                };
-              }
-            ];
-          };
-        laptop = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs pkgs-unstable;};
-          modules = [
-            ./hosts/laptop/configuration.nix
-            inputs.home-manager.nixosModules.default {
-            home-manager.extraSpecialArgs = {
-              inherit inputs pkgs-unstable;
-              };
-            }
-          ];
-        };
-     };
+
+    tuigreetOverlay = final: prev: {
+      tuigreet = inputs.tuigreet.packages.${prev.hostPlatform.system}.tuigreet;
+    };
+
+    sharedModules = [
+      { nixpkgs.overlays = [ tuigreetOverlay ]; }
+      inputs.home-manager.nixosModules.default
+    ];
+  in
+  {
+    nixosConfigurations = {
+      desktop = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs pkgs-unstable; };
+        modules = sharedModules ++ [
+          ./hosts/desktop/configuration.nix
+          { home-manager.extraSpecialArgs = { inherit inputs pkgs-unstable; }; }
+        ];
+      };
+      laptop = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs pkgs-unstable; };
+        modules = sharedModules ++ [
+          ./hosts/laptop/configuration.nix
+          { home-manager.extraSpecialArgs = { inherit inputs pkgs-unstable; }; }
+        ];
+      };
+    };
   };
 }
+
