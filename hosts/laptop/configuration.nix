@@ -29,6 +29,14 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      steam = prev.steam.override {
+        extraArgs = "-cef-disable-gpu-compositing";
+      };
+    })
+  ];
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
