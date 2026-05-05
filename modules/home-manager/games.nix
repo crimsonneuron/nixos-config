@@ -49,11 +49,10 @@ in
 
    
 
-    ssbm = mkIf cfg.melee {
-      slippi-launcher = {
-        enable = true;
-        isoPath = cfg.meleePath;
-      };
-     };
+    slippi-launcher = mkIf cfg.melee {
+      enable = true;
+      isoPath = cfg.meleePath;
+    };
+     
   };
 }
