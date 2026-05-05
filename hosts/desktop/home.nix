@@ -54,6 +54,7 @@
     btop
     fzf
     keyd
+    ffmpeg
  
     libnotify
 
