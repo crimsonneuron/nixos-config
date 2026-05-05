@@ -2,7 +2,7 @@
 
 {
   boot.kernelModules = ["uvcvideo"];
-  users.users.crimsonneuron.extraGroups = ["video"];
+  #users.users.crimsonneuron.extraGroups = ["video"];
   hardware.enableAllFirmware = true;
 
   environment.systemPackages = with pkgs; [
