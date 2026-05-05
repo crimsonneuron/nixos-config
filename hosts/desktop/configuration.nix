@@ -12,7 +12,7 @@
       # ../../modules/nixos/games.nix
       ../../modules/nixos/keyboard.nix
       ../../modules/nixos/niri.nix
-      ../../modules/nixos/slippi.nix
+      #      ../../modules/nixos/slippi.nix
       ../../modules/nixos/fonts.nix
       ../../modules/nixos/webcam.nix
     ];
