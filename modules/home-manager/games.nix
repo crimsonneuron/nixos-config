@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    inputs.ssbm-nix.homeManagerModule
+    inputs.slippi-nix.homeManagerModules.default
   ];
   
   options.games = {
@@ -48,7 +48,6 @@ in
 
 
    
-
 
     ssbm = mkIf cfg.melee {
       slippi-launcher = {
