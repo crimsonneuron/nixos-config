@@ -5,7 +5,7 @@
     enable= true;
     settings = {
       terminal.vt = lib.mkForce 2;
-      default.session = {
+      default_session = {
         command = "${pkgs.tuigreet}/bin/tuigreet --remember --remember-session --time";
         user = "greeter";
       };
