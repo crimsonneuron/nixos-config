@@ -15,6 +15,7 @@
       #      ../../modules/nixos/slippi.nix
       ../../modules/nixos/fonts.nix
       ../../modules/nixos/webcam.nix
+      ../../modules/nixos/greetd.nix
     ];
 
   # Bootloader.
@@ -52,7 +53,6 @@
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
 
-  services.displayManager.ly.enable=true;
   services.udisks2.enable=true;
 
   hardware.graphics.enable=true;
