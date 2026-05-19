@@ -6,7 +6,7 @@
   hardware.enableAllFirmware = true;
 
   environment.systemPackages = with pkgs; [
-    v4l-utils
+    v41-utils
     zoom-us
     #teams
     #^ uncomment for mcsft teams
