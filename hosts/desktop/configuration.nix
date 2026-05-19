@@ -150,7 +150,7 @@
   #because qt is out of dates, and slippi has yet to update
   #REMOVE ME PLEASE
   nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.9"
+    "qtwebengine-5.15.19"
   ];
 
   nix = {
