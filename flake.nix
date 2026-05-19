@@ -11,7 +11,7 @@
   	zen-browser.url = "github:0xc000022070/zen-browser-flake";
     slippi-nix = {
       url = "github:lytedev/slippi-nix";
-      input.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     #ssbm-nix.url = "github:NormalFall/ssbm-nix";
