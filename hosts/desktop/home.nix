@@ -28,6 +28,7 @@
   ];
 
   home.packages = with pkgs; [
+    stremio
     vesktop
     ncmpcpp
     wayfarer
