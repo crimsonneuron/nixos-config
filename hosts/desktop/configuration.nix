@@ -147,13 +147,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  #because qt is out of dates, and slippi has yet to update
-  #REMOVE ME PLEASE
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
-  ];
-
-  nix = {
+  nixpkgs.config.  nix = {
     extraOptions = "experimental-features = nix-command flakes";
     settings = {
       substituters = [
