@@ -147,22 +147,21 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.nix = {
-    extraOptions = "experimental-features = nix-command flakes";
-    settings = {
-      substituters = [
+
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    substituters = [
         "https://nix-gaming.cachix.org"
-      ];
-      trusted-public-keys = [
-        "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-      ];
-      extra-substituters = [
-        "https://vicinae.cachix.org"
-      ];
-      extra-trusted-public-keys = [
-        "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" 
-      ];
-    };
+    ];
+    trusted-public-keys = [
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+    ];
+    extra-substituters = [
+      "https://vicinae.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" 
+    ];
   };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
