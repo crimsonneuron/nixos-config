@@ -147,7 +147,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.  nix = {
+  nixpkgs.config.nix = {
     extraOptions = "experimental-features = nix-command flakes";
     settings = {
       substituters = [
