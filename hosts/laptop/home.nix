@@ -91,23 +91,7 @@
 
   ];
 
-  programs = {
-    ncmpcpp = {
-      enable=true;
-      mpdMusicDir = /mnt/storage/music;
-    };
-    distrobox = {
-     enable=true;
-     enableSystemdUnit = true;
-     containers = {
-       ubunturocm = {
-         image = "docker.io/library/ubuntu:latest";
-         init_hooks = [
-          "export LD_LIBRARY_PATH=\"/opt/rocm-6.4.1/lib:\$LD_LIBRARY_PATH\""
-         ];
-       };
-     };
-   };   
+  programs = {   
   zen-browser= {
    enable=true;
    policies = {
