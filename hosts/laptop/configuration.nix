@@ -64,6 +64,8 @@
     enable =true;
   };
 
+  services.power-profiles-daemon.enable =true;
+
   hardware.graphics.enable=true;
 
 
