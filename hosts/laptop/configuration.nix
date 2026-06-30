@@ -120,6 +120,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  services.fprintd.enable =true;
+  security.pam.services.sudo.fprintAuth = true;
+  security.pam.services.login.fprintAuth = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crimson = {
     isNormalUser = true;
