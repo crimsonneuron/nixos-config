@@ -1,6 +1,6 @@
 {pkgs, config, osConfig, lib, ...}: 
 let
-  isLaptop = lib.hasInfix "l" (lib.toLower config.networking.hostName);
+  isLaptop = lib.hasInfix "l" (lib.toLower osConfig.networking.hostName);
   flakeString = if isLaptop then " --flake ~/nixos#laptop" else " --flake ~/nixos#desktop";
 in
 {
