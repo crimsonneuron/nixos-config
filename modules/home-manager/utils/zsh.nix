@@ -11,6 +11,7 @@ in
         rebuild = "sudo nixos-rebuild switch" + flakeString;
         cleanup = "sudo nix-collect-garbage -delete-older-than 7d";
         test = "sudo nixos-rebuild test --impure" +flakeString;
+        ff = "fastfetch";
         #The --impure is so that I can test without running a billion git add .s
 
       
