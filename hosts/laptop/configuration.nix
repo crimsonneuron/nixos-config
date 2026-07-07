@@ -211,6 +211,10 @@
       directory=/home/crimson/nixos
   '';
 
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gnome pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.config.common.default = [ "gnome" "gtk" ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
