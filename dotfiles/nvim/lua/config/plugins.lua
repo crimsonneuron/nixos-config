@@ -5,21 +5,20 @@ require("kanagawa").setup({})
 vim.cmd.colorscheme("kanagawa")
 
 -- Treesitter
-require("nvim-treesitter.configs").setup({
-  -- Grammars are bundled by Nix (withAllGrammars), so auto_install is off
-  auto_install = false,
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    enable = true,
-  },
-  rainbow = {
-    enable = true,
-    extended_mode = true,
-    max_file_lines = nil,
-  },
+-- New main-branch API: setup() only configures install behaviour now.
+-- Grammars are bundled by Nix, so there's nothing to install.
+require("nvim-treesitter").setup({
+  install_dir = vim.fn.stdpath("data") .. "/site",
+})
+
+-- Highlighting and indent are no longer auto-enabled by the plugin;
+-- turn them on yourself per-buffer.
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function()
+    -- pcall guards filetypes with no parser available
+    pcall(vim.treesitter.start)
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
 })
 
 -- Telescope
@@ -30,7 +29,6 @@ require("nvim-autopairs").setup({})
 
 -- Surround
 require("nvim-surround").setup({})
-
 -- Conjure is zero-config by default; add overrides here if needed
 -- require("conjure")  -- loads itself via ftplugin
 

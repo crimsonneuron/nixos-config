@@ -21,14 +21,14 @@ in
     plugins = {
       full-border = "${yazi-plugins}/full-border.yazi";
     };
-    flavors = {
-      "kanagawa" = kanagawaFlavor;
-    };
-    theme = {
-      flavor = {
-        dark = "kanagawa";
-        light = "kanagawa";
-      };
-    };
+   # flavors = {
+   #   "kanagawa" = kanagawaFlavor;
+   # };
+   # theme = {
+   #   flavor = {
+   #     dark = "kanagawa";
+   #     light = "kanagawa";
+   #   };
+   # };
   };
 }
