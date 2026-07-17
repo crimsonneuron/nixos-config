@@ -181,6 +181,7 @@
     enable=true;
     rust =true;
     OCaml = true;
+    rocq=true;
   };
 
 

@@ -58,6 +58,10 @@
   # Enable the X11 windowing system.
   #services.xserver.enable = true;
 
+  services.udev.extraRules = ''
+    SUBSYSTEM=="power_supply", ATTR{type}=="Battery", ATTR{charge_control_end_threshold}="80", ATTR{charge_control_start_threshold}="60"
+  '';
+
   services.displayManager.ly.enable=true;
   services.udisks2.enable=true;
   services.upower = {

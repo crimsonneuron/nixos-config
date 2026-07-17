@@ -44,6 +44,7 @@
         python
         vimdoc
         latex
+
       ]))
       telescope-nvim
       plenary-nvim           # telescope dependency
@@ -70,6 +71,10 @@
 
       # Rust
       rustaceanvim
+
+      # Rocq
+      coq-lsp-nvim
+      Coqtail
     ];
 
     initLua = ''

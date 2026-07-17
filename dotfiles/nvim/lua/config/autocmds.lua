@@ -48,7 +48,8 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- Diagnostic signs
+-- Binds for Rocq
+--
 local function sign(name, text)
   vim.fn.sign_define(name, { texthl = name, text = text, numhl = "" })
 end
