@@ -130,6 +130,10 @@
   security.pam.services.sudo.fprintAuth = true;
   security.pam.services.login.fprintAuth = true;
 
+  # unlock the security keyring on login 
+  security.pam.services.ly.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.crimson = {
     isNormalUser = true;

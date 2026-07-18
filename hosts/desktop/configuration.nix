@@ -231,6 +231,10 @@
   security.polkit.enable=true;
   security.pam.services.hyprlock={};
 
+  # unlock the security keyring on login
+  security.pam.services.ly.enableGnomeKeyring = true;
+  services.gnome.gnome-keyring.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
