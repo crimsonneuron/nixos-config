@@ -29,7 +29,7 @@
   ];
 
   home.packages = with pkgs; [
-    dorion
+    vesktop
     cutechess
     beeper
     youtube-music
