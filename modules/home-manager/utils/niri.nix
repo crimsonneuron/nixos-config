@@ -74,6 +74,8 @@ in
       {argv = ["noctalia-shell"];}
       {argv = ["vicinae server"];}
       {argv = ["dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"];}
+      {argv = ["eval $(gnome-keyring-daemon --start --components=pkcs11, secrets, ssh)"];}
+      {argv = ["export SSH_AUTH_SOCK"];}
     ];
     hotkey-overlay.skip-at-startup = true;
 
