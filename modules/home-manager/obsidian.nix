@@ -20,7 +20,7 @@ let
       meta.mainProgram = "vault";
     }
     ''
-      install -Dm755 ${./vault} $out/bin/vault
+      install -Dm755 ${/home/crimson/nixos/scripts/bash/vault.sh} $out/bin/vault
       wrapProgram $out/bin/vault \
         --prefix PATH : ${lib.makeBinPath runtimeDeps}
     '';
