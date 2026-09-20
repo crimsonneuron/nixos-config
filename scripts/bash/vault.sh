@@ -23,7 +23,7 @@ STICK="$(dirname "$VAULT")"
 MOUNT="/run/media/veracrypt1"
 
 RESTIC_REPO="${HOME}/Backups/vault-repo"
-RESTIC_PW_FILE="${HOME}/.config/vault/restic-password"
+RESTIC_PW_FILE="${MOUNT}/.restic_password"
 STATE_DIR="${HOME}/.local/state/vault"
 PRUNE_INTERVAL=$((7 * 24 * 3600))
 
@@ -142,6 +142,7 @@ restic_snapshot() {
        --tag vault \
        --exclude 'lost+found' \
        --exclude '.Trash-*' \
+       --excluse '.restic-password' \
        --quiet; then
     ok "restic: snapshot saved"
     prune_if_due
