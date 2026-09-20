@@ -1,3 +1,9 @@
+# Home Manager module for the encrypted notes vault.
+#
+# Place this next to the `vault` script and import it from your HM config:
+#
+#   imports = [ ./vault.nix ];
+#
 { config, lib, pkgs, ... }:
 
 let
@@ -55,5 +61,25 @@ in
     categories = [ "Utility" ];
   };
 
-}
+  # Catches the case where the vault sits open for days and so never hits the
+  # on-open / on-close backup hooks. Exits 1 harmlessly when the vault is
+  # closed, hence SuccessExitStatus.
+  systemd.user.services.vault-backup = {
+    Unit.Description = "Snapshot the notes vault, if it is open";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${lib.getExe vault} backup";
+      SuccessExitStatus = "0 1";
+    };
+  };
 
+  systemd.user.timers.vault-backup = {
+    Unit.Description = "Hourly notes vault snapshot";
+    Timer = {
+      OnCalendar = "hourly";
+      Persistent = true;
+      RandomizedDelaySec = "5m";
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
+}
