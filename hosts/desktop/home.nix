@@ -28,7 +28,7 @@
   ];
 
   home.packages = with pkgs; [
-    stremio-linux-shell
+    obsidian
     vesktop
     ncmpcpp
     wayfarer
