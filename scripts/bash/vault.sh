@@ -142,7 +142,7 @@ restic_snapshot() {
        --tag vault \
        --exclude 'lost+found' \
        --exclude '.Trash-*' \
-       --excluse '.restic-password' \
+       --exclude '.restic-password' \
        --quiet; then
     ok "restic: snapshot saved"
     prune_if_due
