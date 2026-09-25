@@ -71,7 +71,8 @@
 
   services.blueman.enable=true;
 
-
+  #build temp services
+  systemd.services.nix-daemon.environment.TMPDIR = "/mnt/storage/nixtmp";
 
 
   #XRDP Remote Desktop Server setup
@@ -129,6 +130,7 @@
         "crimson" = import ./home.nix;
     };
     backupFileExtension = "bkup";
+    useUserPackages = true;
   };
   # Install firefox.
   programs.firefox.enable = true;

@@ -18,14 +18,6 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     mnw.url = "github:Gerg-L/mnw";
     niri-flake.url = "github:sodiboo/niri-flake";
-    noctalia = {
-        url = "github:noctalia-dev/noctalia-shell";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
-    vicinae = {
-      url = "github:vicinaehq/vicinae";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";

@@ -151,6 +151,7 @@
         "crimson" = import ./home.nix;
     };
     backupFileExtension = "bkup";
+    useUserPackages = true;
   };
   
   programs.zsh = {

@@ -1,0 +1,404 @@
+# ~/.config/noctalia/config.toml
+# Migrated from Noctalia v4 (settingsVersion 26) to v5.
+#
+# Verify with:  noctalia config validate ./config.toml
+# Compare with: noctalia config export full
+#
+# Remember: anything you later change in the Settings GUI lands in
+# ~/.local/state/noctalia/settings.toml, which loads AFTER this file and wins.
+# If a value here looks ignored, check that file first.
+
+# ─────────────────────────────────────────────────────────────
+# Shell — global UI (was `general` + `ui`)
+# ─────────────────────────────────────────────────────────────
+[shell]
+font_family           = "CodeNewRoman Nerd Font Mono"
+lang                  = ""
+time_format           = "{:%I:%M %p}"        # was location.use12hourFormat = true
+date_format           = "%A, %x"
+corner_radius_scale   = 1.0                  # collapses v4's four *RadiusRatio knobs
+avatar_path           = ""                   # was general.avatarImage
+clipboard_enabled     = false                # was appLauncher.enableClipboardHistory = false
+polkit_agent          = false
+setup_wizard_enabled  = false                # you already have a config; skip the wizard
+telemetry_enabled     = false
+external_ip_enabled   = false
+
+[shell.animation]
+enabled = true
+speed   = 1.0
+
+[shell.shadow]
+direction = "down_right"                     # was general.shadowDirection = "bottom_right"
+alpha     = 0.55
+
+[shell.screen_corners]
+enabled = false                              # was general.showScreenCorners
+
+[shell.mpris]
+blacklist = []                               # was audio.mprisBlacklist
+
+# Panels — was ui.panelsAttachedToBar / controlCenter.position / appLauncher.position
+[shell.panel]
+transparency_mode        = "solid"           # was ui.panelBackgroundOpacity = 1
+borders                  = true
+shadow                   = true
+control_center_placement = "attached"        # was "close_to_bar_button"
+wallpaper_placement      = "attached"        # was wallpaper.panelPosition = "follow_bar"
+session_placement        = "floating"
+session_position         = "center"          # was sessionMenu.position
+launcher_placement       = "floating"
+launcher_position        = "bottom_center"   # was appLauncher.position
+open_near_click_control_center = true        # the "close to bar button" half of the old setting
+
+[shell.launcher]
+categories    = false                        # was appLauncher.showCategories
+sort_by_usage = true                         # was appLauncher.sortByMostUsed
+app_grid      = false                        # was appLauncher.viewMode = "list"
+compact       = false
+pinned        = []                           # was appLauncher.pinnedExecs
+
+# Screenshot — v5's native tool. This replaces grim + slurp entirely.
+[shell.screenshot]
+save_to_file         = true
+directory            = ""                    # empty = XDG_PICTURES_DIR, falls back to ~/Pictures
+copy_to_clipboard    = false                 # needs clipboard_enabled = true; off since yours is off
+freeze_screen        = true
+remember_last_region = false
+show_cursor          = true
+annotate             = true                  # open the built-in annotator after a region grab
+close_on_copy        = true
+pipe_to_command      = false
+pipe_command         = ""
+
+# Session menu — was `sessionMenu`
+[shell.session]
+grid           = false
+grid_columns   = 3
+show_shortcuts = true
+
+[[shell.session.actions]]
+action = "lock"
+
+[[shell.session.actions]]
+action            = "suspend"
+countdown_seconds = 10                       # was sessionMenu.countdownDuration = 10000 (ms)
+
+[[shell.session.actions]]
+action            = "reboot"
+countdown_seconds = 10
+
+[[shell.session.actions]]
+action = "logout"
+
+[[shell.session.actions]]
+action            = "shutdown"
+variant           = "destructive"
+countdown_seconds = 10
+
+# ─────────────────────────────────────────────────────────────
+# Lock screen — was general.lockOnSuspend
+# ─────────────────────────────────────────────────────────────
+[lockscreen]
+enabled             = true
+lock_before_suspend = true
+fingerprint         = true
+
+[accessibility]
+ui_scale      = 1.0                          # was general.scaleRatio
+high_contrast = false
+
+# ─────────────────────────────────────────────────────────────
+# Bar — was `bar`. Lanes renamed left/center/right -> start/center/end.
+# On a left-hand bar, "start" is the top and "end" is the bottom.
+# ─────────────────────────────────────────────────────────────
+[bar]
+order = ["main"]
+
+[bar.main]
+enabled              = true
+position             = "left"
+monitors             = []
+reserve_space        = true                  # was bar.exclusive
+layer                = "top"
+background_opacity   = 1.0
+thickness            = 40                    # v4's `density` is gone; tune this by hand
+padding              = 14
+widget_spacing       = 6
+margin_edge          = 0                     # was bar.floating = false
+margin_ends          = 0
+concave_edge_corners = true                  # was bar.outerCorners (requires margin_edge = 0)
+radius               = 12
+shadow               = true                  # was general.enableShadows
+hover_highlight      = true
+scale                = 1.0
+font_scale           = 1.0
+
+# was bar.showCapsule / capsuleOpacity
+capsule           = true
+capsule_fill      = "surface_variant"
+capsule_opacity   = 1.0
+capsule_thickness = 0.76
+
+start  = ["clock", "cpu", "ram", "cpu-temp", "media", "workspaces"]
+center = ["audio_visualizer"]
+end    = ["wallpaper", "tray", "notifications", "battery", "volume", "brightness", "control-center"]
+
+# ─────────────────────────────────────────────────────────────
+# Widgets
+# ─────────────────────────────────────────────────────────────
+[widget.clock]
+# v4 used Qt tokens ("hh mm AP - MM dd"); v5 uses strftime inside {: }.
+format          = "{:%I:%M %p}"
+vertical_format = "{:%I\n%M\n%p\n%m\n%d}"
+tooltip_format  = "{:%A, %B %d, %Y}"
+
+# v4 had ONE SystemMonitor widget showing several stats. In v5 each sysmon
+# widget shows exactly one stat, so this is three widgets. Add/remove freely
+# (gpu_usage, gpu_temp, swap_pct, disk_used_pct, net_rx, net_tx, ...).
+[widget.cpu]
+type = "sysmon"
+stat = "cpu_usage"
+
+[widget.ram]
+type = "sysmon"
+stat = "ram_pct"
+
+[widget.cpu-temp]
+type = "sysmon"
+stat = "cpu_temp"
+
+[widget.media]
+# was MediaMini
+
+[widget.workspaces]
+# was Workspace
+style        = "regular"
+show_labels  = true
+label_source = "id"
+
+[widget.audio_visualizer]
+# was AudioVisualizer. v4's audio.visualizerType/visualizerQuality/cavaFrameRate
+# are now widget-level keys here — check the widget docs for the exact names.
+
+[widget.tray]
+
+[widget.notifications]
+# was NotificationHistory
+
+[widget.battery]
+
+[widget.volume]
+
+[widget.brightness]
+
+[widget.wallpaper]
+# was WallpaperSelector
+
+[widget.control-center]
+# v4's useDistroLogo has no v5 equivalent. Default glyph is "noctalia";
+# point custom_image at a logo file if you want the distro mark back.
+glyph = "noctalia"
+
+# ─────────────────────────────────────────────────────────────
+# Dock — was `dock`
+# ─────────────────────────────────────────────────────────────
+[dock]
+enabled = false
+
+# ─────────────────────────────────────────────────────────────
+# Control Center — v5 is tab-based; v4's `cards` list is gone.
+# Home shortcuts are now one flat array, capped at 6 visible.
+# ─────────────────────────────────────────────────────────────
+[control_center]
+sidebar              = "compact"
+show_shortcut_labels = true
+show_session_button  = true
+hidden_tabs          = []
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "screen_recorder"                     # needs the screen_recorder plugin enabled
+
+[[control_center.shortcuts]]
+type = "wallpaper"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[[control_center.shortcuts]]
+type = "nightlight"
+# Dropped to fit the 6-slot cap: power_profile, caffeine (v4's KeepAwake).
+
+[control_center.calendar]
+show_events_card  = true                     # was location.showCalendarEvents
+show_week_numbers = false                    # was location.showWeekNumberInCalendar
+
+# ─────────────────────────────────────────────────────────────
+# Theme — was `colorSchemes`
+# ─────────────────────────────────────────────────────────────
+[theme]
+mode             = "dark"                    # was darkMode = true, schedulingMode = "off"
+shell_mode       = "follow"
+source           = "wallpaper"               # was useWallpaperColors = true
+builtin          = "Noctalia"                # was predefinedScheme = "Noctalia (default)"
+wallpaper_scheme = "m3-content"              # was matugenSchemeType = "scheme-content"
+pure_black_dark  = false
+
+# was `templates`. v4's per-app booleans are now opt-in ID lists.
+# Confirm the exact IDs with: noctalia theme --list-templates
+[theme.templates]
+enable_builtin_templates   = true
+builtin_ids                = ["kitty"]
+enable_community_templates = true
+community_ids              = ["discord"]
+
+# ─────────────────────────────────────────────────────────────
+# Wallpaper — was `wallpaper`
+# ─────────────────────────────────────────────────────────────
+[wallpaper]
+enabled                 = true
+directory               = "/home/crimson/Pictures/Wallpapers"
+fill_mode               = "crop"
+fill_color              = "#000000"
+transition_duration     = 1500
+edge_smoothness         = 0.05
+transition_on_startup   = false
+per_monitor_directories = false
+# `transition` omitted = pick randomly from all effects (was transitionType = "random")
+
+[wallpaper.automation]
+enabled          = false                     # was wallpaper.randomEnabled
+interval_seconds = 300
+order            = "random"
+recursive        = false                     # was wallpaper.recursiveSearch
+
+[backdrop]
+enabled = false                              # was wallpaper.overviewEnabled
+
+# ─────────────────────────────────────────────────────────────
+# Location & weather — was `location`
+# ─────────────────────────────────────────────────────────────
+[location]
+auto_locate = false
+address     = "New York, NY"                 # was location.name = "NYC"
+
+[weather]
+enabled         = true
+refresh_minutes = 30
+unit            = "imperial"                 # was location.useFahrenheit = true
+effects         = true                       # was location.weatherShowEffects
+
+# ─────────────────────────────────────────────────────────────
+# Notifications — was `notifications`
+# ─────────────────────────────────────────────────────────────
+[notification]
+enable_daemon             = true
+position                  = "top_right"
+layer                     = "overlay"        # was notifications.overlayLayer
+background_opacity        = 1.0
+show_app_name             = true
+show_actions              = true
+border                    = true
+collapse_on_dismiss       = true
+keep_dismissed_in_history = true
+max_visible               = 0
+history_retention_hours   = 0
+monitors                  = []
+# v4's low/normal/criticalUrgencyDuration and respectExpireTimeout are gone.
+# Per-sender timeouts now live in [notification.filter.*].override_duration.
+
+# ─────────────────────────────────────────────────────────────
+# OSD — was `osd`. enabledTypes = [0,1,2] became named booleans.
+# ─────────────────────────────────────────────────────────────
+[osd]
+position           = "top_right"
+orientation        = "horizontal"
+scale              = 1.0
+background_opacity = 1.0
+border             = true
+monitors           = []
+
+[osd.kinds]
+volume          = true
+volume_output   = true
+volume_input    = true
+brightness      = true
+keyboard_layout = true                       # was notifications.enableKeyboardLayoutToast
+wifi            = false
+bluetooth       = false
+power_profile   = false
+caffeine        = false
+nightlight      = false
+dnd             = false
+lock_keys       = false
+media           = false
+privacy         = false
+
+# ─────────────────────────────────────────────────────────────
+# Audio — was `audio`
+# ─────────────────────────────────────────────────────────────
+[audio]
+enable_overdrive = false                     # was audio.volumeOverdrive
+enable_sounds    = false
+sound_volume     = 0.5
+
+# ─────────────────────────────────────────────────────────────
+# Brightness — was `brightness`
+# ─────────────────────────────────────────────────────────────
+[brightness]
+enable_ddcutil     = false                   # was brightness.enableDdcSupport
+minimum_brightness = 0.05                    # was brightness.enforceMinimum = true (now a value)
+sync_all_monitors  = false
+
+# ─────────────────────────────────────────────────────────────
+# Night light — was `nightLight`
+# ─────────────────────────────────────────────────────────────
+[nightlight]
+enabled           = false
+force             = false
+temperature_day   = 6500                     # was dayTemp (string -> int)
+temperature_night = 4000                     # was nightTemp
+
+# ─────────────────────────────────────────────────────────────
+# System monitor — was `systemMonitor`.
+# Polling is now seconds (not ms) and grouped by metric, not per-widget.
+# Warning/critical became per-stat activity/critical thresholds.
+# ─────────────────────────────────────────────────────────────
+[system.monitor]
+enabled              = true
+cpu_poll_seconds     = 3.0
+gpu_poll_seconds     = 5.0
+memory_poll_seconds  = 3.0
+network_poll_seconds = 3.0
+disk_poll_seconds    = 10.0
+
+cpu_usage_activity_threshold     = 80        # was cpuWarningThreshold
+cpu_usage_critical_threshold     = 90        # was cpuCriticalThreshold
+cpu_temp_activity_threshold      = 80        # was tempWarningThreshold
+cpu_temp_critical_threshold      = 90
+ram_pct_activity_threshold       = 80        # was memWarningThreshold
+ram_pct_critical_threshold       = 90
+disk_used_pct_activity_threshold = 80        # was diskWarningThreshold
+disk_used_pct_critical_threshold = 90
+
+# ─────────────────────────────────────────────────────────────
+# Plugins — the v4 built-in screen recorder is now a plugin.
+# Wallhaven (v4 wallpaper.useWallhaven + wallhaven*) is also a plugin.
+# Plugin options (codec, quality, output dir) live in Settings -> Plugins,
+# not here.
+# ─────────────────────────────────────────────────────────────
+[plugins]
+enabled     = ["noctalia/screen_recorder"]
+auto_update = "official"
+
+[[plugins.source]]
+name     = "official"
+kind     = "git"
+location = "https://github.com/noctalia-dev/official-plugins"
+enabled  = true
