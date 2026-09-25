@@ -8,6 +8,9 @@ input {
             options "grp:alt_caps_toggle"
         }
     }
+    touchpad {
+      natural-scroll
+    }
 }
 
 // Desktop monitors. Output blocks for connectors that don't exist are
