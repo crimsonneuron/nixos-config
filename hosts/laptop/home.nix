@@ -81,6 +81,8 @@
     jq
     pywal
 
+    (pkgs.callPackage ../../scripts/nix/whitakers-words.nix { }) 
+
     gimp2-with-plugins
 
     # # You can also create simple shell scripts directly inside your
