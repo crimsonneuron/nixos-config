@@ -14,7 +14,7 @@
             main = {
               #capslock = "layer(control)"; # you might need to also enclose the key in quotes if it contains non-alphabetical symbols
               compose = "leftmeta";
-              f23 = "rightmeta";
+              f23 = "meta";
             };
             otherlayer = {};
           };
