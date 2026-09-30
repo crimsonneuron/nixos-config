@@ -6,6 +6,7 @@ local opts = { noremap = true, silent = true }
 -- Escape shortcuts
 map("i", "jk", "<Esc>", opts)
 map("x", "jk", "<Esc>", opts)
+map("t", "jk", "<C-\\><C-n>", opts)
 
 -- Telescope (non-leader)
 map("n", "ff", ":Telescope find_files<CR>", opts)

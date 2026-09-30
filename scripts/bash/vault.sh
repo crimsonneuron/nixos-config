@@ -5,7 +5,7 @@
 # Usage:
 #   vault             toggle: open if closed, offer to close if open
 #   vault open
-#   vault close
+#   vault close       close the vault, then unmount + power off the USB stick
 #   vault status
 #   vault backup      snapshot now (vault must be open)
 #   vault init-backup one-time setup of the git repo + restic repository
@@ -227,6 +227,51 @@ gives you the full history back too.
 EOF
 }
 
+# --- USB stick ---------------------------------------------------------------
+
+# Unmount the stick's filesystem and power the drive off so it can be pulled.
+eject_stick() {
+  local dev parent disk
+
+  # --mountpoint only matches an exact mount, so this can never resolve to
+  # the root filesystem if the stick is already gone.
+  if ! dev="$(findmnt -no SOURCE --mountpoint "$STICK" 2>/dev/null)" || [[ -z "$dev" ]]; then
+    dim "USB stick isn't mounted — nothing to eject."
+    return 0
+  fi
+
+  if ! have udisksctl; then
+    warn "udisksctl not found (install udisks2). Unmount manually with:
+  sudo umount $STICK"
+    return 1
+  fi
+
+  sync
+
+  if ! udisksctl unmount -b "$dev" >/dev/null; then
+    warn "Couldn't unmount $STICK — something is still using it."
+    if have fuser; then
+      info "Processes holding it open:"
+      fuser -vm "$STICK" 2>&1 || true
+    fi
+    info "Also check that no shell's working directory is inside $STICK."
+    return 1
+  fi
+  ok "USB stick unmounted."
+
+  # Power off the whole drive (parent of the partition, or the device itself
+  # if the stick has no partition table).
+  parent="$(lsblk -no PKNAME "$dev" 2>/dev/null | head -1)"
+  disk="/dev/${parent:-$(basename "$dev")}"
+
+  if udisksctl power-off -b "$disk" 2>/dev/null; then
+    ok "Drive powered off — safe to remove."
+  else
+    # Usually means another partition on the same drive is still mounted.
+    ok "Safe to remove (the drive couldn't be powered off, but it's unmounted)."
+  fi
+}
+
 # --- open / close ------------------------------------------------------------
 
 do_open() {
@@ -273,7 +318,12 @@ FAT/exFAT, uncomment the FS_OPTS line near the top of this script."
 do_close() {
   if ! is_open; then
     info "Nothing mounted at $MOUNT."
-    mapped_volumes && warn "A stale mapping exists — try: sudo veracrypt --text --dismount"
+    if mapped_volumes; then
+      warn "A stale mapping exists — try: sudo veracrypt --text --dismount"
+      warn "Leaving the USB stick mounted until that's cleared."
+      return 0
+    fi
+    eject_stick || exit 1
     return 0
   fi
 
@@ -294,7 +344,9 @@ do_close() {
   fi
 
   is_open && die "veracrypt exited 0 but $MOUNT is still mounted"
-  ok "Closed cleanly."
+  ok "Vault closed cleanly."
+
+  eject_stick || die "Vault is closed, but the USB stick is still mounted — don't pull it yet."
 }
 
 do_status() {
