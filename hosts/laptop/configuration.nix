@@ -13,6 +13,7 @@
       ../../modules/nixos/keyboard.nix
       ../../modules/nixos/niri.nix
       ../../modules/nixos/fonts.nix
+      ../../modules/nixos/webcam.nix
     ];
 
   # Bootloader.
