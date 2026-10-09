@@ -43,6 +43,12 @@ window-rule {
   open-floating true
 }
 
+window-rule {
+    match app-id="^zoom$" title="^(zoom|as_toolbar|annotate_toolbar)$"
+    open-floating true
+    open-focused false
+}
+
 layout {
     gaps 16
     center-focused-column "never"
