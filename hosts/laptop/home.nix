@@ -177,7 +177,7 @@
   games = {
     enable =true;
     melee = true;
-    meleePath = "/home/crimson/Games/Melee/Melee ISO File.iso";
+    meleePath = "/home/crimson/Games/Slippi/ISOs/Super Smash Bros. Melee (USA) (En,Ja) (Rev 2)/Super Smash Bros. Melee (USA) (En,Ja) (Rev 2).ciso";
   };
 
   languages = {
