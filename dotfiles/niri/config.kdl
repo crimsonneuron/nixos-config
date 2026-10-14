@@ -48,6 +48,12 @@ window-rule {
     open-floating true
     open-focused false
 }
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    open-floating true
+    open-focused false
+    default-floating-position x=16 y=16 relative-to="bottom-right"
+}
 
 layout {
     gaps 16
