@@ -42,6 +42,7 @@
     cargo
     calibre
     sioyek
+    libreoffice
 
     wl-clipboard
     python313
