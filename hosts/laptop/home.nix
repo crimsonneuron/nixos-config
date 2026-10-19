@@ -33,7 +33,6 @@
     vesktop
     cutechess
     beeper
-    youtube-music
     playerctl
     ncmpcpp
     wayfarer
