@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     brightnessctl
+    playerctl
   ];
 
   # Adjust this path to wherever you put config.kdl relative to this file.
