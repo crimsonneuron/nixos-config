@@ -98,6 +98,7 @@
  #
    #};
 
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -242,6 +243,11 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.firewall = rec {
+    allowedTCPPorts = [ { from = 1714; to = 1764; } ];
+    allowedUDPPorts = allowedTCPPorts;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

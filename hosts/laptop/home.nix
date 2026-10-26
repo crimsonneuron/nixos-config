@@ -174,6 +174,8 @@
   services.swayidle.enable=true;
   services.polkit-gnome.enable=true;
 
+  services.kdeconnect.enable=true;
+
   games = {
     enable =true;
     melee = true;
