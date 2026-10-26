@@ -245,8 +245,8 @@
   # networking.firewall.enable = false;
 
   networking.firewall = rec {
-    allowedTCPPortsRanges = [ { from = 1714; to = 1764; } ];
-    allowedUDPPortsRanges = allowedTCPPortsRanges;
+    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+    allowedUDPPortRanges = allowedTCPPortRanges;
   };
 
   # This value determines the NixOS release from which the default
