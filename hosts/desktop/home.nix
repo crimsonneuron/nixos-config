@@ -25,6 +25,7 @@
 
     ../../modules/home-manager/games.nix
     ../../modules/home-manager/languages.nix
+    ../../modules/home-manager/media.nix
   ];
 
   home.packages = with pkgs; [
@@ -57,7 +58,6 @@
     fzf
     keyd
     ffmpeg
- 
     libnotify
 
     #gnome-tweaks
