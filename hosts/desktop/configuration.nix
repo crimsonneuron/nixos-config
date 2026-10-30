@@ -132,8 +132,6 @@
     backupFileExtension = "bkup";
     useUserPackages = true;
   };
-  # Install firefox.
-  programs.firefox.enable = true;
   
   programs.zsh = {
     enable=true;
@@ -164,6 +162,12 @@
     extra-trusted-public-keys = [
       "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" 
     ];
+  };
+
+  my.greeter = {
+    enable=true;
+    outputs."DP-2" = {scale = 2; position = {x=0; y=0;}; focus = true;};
+    outputs."HDMI-A-1" = {scale = 1; position = {x=1920; y=0;};};
   };
   # List packages installed in system profile. To search, run:
   # $ nix search wget

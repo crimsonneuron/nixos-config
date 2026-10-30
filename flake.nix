@@ -22,11 +22,6 @@
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
     };
-    tuigreet = {
-      url = "github:NotAShelf/tuigreet";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
 
   };
 
@@ -37,12 +32,7 @@
     pkgs = nixpkgs.legacyPackages.${system};
     pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
 
-    tuigreetOverlay = final: prev: {
-      tuigreet = inputs.tuigreet.packages.${prev.hostPlatform.system}.tuigreet;
-    };
-
     sharedModules = [
-      { nixpkgs.overlays = [ tuigreetOverlay ]; }
       inputs.home-manager.nixosModules.default
     ];
   in
