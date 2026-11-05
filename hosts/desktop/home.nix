@@ -76,6 +76,8 @@
     pywal
     fuzzel
 
+    (pkgs.callPackage ../../scripts/nix/whitakers-words.nix { }) 
+
     #Games (NB:Steam in configued in config):
     prismlauncher
 
