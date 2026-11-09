@@ -145,6 +145,11 @@
     enable=true;
   };
 
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [ libpulseaudio ];
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
